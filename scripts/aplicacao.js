@@ -1,0 +1,1573 @@
+class RepositorioLocal {
+  static chave = "base_medicao_web";
+  static chaveTema = "base_medicao_tema";
+
+  static carregar() {
+    const salvo = localStorage.getItem(RepositorioLocal.chave);
+    if (!salvo) {
+      return {
+        versao: "",
+        materiais: [],
+        maoObra: [],
+        estruturas: [],
+        regrasMaoObra: [],
+        pontos: []
+      };
+    }
+    return JSON.parse(salvo);
+  }
+
+  static salvar(base) {
+    localStorage.setItem(RepositorioLocal.chave, JSON.stringify(base));
+  }
+
+  static carregarTema() {
+    return localStorage.getItem(RepositorioLocal.chaveTema) || "claro";
+  }
+
+  static salvarTema(tema) {
+    localStorage.setItem(RepositorioLocal.chaveTema, tema);
+  }
+}
+
+function clonar(valor) {
+  return JSON.parse(JSON.stringify(valor));
+}
+
+function criarIdentificadorUnico() {
+  if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+  return `id_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+const MAPA_REDE_LEGADA = { mono: "a", bi: "ab", tri: "abc" };
+
+class MotorDeRegras {
+  constructor(base) {
+    this.base = base;
+  }
+
+  processar(pontos) {
+    const materiaisInstalacao = new Map();
+    const materiaisDesativacao = new Map();
+    const maoObraInstalacao = new Map();
+    const maoObraDesativacao = new Map();
+    const maoObraReinstalacao = new Map();
+    const pendenciasMaoObraCabos = [];
+
+    for (const ponto of pontos) {
+      const multiplicador = Number(ponto.quantidadePontos || 1);
+      const destinoMaterial = ponto.operacao === "D" ? materiaisDesativacao : materiaisInstalacao;
+      const destinoMaoObra = ponto.operacao === "D"
+        ? maoObraDesativacao
+        : ponto.operacao === "R"
+          ? maoObraReinstalacao
+          : maoObraInstalacao;
+
+      if (ponto.operacao !== "R") {
+        this.adicionarMateriaisDaEstrutura(destinoMaterial, ponto, multiplicador);
+        this.adicionarMaterialDireto(destinoMaterial, ponto.posteId, multiplicador);
+        this.adicionarCabosDoPonto(destinoMaterial, ponto);
+      }
+
+      this.aplicarRegras(destinoMaoObra, pendenciasMaoObraCabos, ponto, multiplicador);
+    }
+
+    this.consolidarPendenciasDeCabos(pendenciasMaoObraCabos);
+
+    return {
+      materiaisInstalacao: this.ordenarLinhas(materiaisInstalacao),
+      materiaisDesativacao: this.ordenarLinhas(materiaisDesativacao),
+      maoObraInstalacao: this.ordenarLinhas(maoObraInstalacao),
+      maoObraDesativacao: this.ordenarLinhas(maoObraDesativacao),
+      maoObraReinstalacao: this.ordenarLinhas(maoObraReinstalacao)
+    };
+  }
+
+  adicionarMateriaisDaEstrutura(mapa, ponto, multiplicador) {
+    const estrutura = this.base.estruturas.find((item) => item.id === ponto.estruturaId);
+    if (!estrutura) return;
+
+    for (const item of estrutura.itens) {
+      this.adicionarMaterialDireto(mapa, item.materialId, Number(item.quantidade || 0) * multiplicador);
+    }
+  }
+
+  adicionarMaterialDireto(mapa, materialId, quantidade) {
+    if (!materialId || quantidade <= 0) return;
+    const material = this.base.materiais.find((item) => item.id === materialId);
+    if (!material) return;
+    this.somar(mapa, material.codigo, material.descricao, quantidade, material.unidade);
+  }
+
+  aplicarRegras(mapa, pendenciasMaoObraCabos, ponto, multiplicadorPonto) {
+    for (const regra of this.base.regrasMaoObra) {
+      if (!this.regraAtendePonto(regra, ponto)) continue;
+      const materiaisGatilho = this.materiaisDeGatilho(regra, ponto);
+      const estrutura = this.estruturaDoPonto(ponto);
+
+      for (const saida of regra.saidas) {
+        const quantidadeSaida = Number(saida.quantidade || 0);
+        const materiais = materiaisGatilho.length ? materiaisGatilho : [null];
+
+        for (const material of materiais) {
+          const descricaoBase = saida.templateDescricao || saida.descricao;
+          const descricao = this.preencherDescricao(descricaoBase || "", material, estrutura, ponto.operacao, regra);
+
+          if (material?.categoria === "cabo") {
+            this.acumularRegraDeCabo(
+              pendenciasMaoObraCabos,
+              mapa,
+              saida.codigo || "MO",
+              descricao,
+              quantidadeSaida * this.quantidadeBaseCabosDoPonto(ponto),
+              1
+            );
+            continue;
+          }
+
+          this.somar(mapa, saida.codigo || "MO", descricao, quantidadeSaida * multiplicadorPonto, "un");
+        }
+      }
+    }
+  }
+
+  regraAtendePonto(regra, ponto) {
+    if (regra.operacoes.length > 0 && !regra.operacoes.includes(ponto.operacao)) return false;
+    if (regra.tipoGatilho === "estrutura") {
+      if (!ponto.estruturaId) return false;
+      const ids = regra.gatilho?.estruturaIds ?? regra.estruturaIds ?? (regra.estruturaId ? [regra.estruturaId] : []);
+      if (!ids.length) return true;
+      return ids.includes(ponto.estruturaId);
+    }
+    if (regra.tipoGatilho === "contexto") return Boolean(ponto.estruturaId || ponto.posteId || ponto.caboBTId || ponto.caboMTId);
+
+    const materiais = this.materiaisDeGatilho(regra, ponto);
+    if (!materiais.length) return false;
+    const materialIds = regra.gatilho?.materialIds ?? regra.materialIds ?? (regra.materialId ? [regra.materialId] : []);
+    if (materialIds.length) return materiais.some((item) => materialIds.includes(item.id));
+    if (regra.materialId) return materiais.some((item) => regra.materialId === item.id);
+    return materiais.some((item) => regra.categorias?.includes(item.categoria));
+  }
+
+  materialDoGatilho(regra, ponto) {
+    if (regra.materialId) {
+      return this.materiaisDoPonto(ponto).find((item) => item.id === regra.materialId) || null;
+    }
+
+    if (regra.categorias?.includes("poste") && ponto.posteId) {
+      return this.base.materiais.find((item) => item.id === ponto.posteId);
+    }
+
+    if (regra.categorias?.includes("cabo")) {
+      return this.base.materiais.find((item) => item.id === ponto.caboBTId)
+        || this.base.materiais.find((item) => item.id === ponto.caboMTId)
+        || null;
+    }
+
+    if (regra.categorias?.includes("geral")) {
+      return this.materiaisDoPonto(ponto).find((item) => item.categoria === "geral") || null;
+    }
+
+    return null;
+  }
+
+  materiaisDeGatilho(regra, ponto) {
+    const idsMultiplos = regra.gatilho?.materialIds ?? regra.materialIds ?? [];
+    if (idsMultiplos.length) {
+      return this.materiaisDoPonto(ponto).filter((item) => idsMultiplos.includes(item.id));
+    }
+
+    if (regra.materialId) {
+      const material = this.materiaisDoPonto(ponto).find((item) => item.id === regra.materialId);
+      return material ? [material] : [];
+    }
+
+    const categorias = regra.gatilho?.categorias ?? regra.categorias ?? [];
+    if (categorias.includes("cabo")) {
+      const cabos = [ponto.caboBTId, ponto.caboMTId]
+        .filter(Boolean)
+        .map((id) => this.materialPorId(id))
+        .filter((item) => item?.categoria === "cabo");
+      return [...new Map(cabos.map((item) => [item.id, item])).values()];
+    }
+
+    const material = this.materialDoGatilho(regra, ponto);
+    return material ? [material] : [];
+  }
+
+  materiaisDoPonto(ponto) {
+    const ids = [];
+    if (ponto.posteId) ids.push(ponto.posteId);
+    if (ponto.caboBTId) ids.push(ponto.caboBTId);
+    if (ponto.caboMTId) ids.push(ponto.caboMTId);
+
+    const estrutura = this.base.estruturas.find((item) => item.id === ponto.estruturaId);
+    if (estrutura) {
+      ids.push(...estrutura.itens.map((item) => item.materialId));
+    }
+
+    const unicos = [...new Set(ids)];
+    return unicos
+      .map((id) => this.base.materiais.find((item) => item.id === id))
+      .filter(Boolean);
+  }
+
+  estruturaDoPonto(ponto) {
+    return this.base.estruturas.find((item) => item.id === ponto.estruturaId) || null;
+  }
+
+  quantidadeCabosDoPonto(ponto) {
+    return this.quantidadeBaseCabosDoPonto(ponto);
+  }
+
+  quantidadeBaseCabosDoPonto(ponto) {
+    return Number(ponto.quantidadeCabo || 0);
+  }
+
+  adicionarCabosDoPonto(mapa, ponto) {
+    const quantidade = this.quantidadeBaseCabosDoPonto(ponto);
+    const ids = [ponto.caboBTId, ponto.caboMTId].filter(Boolean);
+    const unicos = [...new Set(ids)];
+    unicos.forEach((id) => this.adicionarMaterialDireto(mapa, id, quantidade));
+  }
+
+  preencherDescricao(texto, material, estrutura, operacao, regra) {
+    const nomesOperacao = { I: "INST", D: "DESATIVA", R: "REINST" };
+    let descricao = texto
+      .replace("{material}", material?.descricao?.toUpperCase() || "")
+      .replace("{estrutura}", estrutura?.id || "")
+      .replace("{estruturaDescricao}", estrutura?.descricao || "")
+      .replace("{operacao}", nomesOperacao[operacao] || operacao);
+
+    if (regra?.tipoGatilho === "estrutura" && !regra.estruturaId && estrutura?.id && !texto.includes("{estrutura}")) {
+      descricao = `${descricao} ${estrutura.id}`.trim();
+    }
+
+    return descricao;
+  }
+
+  somar(mapa, codigo, descricao, quantidade, unidade) {
+    const chave = `${codigo}::${descricao}`;
+    const atual = mapa.get(chave) || { codigo, descricao, quantidade: 0, unidade };
+    atual.quantidade += quantidade;
+    mapa.set(chave, atual);
+  }
+
+  ordenarLinhas(mapa) {
+    return [...mapa.values()].sort((a, b) => a.descricao.localeCompare(b.descricao, "pt-BR"));
+  }
+
+  acumularRegraDeCabo(pendencias, mapa, codigo, descricao, quantidadeBase, fatorRede) {
+    if (quantidadeBase <= 0) return;
+    const chave = `${codigo}::${descricao}::${fatorRede}`;
+    const atual = pendencias.find((item) => item.chave === chave);
+    if (atual) {
+      atual.quantidadeBase += quantidadeBase;
+      return;
+    }
+
+    pendencias.push({ chave, mapa, codigo, descricao, quantidadeBase, fatorRede });
+  }
+
+  consolidarPendenciasDeCabos(pendencias) {
+    for (const item of pendencias) {
+      this.somar(item.mapa, item.codigo, item.descricao, item.quantidadeBase * item.fatorRede, "un");
+    }
+  }
+}
+
+class CasosDeUsoApp {
+  constructor(repositorio) {
+    this.repositorio = repositorio;
+  }
+
+  carregarBase() {
+    return this.repositorio.carregar();
+  }
+
+  salvarBase(base) {
+    this.repositorio.salvar(base);
+  }
+
+  carregarTema() {
+    return this.repositorio.carregarTema();
+  }
+
+  salvarTema(tema) {
+    this.repositorio.salvarTema(tema);
+  }
+
+  gerarMedicao(base) {
+    return new MotorDeRegras(base).processar(base.pontos);
+  }
+}
+
+class AplicacaoMedicao {
+  constructor(casosDeUso) {
+    this.casosDeUso = casosDeUso;
+    this.base = this.casosDeUso.carregarBase();
+    this.tema = this.casosDeUso.carregarTema();
+    this.resultado = {
+      materiaisInstalacao: [],
+      materiaisDesativacao: [],
+      maoObraInstalacao: [],
+      maoObraDesativacao: [],
+      maoObraReinstalacao: []
+    };
+    this.itensEstruturaTemporarios = [];
+    this.saidasRegraTemporarias = [];
+    this.materiaisRegraSelecionados = [];
+    this.filtrosResultado = { material: "I", maoObra: "I" };
+    this.contextoSeletorItem = null;
+    this.selecaoAtualSeletorItem = null;
+    this.elementos = this.mapearElementos();
+    this.normalizarBase();
+    this.registrarEventos();
+    this.renderizarTudo();
+  }
+
+  mapearElementos() {
+    return {
+      body: document.body,
+      aviso: document.querySelector("#aviso"),
+      abas: document.querySelectorAll(".aba"),
+      paineis: document.querySelectorAll(".painel-aba"),
+      abasCadastro: document.querySelectorAll(".aba-cadastro"),
+      paineisCadastro: document.querySelectorAll(".painel-cadastro"),
+      listaPontos: document.querySelector("#lista-pontos"),
+      adicionarPonto: document.querySelector("#adicionar-ponto"),
+      gerarMedicao: document.querySelector("#gerar-medicao"),
+      totalPontos: document.querySelector("#total-pontos"),
+      totalErros: document.querySelector("#total-erros"),
+      alternarTema: document.querySelector("#alternar-tema"),
+      formMaterial: document.querySelector("#form-material"),
+      listaMateriais: document.querySelector("#lista-materiais"),
+      filtroMateriais: document.querySelector("#filtro-materiais"),
+      novoMaterial: document.querySelector("#novo-material"),
+      formMaoObra: document.querySelector("#form-mao-obra"),
+      listaMaoObra: document.querySelector("#lista-mao-obra"),
+      filtroMaoObra: document.querySelector("#filtro-mao-obra"),
+      novaMaoObra: document.querySelector("#nova-mao-obra"),
+      formEstrutura: document.querySelector("#form-estrutura"),
+      listaEstruturas: document.querySelector("#lista-estruturas"),
+      filtroEstruturas: document.querySelector("#filtro-estruturas"),
+      incluirItemEstrutura: document.querySelector("#incluir-item-estrutura"),
+      itensEstrutura: document.querySelector("#itens-estrutura"),
+      novaEstrutura: document.querySelector("#nova-estrutura"),
+      formRegra: document.querySelector("#form-regra"),
+      campoMaterialRegra: document.querySelector("#campo-material-regra"),
+      itensMateriaisRegra: document.querySelector("#itens-materiais-regra"),
+      adicionarMaterialRegra: document.querySelector("#adicionar-material-regra"),
+      adicionarMaoObraRegra: document.querySelector("#adicionar-mao-obra-regra"),
+      saidasRegra: document.querySelector("#saidas-regra"),
+      listaRegras: document.querySelector("#lista-regras"),
+      novaRegra: document.querySelector("#nova-regra"),
+      resultadoMaterial: document.querySelector("#resultado-material"),
+      resultadoMaoObra: document.querySelector("#resultado-mao-obra"),
+      adicionarResultadoMaterial: document.querySelector("#adicionar-resultado-material"),
+      adicionarResultadoMaoObra: document.querySelector("#adicionar-resultado-mao-obra"),
+      abasResultado: document.querySelectorAll(".aba-resultado"),
+      baixarJson: document.querySelector("#baixar-json"),
+      baixarCsv: document.querySelector("#baixar-csv"),
+      arquivoJson: document.querySelector("#arquivo-json"),
+      modalMaterial: document.querySelector("#modal-material"),
+      modalMaoObra: document.querySelector("#modal-mao-obra"),
+      modalEstrutura: document.querySelector("#modal-estrutura"),
+      modalRegra: document.querySelector("#modal-regra"),
+      modalSeletorItem: document.querySelector("#modal-seletor-item"),
+      tituloModalMaterial: document.querySelector("#titulo-modal-material"),
+      tituloModalMaoObra: document.querySelector("#titulo-modal-mao-obra"),
+      tituloModalEstrutura: document.querySelector("#titulo-modal-estrutura"),
+      tituloModalRegra: document.querySelector("#titulo-modal-regra"),
+      tituloModalSeletorItem: document.querySelector("#titulo-modal-seletor-item"),
+      rotuloModalSeletorItem: document.querySelector("#rotulo-modal-seletor-item"),
+      fecharModal: document.querySelectorAll("[data-fechar-modal]"),
+      materialEstruturaStatus: document.querySelector("#material-estrutura-status"),
+      datalistMateriaisEstrutura: document.querySelector("#materiais-estrutura"),
+      formSeletorItem: document.querySelector("#form-seletor-item"),
+      listaSeletorItem: document.querySelector("#lista-seletor-item"),
+      statusSeletorItem: document.querySelector("#status-seletor-item"),
+      campoCodigoSeletorItem: document.querySelector("#campo-codigo-seletor-item"),
+      campoDescricaoSeletorItem: document.querySelector("#campo-descricao-seletor-item"),
+      campoQuantidadeSeletorItem: document.querySelector("#campo-quantidade-seletor-item"),
+      confirmarSeletorItem: document.querySelector("#confirmar-seletor-item")
+    };
+  }
+
+  registrarEventos() {
+    this.elementos.abas.forEach((aba) => aba.addEventListener("click", () => this.abrirAba(aba.dataset.aba)));
+    this.elementos.abasCadastro.forEach((aba) => aba.addEventListener("click", () => this.abrirAbaCadastro(aba.dataset.cadastro)));
+    this.elementos.adicionarPonto.addEventListener("click", () => this.adicionarPonto());
+    this.elementos.gerarMedicao.addEventListener("click", () => this.gerarMedicao());
+    this.elementos.alternarTema.addEventListener("click", () => this.alternarTema());
+    this.elementos.formMaterial.addEventListener("submit", (evento) => this.salvarMaterial(evento));
+    this.elementos.formMaoObra.addEventListener("submit", (evento) => this.salvarMaoObra(evento));
+    this.elementos.formEstrutura.addEventListener("submit", (evento) => this.salvarEstrutura(evento));
+    this.elementos.formRegra.addEventListener("submit", (evento) => this.salvarRegra(evento));
+    this.elementos.incluirItemEstrutura.addEventListener("click", () => this.incluirItemEstrutura());
+    this.elementos.adicionarMaterialRegra.addEventListener("click", () => this.abrirSeletorItem("regra-materiais"));
+    this.elementos.adicionarMaoObraRegra.addEventListener("click", () => this.abrirSeletorItem("regra-mao-obra"));
+    this.elementos.novoMaterial.addEventListener("click", () => this.abrirModalCadastro("material"));
+    this.elementos.novaMaoObra.addEventListener("click", () => this.abrirModalCadastro("maoObra"));
+    this.elementos.novaEstrutura.addEventListener("click", () => this.abrirModalCadastro("estrutura"));
+    this.elementos.novaRegra.addEventListener("click", () => this.abrirModalCadastro("regra"));
+    this.elementos.adicionarResultadoMaterial.addEventListener("click", () => this.abrirSeletorItem("resultado-material"));
+    this.elementos.adicionarResultadoMaoObra.addEventListener("click", () => this.abrirSeletorItem("resultado-mao-obra"));
+    this.elementos.formMaterial.elements.categoria.addEventListener("change", () => this.atualizarFormularioMaterial());
+    this.elementos.formRegra.elements.categoriaRegra.addEventListener("change", () => this.atualizarFormularioRegra());
+    this.elementos.formEstrutura.elements.materialBusca.addEventListener("input", () => this.sincronizarBuscaMaterialEstrutura());
+    this.elementos.formEstrutura.elements.materialBusca.addEventListener("change", () => this.sincronizarBuscaMaterialEstrutura());
+    this.elementos.formSeletorItem.addEventListener("submit", (evento) => this.confirmarSeletorItem(evento));
+    this.elementos.formSeletorItem.elements.busca.addEventListener("input", () => this.sincronizarSeletorItem());
+    this.elementos.formSeletorItem.elements.busca.addEventListener("change", () => this.sincronizarSeletorItem());
+    this.elementos.filtroMateriais?.addEventListener("input", () => this.renderizarCadastros());
+    this.elementos.filtroEstruturas?.addEventListener("input", () => this.renderizarCadastros());
+    this.elementos.filtroMaoObra?.addEventListener("input", () => this.renderizarCadastros());
+    this.elementos.fecharModal.forEach((botao) => botao.addEventListener("click", () => this.fecharModalCadastro(botao.dataset.fecharModal)));
+    [this.elementos.modalMaterial, this.elementos.modalMaoObra, this.elementos.modalEstrutura, this.elementos.modalRegra, this.elementos.modalSeletorItem].forEach((modal) => {
+      modal.addEventListener("click", (evento) => {
+        if (evento.target === modal) this.fecharModalAtual();
+      });
+    });
+    document.addEventListener("keydown", (evento) => {
+      if (evento.key === "Escape") this.fecharModalAtual();
+    });
+    this.elementos.abasResultado.forEach((aba) => aba.addEventListener("click", () => this.alterarResultado(aba)));
+    this.elementos.baixarJson.addEventListener("click", () => this.baixarArquivo("base-medicao.json", JSON.stringify(this.base, null, 2), "application/json"));
+    this.elementos.baixarCsv.addEventListener("click", () => this.baixarCsv());
+    this.elementos.arquivoJson.addEventListener("change", (evento) => this.importarJson(evento));
+  }
+
+  abrirAba(nome) {
+    this.elementos.abas.forEach((aba) => aba.classList.toggle("ativa", aba.dataset.aba === nome));
+    this.elementos.paineis.forEach((painel) => painel.classList.toggle("ativo", painel.id === `aba-${nome}`));
+  }
+
+  abrirAbaCadastro(nome) {
+    this.elementos.abasCadastro.forEach((aba) => aba.classList.toggle("ativa", aba.dataset.cadastro === nome));
+    this.elementos.paineisCadastro.forEach((painel) => painel.classList.toggle("ativo", painel.dataset.cadastroPainel === nome));
+  }
+
+  renderizarTudo() {
+    this.aplicarTema();
+    this.renderizarPontos();
+    this.renderizarSelects();
+    this.renderizarCadastros();
+    this.renderizarItensTemporarios();
+    this.renderizarResultado();
+    this.atualizarFormularioMaterial();
+    this.atualizarFormularioRegra();
+    this.atualizarStatusMaterialEstrutura();
+    this.casosDeUso.salvarBase(this.base);
+  }
+
+  renderizarPontos() {
+    this.elementos.listaPontos.innerHTML = "";
+    const erros = this.validarPontos();
+
+    this.base.pontos.forEach((ponto, indice) => {
+      const linha = document.createElement("tr");
+      linha.className = erros.has(ponto.id) ? "erro-linha" : "";
+      linha.innerHTML = `
+        <td data-coluna="Ponto"><input data-campo="numero" data-indice="${indice}" type="text" value="${ponto.numero}"></td>
+        <td data-coluna="Operacao">${this.selectOperacao(ponto.operacao, indice)}</td>
+        <td data-coluna="Estrutura">${this.inputBuscaPonto("estruturaId", this.base.estruturas, ponto.estruturaId, indice, "opcoes-estruturas-ponto")}</td>
+        <td data-coluna="Poste">${this.inputBuscaPonto("posteId", this.materiaisPorCategoria("poste"), ponto.posteId, indice, "opcoes-postes-ponto")}</td>
+        <td data-coluna="Cabo BT">${this.inputBuscaPonto("caboBTId", this.materiaisPorCategoria("cabo"), ponto.caboBTId, indice, "opcoes-cabos-bt-ponto")}</td>
+        <td data-coluna="Cabo MT">${this.inputBuscaPonto("caboMTId", this.materiaisPorCategoria("cabo"), ponto.caboMTId, indice, "opcoes-cabos-mt-ponto")}</td>
+        <td data-coluna="Qtd. cabo"><input data-campo="quantidadeCabo" data-indice="${indice}" type="number" min="0" step="0.01" value="${ponto.quantidadeCabo || ""}"></td>
+        <td data-coluna="Acao"><button class="botao perigo" data-remover-ponto="${indice}" type="button">Remover</button></td>
+      `;
+      this.elementos.listaPontos.append(linha);
+    });
+
+    this.elementos.listaPontos.querySelectorAll("[data-campo]").forEach((campo) => {
+      campo.addEventListener("change", () => this.atualizarPonto(campo));
+    });
+    this.elementos.listaPontos.querySelectorAll("[data-busca-ponto]").forEach((campo) => {
+      campo.addEventListener("change", () => this.atualizarPontoPorBusca(campo));
+    });
+    this.elementos.listaPontos.querySelectorAll("[data-remover-ponto]").forEach((botao) => {
+      botao.addEventListener("click", () => this.removerPonto(Number(botao.dataset.removerPonto)));
+    });
+
+    this.elementos.totalPontos.textContent = String(this.base.pontos.length);
+    this.elementos.totalErros.textContent = String(erros.size);
+  }
+
+  selectOperacao(valor, indice) {
+    return `
+      <select data-campo="operacao" data-indice="${indice}">
+        ${["I", "D", "R"].map((opcao) => `<option value="${opcao}" ${valor === opcao ? "selected" : ""}>${opcao}</option>`).join("")}
+      </select>
+    `;
+  }
+
+  selectGenerico(campo, itens, valor, indice, label, vazio = false) {
+    const opcoes = vazio ? [`<option value="">Selecione</option>`] : [];
+    opcoes.push(...itens.map((item) => `<option value="${item.id}" ${valor === item.id ? "selected" : ""}>${item[label] || item.id}</option>`));
+    return `<select data-campo="${campo}" data-indice="${indice}">${opcoes.join("")}</select>`;
+  }
+
+  inputBuscaPonto(campo, itens, valor, indice, datalistId) {
+    const itemSelecionado = itens.find((item) => item.id === valor);
+    const texto = itemSelecionado ? `${itemSelecionado.descricao || itemSelecionado.id}` : "";
+    return `<input data-busca-ponto="${campo}" data-indice="${indice}" list="${datalistId}" value="${texto}" placeholder="Digite descricao" />`;
+  }
+
+  atualizarPonto(campo) {
+    const ponto = this.base.pontos[Number(campo.dataset.indice)];
+    const valor = campo.dataset.campo === "quantidadeCabo" ? Number(campo.value) : campo.value;
+    ponto[campo.dataset.campo] = valor;
+
+    if (campo.dataset.campo === "caboBTId" || campo.dataset.campo === "caboMTId") {
+      const temCabo = ponto.caboBTId || ponto.caboMTId;
+      if (!temCabo) {
+        ponto.quantidadeCabo = 0;
+      }
+    }
+
+    this.renderizarTudo();
+  }
+
+  atualizarPontoPorBusca(campo) {
+    const ponto = this.base.pontos[Number(campo.dataset.indice)];
+    const campoId = campo.dataset.buscaPonto;
+    const itens = this.opcoesBuscaPonto(campoId);
+    const termo = this.normalizarTexto(campo.value);
+    const encontrado = itens.find((item) => this.normalizarTexto(`${item.descricao || ""}`).includes(termo)
+      || this.normalizarTexto(`${item.codigo || ""}`).includes(termo)
+      || this.normalizarTexto(`${item.id || ""}`).includes(termo));
+    if (encontrado) ponto[campoId] = encontrado.id;
+    else ponto[campoId] = "";
+    this.renderizarTudo();
+  }
+
+  opcoesBuscaPonto(campoId) {
+    if (campoId === "estruturaId") return this.base.estruturas;
+    if (campoId === "posteId") return this.materiaisPorCategoria("poste");
+    if (campoId === "caboBTId" || campoId === "caboMTId") return this.materiaisPorCategoria("cabo");
+    return [];
+  }
+
+  adicionarPonto() {
+    this.base.pontos.push({
+      id: criarIdentificadorUnico(),
+      numero: this.obterProximoNumeroPonto(),
+      operacao: "I",
+      estruturaId: "",
+      posteId: "",
+      caboBTId: "",
+      caboMTId: "",
+      quantidadeCabo: 0,
+      rede: "",
+      quantidadePontos: 1
+    });
+    this.renderizarTudo();
+  }
+
+  removerPonto(indice) {
+    this.base.pontos.splice(indice, 1);
+    this.renderizarTudo();
+  }
+
+  validarPontos() {
+    const erros = new Set();
+    for (const ponto of this.base.pontos) {
+      if (!this.extrairNumeroBaseDoPonto(ponto.numero) || !ponto.operacao) erros.add(ponto.id);
+      if ((ponto.caboBTId || ponto.caboMTId) && Number(ponto.quantidadeCabo || 0) <= 0) erros.add(ponto.id);
+    }
+    return erros;
+  }
+
+  extrairNumeroBaseDoPonto(valor) {
+    const texto = String(valor || "").trim();
+    const correspondente = texto.match(/\d+/);
+    return correspondente ? Number(correspondente[0]) : 0;
+  }
+
+  obterProximoNumeroPonto() {
+    if (!this.base.pontos.length) return "1";
+    const ultimo = this.base.pontos[this.base.pontos.length - 1];
+    const ultimoNumero = this.extrairNumeroBaseDoPonto(ultimo?.numero);
+    const base = ultimoNumero > 0 ? ultimoNumero : this.base.pontos.length;
+    return String(base + 1);
+  }
+
+  renderizarSelects() {
+    this.elementos.datalistMateriaisEstrutura.innerHTML = this.base.materiais
+      .map((material) => `<option value="${material.descricao}">${material.codigo}</option>`)
+      .join("");
+    const opcoesEstruturas = this.base.estruturas.map((item) => `<option value="${item.descricao || item.id}"></option>`).join("");
+    const opcoesPostes = this.materiaisPorCategoria("poste").map((item) => `<option value="${item.descricao}"></option>`).join("");
+    const opcoesCabos = this.materiaisPorCategoria("cabo").map((item) => `<option value="${item.descricao}"></option>`).join("");
+    const datalistEstruturas = document.querySelector("#opcoes-estruturas-ponto");
+    const datalistPostes = document.querySelector("#opcoes-postes-ponto");
+    const datalistCabosBt = document.querySelector("#opcoes-cabos-bt-ponto");
+    const datalistCabosMt = document.querySelector("#opcoes-cabos-mt-ponto");
+    if (datalistEstruturas) datalistEstruturas.innerHTML = opcoesEstruturas;
+    if (datalistPostes) datalistPostes.innerHTML = opcoesPostes;
+    if (datalistCabosBt) datalistCabosBt.innerHTML = opcoesCabos;
+    if (datalistCabosMt) datalistCabosMt.innerHTML = opcoesCabos;
+    const materiaisGerais = this.materiaisPorCategoria("geral");
+    this.elementos.formRegra.elements.materialId.innerHTML = `<option value="">Selecione</option>${materiaisGerais.map((item) => `<option value="${item.id}">${item.descricao}</option>`).join("")}`;
+    this.renderizarSeletoresRegra();
+  }
+
+  renderizarSeletoresRegra() {
+    const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+    this.elementos.itensMateriaisRegra.innerHTML = this.materiaisRegraSelecionados.map((id, indice) => {
+      if (categoria === "estrutura") {
+        const estrutura = this.base.estruturas.find((item) => item.id === id);
+        return `<div class="item-temporario"><span>${estrutura?.descricao || ""}</span><button data-remover-material-regra="${indice}" type="button">Remover</button></div>`;
+      }
+      const material = this.materialPorId(id);
+      return `<div class="item-temporario"><span>${material?.descricao || ""}</span><button data-remover-material-regra="${indice}" type="button">Remover</button></div>`;
+    }).join("");
+
+    this.elementos.itensMateriaisRegra.querySelectorAll("[data-remover-material-regra]").forEach((botao) => {
+      botao.addEventListener("click", () => {
+        this.materiaisRegraSelecionados.splice(Number(botao.dataset.removerMaterialRegra), 1);
+        this.renderizarSeletoresRegra();
+      });
+    });
+  }
+
+  atualizarFormularioMaterial() {
+    // Sem configuracoes adicionais para categoria cabo.
+  }
+
+  atualizarFormularioRegra() {
+    this.elementos.campoMaterialRegra.classList.remove("oculto");
+    this.renderizarSeletoresRegra();
+    this.renderizarItensTemporarios();
+  }
+
+  renderizarCadastros() {
+    const termoMateriais = this.normalizarTexto(this.elementos.filtroMateriais?.value || "");
+    const termoEstruturas = this.normalizarTexto(this.elementos.filtroEstruturas?.value || "");
+    const termoMaoObra = this.normalizarTexto(this.elementos.filtroMaoObra?.value || "");
+
+    const materiaisFiltrados = termoMateriais
+      ? this.base.materiais.filter((material) => this.correspondeBuscaCatalogo(material, termoMateriais))
+      : this.base.materiais;
+    const estruturasFiltradas = termoEstruturas
+      ? this.base.estruturas.filter((estrutura) => {
+        const materiaisEstrutura = estrutura.itens
+          .map((item) => this.materialPorId(item.materialId)?.descricao || item.materialId)
+          .join(" ");
+        return this.normalizarTexto(`${estrutura.id} ${estrutura.descricao} ${materiaisEstrutura}`).includes(termoEstruturas);
+      })
+      : this.base.estruturas;
+    const maoObraFiltrada = termoMaoObra
+      ? this.base.maoObra.filter((item) => this.correspondeBuscaCatalogo(item, termoMaoObra))
+      : this.base.maoObra;
+
+    this.elementos.listaMateriais.innerHTML = materiaisFiltrados.map((material) => this.cartaoCadastro(
+      material.id,
+      material.descricao,
+      `${material.codigo} | ${material.unidade} | ${material.categoria}`,
+      "material"
+    )).join("");
+
+    this.elementos.listaEstruturas.innerHTML = estruturasFiltradas.map((estrutura) => this.cartaoCadastro(
+      estrutura.id,
+      estrutura.descricao,
+      `${estrutura.itens.length} materiais vinculados`,
+      "estrutura"
+    )).join("");
+
+    this.elementos.listaMaoObra.innerHTML = maoObraFiltrada.map((item) => this.cartaoCadastro(
+      item.id,
+      item.descricao,
+      `${item.codigo} | ${item.unidade}`,
+      "maoObra"
+    )).join("");
+
+    this.elementos.listaRegras.innerHTML = this.base.regrasMaoObra.map((regra) => this.cartaoCadastro(
+      regra.id,
+      regra.nome,
+      `${regra.operacoes.join(", ")} | ${this.resumoRegra(regra)} | ${regra.saidas.length} saidas`,
+      "regra"
+    )).join("");
+
+    document.querySelectorAll("[data-editar]").forEach((botao) => botao.addEventListener("click", () => this.editarCadastro(botao.dataset.tipo, botao.dataset.editar)));
+    document.querySelectorAll("[data-excluir]").forEach((botao) => botao.addEventListener("click", () => this.excluirCadastro(botao.dataset.tipo, botao.dataset.excluir)));
+  }
+
+  cartaoCadastro(id, titulo, detalhe, tipo) {
+    return `
+      <div class="cartao-item">
+        <div><strong>${titulo}</strong><span>${detalhe}</span></div>
+        <div class="mini-acoes">
+          <button data-tipo="${tipo}" data-editar="${id}" type="button">Editar</button>
+          <button data-tipo="${tipo}" data-excluir="${id}" type="button">Excluir</button>
+        </div>
+      </div>
+    `;
+  }
+
+  salvarMaterial(evento) {
+    evento.preventDefault();
+    const dados = new FormData(evento.currentTarget);
+    const material = {
+      id: dados.get("id") || this.criarId(dados.get("descricao")),
+      codigo: dados.get("codigo"),
+      descricao: dados.get("descricao"),
+      unidade: dados.get("unidade"),
+      categoria: dados.get("categoria")
+    };
+
+    this.salvarPorId(this.base.materiais, material);
+    this.limparFormularioMaterial();
+    this.fecharModalCadastro("material");
+    this.renderizarTudo();
+    this.mostrarAviso("Material salvo.");
+  }
+
+  salvarMaoObra(evento) {
+    evento.preventDefault();
+    const dados = new FormData(evento.currentTarget);
+    const descricao = String(dados.get("descricao") || "").trim();
+    if (!descricao) return this.mostrarAviso("Informe a descricao da mao de obra.");
+
+    this.salvarMaoObraCatalogo({
+      id: String(dados.get("id") || "").trim(),
+      codigo: String(dados.get("codigo") || "").trim(),
+      descricao,
+      unidade: String(dados.get("unidade") || "un").trim() || "un"
+    });
+
+    this.limparFormularioMaoObra();
+    this.fecharModalCadastro("maoObra");
+    this.renderizarTudo();
+    this.mostrarAviso("Mao de obra salva.");
+  }
+
+  incluirItemEstrutura() {
+    const form = this.elementos.formEstrutura;
+    const materialId = form.elements.materialId.value;
+    const quantidade = Number(form.elements.quantidade.value || 0);
+    if (!materialId || quantidade <= 0) return this.mostrarAviso("Informe material e quantidade da estrutura.");
+    this.itensEstruturaTemporarios.push({ materialId, quantidade });
+    form.elements.materialBusca.value = "";
+    form.elements.materialId.value = "";
+    form.elements.quantidade.value = 1;
+    this.atualizarStatusMaterialEstrutura();
+    this.renderizarItensTemporarios();
+  }
+
+  salvarEstrutura(evento) {
+    evento.preventDefault();
+    const form = evento.currentTarget;
+    const idOriginal = form.elements.idOriginal.value || form.elements.id.value;
+    const estrutura = {
+      id: form.elements.id.value.trim(),
+      descricao: form.elements.descricao.value.trim(),
+      itens: this.itensEstruturaTemporarios
+    };
+    if (!estrutura.itens.length) return this.mostrarAviso("Inclua pelo menos um material na estrutura.");
+    this.base.estruturas = this.base.estruturas.filter((item) => item.id !== idOriginal);
+    this.base.estruturas.push(estrutura);
+    this.limparFormularioEstrutura();
+    this.fecharModalCadastro("estrutura");
+    this.renderizarTudo();
+    this.mostrarAviso("Estrutura salva.");
+  }
+
+  incluirSaidaRegra() {
+    this.abrirSeletorItem("regra-mao-obra");
+  }
+
+  salvarRegra(evento) {
+    evento.preventDefault();
+    const form = evento.currentTarget;
+    const nome = String(form.elements.nome.value || "").trim();
+    if (!nome) return this.mostrarAviso("Nome da regra e obrigatorio.");
+    const operacoes = [...form.querySelectorAll("input[name='operacoes']:checked")].map((item) => item.value);
+    const categoria = form.elements.categoriaRegra.value;
+    const materialIds = [...new Set(this.materiaisRegraSelecionados)];
+    const estruturaIds = categoria === "estrutura" ? [...new Set(this.materiaisRegraSelecionados)] : [];
+    const saidasNormalizadas = clonar(this.saidasRegraTemporarias).map((saida) => ({
+      ...saida,
+      quantidade: categoria === "cabo" ? 1 : Number(saida.quantidade || 0)
+    }));
+    const regra = {
+      id: form.elements.id.value || this.criarId(form.elements.nome.value),
+      nome,
+      tipoGatilho: categoria === "estrutura" ? "estrutura" : "material",
+      materialId: categoria === "geral" ? (materialIds[0] || null) : null,
+      materialIds: categoria === "estrutura" ? [] : materialIds,
+      estruturaId: null,
+      estruturaIds: categoria === "estrutura" ? estruturaIds : [],
+      categorias: categoria === "estrutura" ? [] : [categoria],
+      gatilho: {
+        tipo: categoria === "estrutura" ? "estrutura" : "material",
+        materialId: categoria === "geral" ? (materialIds[0] || undefined) : undefined,
+        materialIds: categoria === "estrutura" ? [] : materialIds,
+        estruturaIds: categoria === "estrutura" ? estruturaIds : [],
+        categorias: categoria === "estrutura" ? [] : [categoria]
+      },
+      operacoes,
+      saidas: saidasNormalizadas
+    };
+    if (!operacoes.length) return this.mostrarAviso("Selecione ao menos uma operacao.");
+    if ((categoria === "poste" || categoria === "cabo" || categoria === "geral") && !materialIds.length) return this.mostrarAviso("Selecione ao menos um material.");
+    if (categoria === "estrutura" && !estruturaIds.length) return this.mostrarAviso("Selecione ao menos uma estrutura.");
+    if (!regra.saidas.length) return this.mostrarAviso("Inclua pelo menos uma saida de mao de obra.");
+    this.salvarPorId(this.base.regrasMaoObra, regra);
+    this.limparFormularioRegra();
+    this.fecharModalCadastro("regra");
+    this.renderizarTudo();
+    this.mostrarAviso("Regra salva.");
+  }
+
+  renderizarItensTemporarios() {
+    this.elementos.itensEstrutura.innerHTML = this.itensEstruturaTemporarios.map((item, indice) => {
+      const material = this.materialPorId(item.materialId);
+      return `<div class="item-temporario"><span>${material?.descricao || item.materialId} | ${item.quantidade}</span><button data-remover-item-estrutura="${indice}" type="button">Remover</button></div>`;
+    }).join("");
+
+    this.elementos.saidasRegra.innerHTML = this.saidasRegraTemporarias.map((item, indice) => {
+      const maoObra = this.base.maoObra.find((atual) => atual.id === item.maoObraId);
+      const codigo = maoObra?.codigo || item.codigo || "MO";
+      const descricao = maoObra?.descricao || item.descricao || "";
+      const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+      const quantidadeCampo = categoria === "cabo"
+        ? `<span class="texto-apoio">Qtd. automatica por metragem de cabo</span>`
+        : `<input data-quantidade-saida-regra="${indice}" type="number" min="0" step="0.01" value="${Number(item.quantidade || 0)}">`;
+      return `
+        <div class="item-temporario">
+          <span>${descricao}</span>
+          <div class="campo-busca-regra-acoes">
+            ${quantidadeCampo}
+            <button data-remover-saida-regra="${indice}" type="button">Remover</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    document.querySelectorAll("[data-remover-item-estrutura]").forEach((botao) => botao.addEventListener("click", () => {
+      this.itensEstruturaTemporarios.splice(Number(botao.dataset.removerItemEstrutura), 1);
+      this.renderizarItensTemporarios();
+    }));
+    document.querySelectorAll("[data-remover-saida-regra]").forEach((botao) => botao.addEventListener("click", () => {
+      this.saidasRegraTemporarias.splice(Number(botao.dataset.removerSaidaRegra), 1);
+      this.renderizarItensTemporarios();
+    }));
+    document.querySelectorAll("[data-quantidade-saida-regra]").forEach((campo) => campo.addEventListener("change", () => {
+      const indice = Number(campo.dataset.quantidadeSaidaRegra);
+      this.saidasRegraTemporarias[indice].quantidade = Number(campo.value || 0);
+    }));
+  }
+
+  gerarMedicao() {
+    const erros = this.validarPontos();
+    if (erros.size) return this.mostrarAviso("Corrija os pontos destacados antes de gerar a medicao.");
+    this.resultado = this.casosDeUso.gerarMedicao(this.base);
+    this.renderizarResultado();
+    this.abrirAba("resultado");
+    this.mostrarAviso("Medicao gerada com sucesso.");
+  }
+
+  renderizarResultado() {
+    const grupoMaterial = this.filtrosResultado.material === "D" ? "materiaisDesativacao" : "materiaisInstalacao";
+    const gruposMaoObra = {
+      I: "maoObraInstalacao",
+      D: "maoObraDesativacao",
+      R: "maoObraReinstalacao"
+    };
+    const grupoMaoObra = gruposMaoObra[this.filtrosResultado.maoObra];
+    this.elementos.resultadoMaterial.innerHTML = this.linhasResultado(this.resultado[grupoMaterial], grupoMaterial);
+    this.elementos.resultadoMaoObra.innerHTML = this.linhasResultado(this.resultado[grupoMaoObra], grupoMaoObra);
+    this.elementos.abasResultado.forEach((aba) => {
+      const ativa = this.filtrosResultado[aba.dataset.resultadoSecao] === aba.dataset.resultadoOperacao;
+      aba.classList.toggle("ativa", ativa);
+    });
+
+    document.querySelectorAll("[data-resultado-grupo]").forEach((campo) => {
+      campo.addEventListener("change", () => {
+        this.resultado[campo.dataset.resultadoGrupo][Number(campo.dataset.resultadoIndice)].quantidade = Number(campo.value || 0);
+      });
+    });
+  }
+
+  alterarResultado(aba) {
+    this.filtrosResultado[aba.dataset.resultadoSecao] = aba.dataset.resultadoOperacao;
+    this.renderizarResultado();
+  }
+
+  linhasResultado(linhas, grupo) {
+    if (!linhas.length) return `<div class="preview-vazio">Gere a medicao para visualizar.</div>`;
+    return linhas.map((linha, indice) => `
+      <div class="linha-resultado">
+        <div><strong>${linha.descricao}</strong><span>${linha.codigo} | ${linha.unidade}</span></div>
+        <input class="quantidade-editavel" data-resultado-grupo="${grupo}" data-resultado-indice="${indice}" type="number" step="0.01" value="${linha.quantidade}">
+      </div>
+    `).join("");
+  }
+
+  editarCadastro(tipo, id) {
+    if (tipo === "material") {
+      const material = this.base.materiais.find((item) => item.id === id);
+      this.limparFormularioMaterial();
+      this.elementos.tituloModalMaterial.textContent = "Editar material";
+      this.elementos.formMaterial.elements.id.value = material.id;
+      this.elementos.formMaterial.elements.codigo.value = material.codigo;
+      this.elementos.formMaterial.elements.descricao.value = material.descricao;
+      this.elementos.formMaterial.elements.unidade.value = material.unidade;
+      this.elementos.formMaterial.elements.categoria.value = material.categoria;
+      this.atualizarFormularioMaterial();
+      this.abrirModal("material");
+    }
+
+    if (tipo === "estrutura") {
+      const estrutura = this.base.estruturas.find((item) => item.id === id);
+      this.limparFormularioEstrutura();
+      this.elementos.tituloModalEstrutura.textContent = "Editar estrutura";
+      this.elementos.formEstrutura.elements.idOriginal.value = estrutura.id;
+      this.elementos.formEstrutura.elements.id.value = estrutura.id;
+      this.elementos.formEstrutura.elements.descricao.value = estrutura.descricao;
+      this.itensEstruturaTemporarios = clonar(estrutura.itens);
+      this.elementos.formEstrutura.elements.materialBusca.value = "";
+      this.elementos.formEstrutura.elements.materialId.value = "";
+      this.atualizarStatusMaterialEstrutura();
+      this.renderizarItensTemporarios();
+      this.abrirModal("estrutura");
+    }
+
+    if (tipo === "maoObra") {
+      const item = this.base.maoObra.find((atual) => atual.id === id);
+      this.limparFormularioMaoObra();
+      this.elementos.tituloModalMaoObra.textContent = "Editar mao de obra";
+      this.elementos.formMaoObra.elements.id.value = item.id;
+      this.elementos.formMaoObra.elements.codigo.value = item.codigo;
+      this.elementos.formMaoObra.elements.descricao.value = item.descricao;
+      this.elementos.formMaoObra.elements.unidade.value = item.unidade || "un";
+      this.abrirModal("maoObra");
+    }
+
+    if (tipo === "regra") {
+      const regra = this.base.regrasMaoObra.find((item) => item.id === id);
+      const tipoGatilho = regra.gatilho?.tipo || regra.tipoGatilho;
+      const materialIdRegra = regra.gatilho?.materialId ?? regra.materialId;
+      const materialIdsRegra = regra.gatilho?.materialIds ?? regra.materialIds ?? [];
+      const estruturaIdsRegra = regra.gatilho?.estruturaIds ?? regra.estruturaIds ?? [];
+      const categoriasRegra = regra.gatilho?.categorias ?? regra.categorias;
+      const categoria = tipoGatilho === "estrutura"
+        ? "estrutura"
+        : materialIdRegra
+          ? this.materialPorId(materialIdRegra)?.categoria || categoriasRegra?.[0] || "poste"
+          : categoriasRegra?.[0] || "poste";
+      this.limparFormularioRegra();
+      this.elementos.tituloModalRegra.textContent = "Editar regra";
+      this.elementos.formRegra.elements.id.value = regra.id;
+      this.elementos.formRegra.elements.nome.value = regra.nome;
+      this.elementos.formRegra.elements.categoriaRegra.value = categoria;
+      this.atualizarFormularioRegra();
+      this.elementos.formRegra.elements.materialId.value = materialIdRegra || "";
+      this.materiaisRegraSelecionados = categoria === "estrutura" ? [...estruturaIdsRegra] : [...materialIdsRegra];
+      this.renderizarSeletoresRegra();
+      this.elementos.formRegra.querySelectorAll("input[name='operacoes']").forEach((item) => item.checked = regra.operacoes.includes(item.value));
+      this.saidasRegraTemporarias = clonar(regra.saidas);
+      this.renderizarItensTemporarios();
+      this.abrirModal("regra");
+    }
+  }
+
+  excluirCadastro(tipo, id) {
+    if (tipo === "material") this.base.materiais = this.base.materiais.filter((item) => item.id !== id);
+    if (tipo === "maoObra") this.base.maoObra = this.base.maoObra.filter((item) => item.id !== id);
+    if (tipo === "estrutura") this.base.estruturas = this.base.estruturas.filter((item) => item.id !== id);
+    if (tipo === "regra") this.base.regrasMaoObra = this.base.regrasMaoObra.filter((item) => item.id !== id);
+    this.renderizarTudo();
+  }
+
+  baixarCsv() {
+    const grupos = [
+      ["Materiais Instalacao", this.resultado.materiaisInstalacao],
+      ["Materiais Desativacao", this.resultado.materiaisDesativacao],
+      ["Mao de Obra Instalacao", this.resultado.maoObraInstalacao],
+      ["Mao de Obra Reinstalacao", this.resultado.maoObraReinstalacao],
+      ["Mao de Obra Desativacao", this.resultado.maoObraDesativacao]
+    ];
+    const linhas = ["Grupo;Codigo;Descricao;Quantidade;Unidade"];
+    grupos.forEach(([grupo, itens]) => itens.forEach((item) => linhas.push(`${grupo};${item.codigo};${item.descricao};${item.quantidade};${item.unidade}`)));
+    this.baixarArquivo("resultado-medicao.csv", linhas.join("\n"), "text/csv;charset=utf-8");
+  }
+
+  importarJson(evento) {
+    const arquivo = evento.target.files[0];
+    if (!arquivo) return;
+    const leitor = new FileReader();
+    leitor.onload = () => {
+      this.base = JSON.parse(leitor.result);
+      this.normalizarBase();
+      this.renderizarTudo();
+      this.mostrarAviso("Base carregada.");
+    };
+    leitor.readAsText(arquivo);
+  }
+
+  baixarArquivo(nome, conteudo, tipo) {
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([conteudo], { type: tipo }));
+    link.download = nome;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
+
+  materiaisPorCategoria(categoria) {
+    return this.base.materiais.filter((item) => item.categoria === categoria);
+  }
+
+  materiaisPorTipoCabo(tipoCabo) {
+    return this.base.materiais.filter((item) => item.categoria === "cabo" && item.tipoCabo === tipoCabo);
+  }
+
+  materialPorId(id) {
+    return this.base.materiais.find((item) => item.id === id);
+  }
+
+  salvarPorId(lista, item) {
+    const indice = lista.findIndex((atual) => atual.id === item.id);
+    if (indice >= 0) lista[indice] = item;
+    else lista.push(item);
+  }
+
+  criarId(texto) {
+    return this.normalizarTexto(texto)
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_|_$/g, "");
+  }
+
+  normalizarTexto(texto) {
+    return String(texto || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  alternarTema() {
+    this.tema = this.tema === "escuro" ? "claro" : "escuro";
+    this.casosDeUso.salvarTema(this.tema);
+    this.aplicarTema();
+  }
+
+  aplicarTema() {
+    document.body.dataset.tema = this.tema;
+    const rotulo = this.tema === "escuro" ? "Ativar modo claro" : "Ativar modo escuro";
+    const icone = this.tema === "escuro"
+      ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V5.5a.75.75 0 0 1 .75-.75Zm0 10.5a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Zm7.25-4a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1 0-1.5h1.5ZM7.75 12a.75.75 0 0 1-.75.75H5.5a.75.75 0 0 1 0-1.5H7a.75.75 0 0 1 .75.75Zm8.376-4.876a.75.75 0 0 1 1.06 0l1.06 1.061a.75.75 0 0 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.06ZM6.814 16.126a.75.75 0 0 1 1.06 0l1.06 1.06a.75.75 0 1 1-1.06 1.061l-1.06-1.061a.75.75 0 0 1 0-1.06Zm10.372 1.06a.75.75 0 1 1-1.06-1.06l1.06-1.061a.75.75 0 1 1 1.06 1.06l-1.06 1.061ZM8.935 7.124a.75.75 0 1 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 1.06-1.061l1.06 1.061ZM12 17a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 12 17Z" fill="currentColor"/></svg>`
+      : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 3.25a.75.75 0 0 1 .726.938 7.25 7.25 0 0 0 9.086 9.086.75.75 0 0 1 .938.726A9.75 9.75 0 1 1 14.5 3.25Z" fill="currentColor" transform="translate(-1.5 0)"/></svg>`;
+    this.elementos.alternarTema.innerHTML = `<span class="icone-botao">${icone}</span><span class="texto-invisivel">${rotulo}</span>`;
+    this.elementos.alternarTema.setAttribute("aria-label", rotulo);
+    this.elementos.alternarTema.setAttribute("title", rotulo);
+  }
+
+  limparFormularioMaterial() {
+    this.elementos.formMaterial.reset();
+    this.elementos.formMaterial.elements.id.value = "";
+    this.elementos.formMaterial.elements.categoria.value = "geral";
+    this.elementos.tituloModalMaterial.textContent = "Novo material";
+    this.atualizarFormularioMaterial();
+  }
+
+  limparFormularioMaoObra() {
+    this.elementos.formMaoObra.reset();
+    this.elementos.formMaoObra.elements.id.value = "";
+    this.elementos.formMaoObra.elements.unidade.value = "un";
+    this.elementos.tituloModalMaoObra.textContent = "Nova mao de obra";
+  }
+
+  limparFormularioEstrutura() {
+    this.elementos.formEstrutura.reset();
+    this.elementos.formEstrutura.elements.idOriginal.value = "";
+    this.elementos.formEstrutura.elements.materialId.value = "";
+    this.elementos.tituloModalEstrutura.textContent = "Nova estrutura";
+    this.itensEstruturaTemporarios = [];
+    this.atualizarStatusMaterialEstrutura();
+    this.renderizarItensTemporarios();
+  }
+
+  limparFormularioRegra() {
+    this.elementos.formRegra.reset();
+    this.elementos.formRegra.elements.id.value = "";
+    this.elementos.formRegra.elements.categoriaRegra.value = "poste";
+    this.materiaisRegraSelecionados = [];
+    this.elementos.tituloModalRegra.textContent = "Nova regra";
+    this.saidasRegraTemporarias = [];
+    this.renderizarItensTemporarios();
+    this.atualizarFormularioRegra();
+  }
+
+  resumoRegra(regra) {
+    const tipoGatilho = regra.gatilho?.tipo || regra.tipoGatilho;
+    const estruturaId = regra.gatilho?.estruturaId ?? regra.estruturaId;
+    const estruturaIds = regra.gatilho?.estruturaIds ?? regra.estruturaIds ?? [];
+    const materialId = regra.gatilho?.materialId ?? regra.materialId;
+    const materialIds = regra.gatilho?.materialIds ?? regra.materialIds ?? [];
+    const categorias = regra.gatilho?.categorias ?? regra.categorias;
+
+    if (tipoGatilho === "estrutura") {
+      if (estruturaIds.length) return `${estruturaIds.length} estrutura(s)`;
+      return estruturaId ? `Estrutura ${estruturaId}` : "Todas as estruturas";
+    }
+
+    if (materialIds.length) return `${materialIds.length} item(ns)`;
+    if (materialId) return this.materialPorId(materialId)?.descricao || materialId;
+    const categoria = categorias?.[0] || "poste";
+    if (categoria === "poste" || categoria === "cabo" || categoria === "geral") return "Sem itens";
+    return "Sem filtro";
+  }
+
+  abrirModalCadastro(tipo) {
+    if (tipo === "material") this.limparFormularioMaterial();
+    if (tipo === "maoObra") this.limparFormularioMaoObra();
+    if (tipo === "estrutura") this.limparFormularioEstrutura();
+    if (tipo === "regra") this.limparFormularioRegra();
+    if (tipo === "seletorItem") this.limparSeletorItem();
+    this.abrirModal(tipo);
+  }
+
+  abrirModal(tipo) {
+    const modal = this.modalPorTipo(tipo);
+    if (!modal) return;
+    if (tipo === "seletorItem" && this.modalAberto && this.modalAberto !== tipo) {
+      this.modalAnteriorSeletorItem = this.modalAberto;
+      modal.classList.remove("oculto");
+      this.modalAberto = tipo;
+      this.elementos.body.classList.add("modal-aberto");
+      return;
+    }
+    if (this.modalAberto && this.modalAberto !== tipo) this.fecharModalCadastro(this.modalAberto);
+    this.modalAberto = tipo;
+    modal.classList.remove("oculto");
+    this.elementos.body.classList.add("modal-aberto");
+  }
+
+  fecharModalCadastro(tipo) {
+    const modal = this.modalPorTipo(tipo);
+    if (!modal) return;
+    modal.classList.add("oculto");
+    if (tipo === "seletorItem") this.limparSeletorItem();
+    if (this.modalAberto === tipo) this.modalAberto = this.modalAnteriorSeletorItem || null;
+    if (tipo === "seletorItem") this.modalAnteriorSeletorItem = null;
+    if (!this.modalAberto) this.elementos.body.classList.remove("modal-aberto");
+  }
+
+  fecharModalAtual() {
+    if (!this.modalAberto) return;
+    this.fecharModalCadastro(this.modalAberto);
+  }
+
+  modalPorTipo(tipo) {
+    if (tipo === "material") return this.elementos.modalMaterial;
+    if (tipo === "maoObra") return this.elementos.modalMaoObra;
+    if (tipo === "estrutura") return this.elementos.modalEstrutura;
+    if (tipo === "regra") return this.elementos.modalRegra;
+    if (tipo === "seletorItem") return this.elementos.modalSeletorItem;
+    return null;
+  }
+
+  sincronizarBuscaMaterialEstrutura() {
+    const campo = this.elementos.formEstrutura.elements.materialBusca;
+    const termo = this.normalizarTexto(campo.value);
+    const material = termo
+      ? this.base.materiais.find((item) => {
+        const descricao = this.normalizarTexto(item.descricao);
+        const codigo = this.normalizarTexto(item.codigo);
+        const id = this.normalizarTexto(item.id);
+        return descricao.includes(termo) || codigo.includes(termo) || id.includes(termo);
+      })
+      : null;
+
+    this.elementos.formEstrutura.elements.materialId.value = material?.id || "";
+    this.atualizarStatusMaterialEstrutura(material);
+  }
+
+  atualizarStatusMaterialEstrutura(material = null) {
+    const selecionado = material || this.materialPorId(this.elementos.formEstrutura.elements.materialId.value);
+    this.elementos.materialEstruturaStatus.textContent = selecionado
+      ? `Selecionado: ${selecionado.descricao} (${selecionado.codigo})`
+      : "Nenhum material selecionado.";
+  }
+
+  abrirSeletorItem(contexto) {
+    this.contextoSeletorItem = contexto;
+    this.selecaoAtualSeletorItem = null;
+    const form = this.elementos.formSeletorItem;
+    form.reset();
+    form.elements.quantidade.value = 1;
+    form.elements.codigo.value = "";
+    form.elements.descricao.value = "";
+
+    const configuracoes = {
+      "resultado-material": {
+        rotulo: "Resultado",
+        titulo: "Adicionar material",
+        botao: "Adicionar material",
+        mostrarCodigo: false,
+        mostrarDescricao: false,
+        mostrarQuantidade: true,
+        placeholder: "Digite codigo ou descricao do material"
+      },
+      "resultado-mao-obra": {
+        rotulo: "Resultado",
+        titulo: "Adicionar mao de obra",
+        botao: "Adicionar M.O.",
+        mostrarCodigo: true,
+        mostrarDescricao: true,
+        mostrarQuantidade: true,
+        placeholder: "Digite codigo ou descricao da mao de obra"
+      },
+      "regra-materiais": {
+        rotulo: "Regras",
+        titulo: "Selecionar item da regra",
+        botao: "Salvar selecao",
+        mostrarCodigo: false,
+        mostrarDescricao: false,
+        mostrarQuantidade: false,
+        placeholder: "Digite a descricao do item"
+      },
+      "regra-mao-obra": {
+        rotulo: "Regras",
+        titulo: "Selecionar mao de obra da regra",
+        botao: "Salvar selecao",
+        mostrarCodigo: false,
+        mostrarDescricao: false,
+        mostrarQuantidade: false,
+        placeholder: "Digite a descricao da mao de obra"
+      }
+    };
+
+    const config = configuracoes[contexto];
+    if (!config) return;
+    const categoriaRegra = this.elementos.formRegra.elements.categoriaRegra.value;
+    if (contexto === "regra-materiais") {
+      const rotulos = {
+        poste: "Selecionar postes",
+        cabo: "Selecionar cabos",
+        geral: "Selecionar itens gerais",
+        estrutura: "Selecionar itens"
+      };
+      config.titulo = rotulos[categoriaRegra] || config.titulo;
+    }
+    if (contexto === "regra-mao-obra" && categoriaRegra === "cabo") {
+      config.placeholder = "Digite a descricao da mao de obra (quantidade automatica por metragem)";
+    }
+
+    this.elementos.rotuloModalSeletorItem.textContent = config.rotulo;
+    this.elementos.tituloModalSeletorItem.textContent = config.titulo;
+    this.elementos.confirmarSeletorItem.textContent = config.botao;
+    this.elementos.formSeletorItem.elements.busca.placeholder = config.placeholder;
+    this.elementos.campoCodigoSeletorItem.classList.toggle("oculto", !config.mostrarCodigo);
+    this.elementos.campoDescricaoSeletorItem.classList.toggle("oculto", !config.mostrarDescricao);
+    this.elementos.campoQuantidadeSeletorItem.classList.toggle("oculto", !config.mostrarQuantidade);
+
+    this.sincronizarSeletorItem();
+    this.abrirModal("seletorItem");
+  }
+
+  limparSeletorItem() {
+    this.contextoSeletorItem = null;
+    this.selecaoAtualSeletorItem = null;
+    this.elementos.formSeletorItem.reset();
+    this.elementos.formSeletorItem.elements.quantidade.value = 1;
+    this.elementos.statusSeletorItem.textContent = "Nenhum item selecionado.";
+    this.elementos.listaSeletorItem.innerHTML = "";
+  }
+
+  sincronizarSeletorItem() {
+    if (!this.contextoSeletorItem) return;
+    const termo = this.normalizarTexto(this.elementos.formSeletorItem.elements.busca.value);
+    const itens = this.opcoesSeletorItem(this.contextoSeletorItem);
+    const filtrados = termo
+      ? itens.filter((item) => this.correspondeBuscaCatalogo(item, termo))
+      : itens;
+    const ordenados = [...filtrados].sort((a, b) => this.pontuacaoBusca(a, termo) - this.pontuacaoBusca(b, termo));
+
+    this.selecaoAtualSeletorItem = ordenados[0] || null;
+    this.renderizarListaSeletorItem(ordenados);
+
+    if (this.contextoSeletorItem === "resultado-mao-obra") {
+      if (this.selecaoAtualSeletorItem) {
+        this.elementos.formSeletorItem.elements.codigo.value = this.selecaoAtualSeletorItem.codigo || "";
+        this.elementos.formSeletorItem.elements.descricao.value = this.selecaoAtualSeletorItem.descricao || "";
+        this.elementos.statusSeletorItem.textContent = `Pre-selecionado: ${this.selecaoAtualSeletorItem.descricao} (${this.selecaoAtualSeletorItem.codigo})`;
+      } else if (termo) {
+        const descricaoDigitada = this.elementos.formSeletorItem.elements.busca.value.trim();
+        this.elementos.formSeletorItem.elements.codigo.value = "";
+        this.elementos.formSeletorItem.elements.descricao.value = descricaoDigitada;
+        this.elementos.statusSeletorItem.textContent = "Nao encontrada. A mao de obra sera cadastrada ao adicionar.";
+      } else {
+        this.elementos.formSeletorItem.elements.codigo.value = "";
+        this.elementos.formSeletorItem.elements.descricao.value = "";
+        this.elementos.statusSeletorItem.textContent = "Nenhum item selecionado.";
+      }
+      return;
+    }
+
+    this.elementos.statusSeletorItem.textContent = this.selecaoAtualSeletorItem
+      ? `Pre-selecionado: ${this.selecaoAtualSeletorItem.descricao} (${this.selecaoAtualSeletorItem.codigo})`
+      : "Nenhum item selecionado.";
+  }
+
+  renderizarListaSeletorItem(itens) {
+    if (!itens.length) {
+      this.elementos.listaSeletorItem.innerHTML = `<div class="preview-vazio">Nenhum item encontrado.</div>`;
+      return;
+    }
+
+    this.elementos.listaSeletorItem.innerHTML = itens.map((item) => {
+      const ativo = this.selecaoAtualSeletorItem?.id === item.id ? "ativo" : "";
+      return `
+        <button class="item-seletor ${ativo}" data-seletor-item="${item.id}" type="button">
+          <strong>${item.descricao || item.id}</strong>
+        </button>
+      `;
+    }).join("");
+
+    this.elementos.listaSeletorItem.querySelectorAll("[data-seletor-item]").forEach((botao) => {
+      botao.addEventListener("click", () => this.selecionarItemDoSeletor(botao.dataset.seletorItem));
+    });
+  }
+
+  selecionarItemDoSeletor(id) {
+    const item = this.opcoesSeletorItem(this.contextoSeletorItem).find((atual) => atual.id === id);
+    if (!item) return;
+    this.selecaoAtualSeletorItem = item;
+    // Mantem a busca pela descricao para evitar perder a selecao no filtro.
+    this.elementos.formSeletorItem.elements.busca.value = `${item.descricao || ""}`.trim();
+    if (this.contextoSeletorItem === "resultado-mao-obra") {
+      this.elementos.formSeletorItem.elements.codigo.value = item.codigo || "";
+      this.elementos.formSeletorItem.elements.descricao.value = item.descricao || "";
+    }
+    this.sincronizarSeletorItem();
+  }
+
+  opcoesSeletorItem(contexto) {
+    if (contexto === "resultado-material") return this.base.materiais;
+    if (contexto === "resultado-mao-obra") return this.base.maoObra;
+    if (contexto === "regra-materiais") {
+      const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+      if (categoria === "poste") return this.materiaisPorCategoria("poste");
+      if (categoria === "cabo") return this.materiaisPorCategoria("cabo");
+      if (categoria === "geral") return this.materiaisPorCategoria("geral");
+      if (categoria === "estrutura") return this.base.estruturas;
+      return [];
+    }
+    if (contexto === "regra-mao-obra") return this.base.maoObra;
+    return [];
+  }
+
+  correspondeBuscaCatalogo(item, termo) {
+    const combinado = `${item.descricao || ""} ${item.codigo || ""} ${item.id || ""} ${item.unidade || ""}`;
+    const campos = [item.descricao, item.codigo, item.id, item.unidade, combinado];
+    return campos.some((campo) => this.normalizarTexto(campo).includes(termo));
+  }
+
+  pontuacaoBusca(item, termo) {
+    if (!termo) return 0;
+    const descricao = this.normalizarTexto(item.descricao);
+    const codigo = this.normalizarTexto(item.codigo);
+    const id = this.normalizarTexto(item.id);
+    if (descricao.startsWith(termo)) return 0;
+    if (descricao.includes(termo)) return 1;
+    if (codigo.startsWith(termo)) return 2;
+    if (codigo.includes(termo)) return 3;
+    if (id.startsWith(termo)) return 4;
+    if (id.includes(termo)) return 5;
+    return 6;
+  }
+
+  confirmarSeletorItem(evento) {
+    evento.preventDefault();
+    const form = evento.currentTarget;
+    const quantidade = Number(form.elements.quantidade.value || 0);
+
+    if (this.contextoSeletorItem === "resultado-material") {
+      if (!this.selecaoAtualSeletorItem) return this.mostrarAviso("Selecione um material para adicionar.");
+      if (quantidade <= 0) return this.mostrarAviso("Informe uma quantidade valida.");
+      this.adicionarLinhaManualAoResultado(this.grupoResultadoMaterialAtual(), this.selecaoAtualSeletorItem, quantidade);
+      this.fecharModalCadastro("seletorItem");
+      this.renderizarResultado();
+      return this.mostrarAviso("Material adicionado ao resultado.");
+    }
+
+    if (this.contextoSeletorItem === "resultado-mao-obra") {
+      if (quantidade <= 0) return this.mostrarAviso("Informe uma quantidade valida.");
+      const codigo = form.elements.codigo.value.trim();
+      const descricao = form.elements.descricao.value.trim() || form.elements.busca.value.trim();
+      let maoObra = this.selecaoAtualSeletorItem;
+      if (!maoObra) {
+        if (!descricao) return this.mostrarAviso("Informe a mao de obra para adicionar.");
+        maoObra = this.salvarMaoObraCatalogo({ codigo, descricao, unidade: "un" });
+      }
+      this.adicionarLinhaManualAoResultado(this.grupoResultadoMaoObraAtual(), maoObra, quantidade);
+      this.fecharModalCadastro("seletorItem");
+      this.renderizarTudo();
+      return this.mostrarAviso("Mao de obra adicionada ao resultado.");
+    }
+
+    if (this.contextoSeletorItem === "regra-materiais") {
+      if (!this.selecaoAtualSeletorItem) return this.mostrarAviso("Selecione um material.");
+      const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+      const nomeSelecionado = this.normalizarTexto(this.selecaoAtualSeletorItem.descricao || "");
+      const jaExisteMesmoNome = this.materiaisRegraSelecionados.some((id) => {
+        const itemAtual = categoria === "estrutura"
+          ? this.base.estruturas.find((estrutura) => estrutura.id === id)
+          : this.materialPorId(id);
+        return this.normalizarTexto(itemAtual?.descricao || "") === nomeSelecionado;
+      });
+      if (jaExisteMesmoNome) return this.mostrarAviso("Item com mesmo nome ja foi selecionado.");
+      this.materiaisRegraSelecionados.push(this.selecaoAtualSeletorItem.id);
+      this.renderizarSeletoresRegra();
+      this.fecharModalCadastro("seletorItem");
+      return this.mostrarAviso("Material adicionado na regra.");
+    }
+
+    if (this.contextoSeletorItem === "regra-mao-obra") {
+      if (!this.selecaoAtualSeletorItem) return this.mostrarAviso("Selecione uma mao de obra.");
+      if (this.saidasRegraTemporarias.some((item) => item.maoObraId === this.selecaoAtualSeletorItem.id)) {
+        this.fecharModalCadastro("seletorItem");
+        return this.mostrarAviso("Mao de obra ja adicionada na regra.");
+      }
+      const categoriaRegra = this.elementos.formRegra.elements.categoriaRegra.value;
+      const quantidadeSaida = categoriaRegra === "cabo" ? 1 : 1;
+      this.saidasRegraTemporarias.push({
+        maoObraId: this.selecaoAtualSeletorItem.id,
+        codigo: this.selecaoAtualSeletorItem.codigo,
+        descricao: this.selecaoAtualSeletorItem.descricao,
+        quantidade: quantidadeSaida
+      });
+      this.renderizarItensTemporarios();
+      this.fecharModalCadastro("seletorItem");
+      return this.mostrarAviso("Mao de obra adicionada na regra.");
+    }
+  }
+
+  grupoResultadoMaterialAtual() {
+    return this.filtrosResultado.material === "D" ? "materiaisDesativacao" : "materiaisInstalacao";
+  }
+
+  grupoResultadoMaoObraAtual() {
+    const grupos = {
+      I: "maoObraInstalacao",
+      D: "maoObraDesativacao",
+      R: "maoObraReinstalacao"
+    };
+    return grupos[this.filtrosResultado.maoObra];
+  }
+
+  adicionarLinhaManualAoResultado(grupo, item, quantidade) {
+    const linhas = this.resultado[grupo];
+    const existente = linhas.find((linha) => linha.codigo === item.codigo && linha.descricao === item.descricao);
+    if (existente) {
+      existente.quantidade += quantidade;
+      return;
+    }
+
+    linhas.push({
+      codigo: item.codigo,
+      descricao: item.descricao,
+      quantidade,
+      unidade: item.unidade || "un"
+    });
+    linhas.sort((a, b) => a.descricao.localeCompare(b.descricao, "pt-BR"));
+  }
+
+  salvarMaoObraCatalogo(item) {
+    const descricao = String(item.descricao || "").trim();
+    const codigo = String(item.codigo || "").trim() || this.criarCodigoMaoObra(descricao);
+    const unidade = String(item.unidade || "un").trim() || "un";
+    const id = item.id || this.criarId(`${codigo}_${descricao}`);
+    const normalizado = { id, codigo, descricao, unidade };
+    this.salvarPorId(this.base.maoObra, normalizado);
+    return normalizado;
+  }
+
+  criarCodigoMaoObra(descricao) {
+    const base = this.criarId(descricao || "mao_obra").replace(/_/g, "-").toUpperCase();
+    return base ? `MO-${base}` : "MO";
+  }
+
+  normalizarBase() {
+    this.base.maoObra = Array.isArray(this.base.maoObra) ? this.base.maoObra : [];
+    this.base.materiais = this.base.materiais.map((material) => ({
+      ...material,
+      tipoCabo: material.categoria === "cabo" ? (material.tipoCabo || "BT") : ""
+    }));
+    const catalogoMaoObraNormalizado = [];
+    this.base.maoObra.forEach((item) => {
+      const descricao = String(item.descricao || "").trim();
+      if (!descricao) return;
+      this.salvarPorId(catalogoMaoObraNormalizado, {
+        id: item.id || this.criarId(`${item.codigo || ""}_${descricao}`),
+        codigo: String(item.codigo || "").trim() || this.criarCodigoMaoObra(descricao),
+        descricao,
+        unidade: String(item.unidade || "un").trim() || "un"
+      });
+    });
+    this.base.maoObra = catalogoMaoObraNormalizado;
+
+    this.base.regrasMaoObra = this.base.regrasMaoObra.map((regra) => ({
+      ...regra,
+      gatilho: regra.gatilho || {
+        tipo: regra.tipoGatilho || "material",
+        materialId: regra.materialId || undefined,
+        estruturaId: regra.estruturaId || undefined,
+        categorias: regra.categorias || []
+      },
+      saidas: (regra.saidas || []).map((saida) => {
+        const maoObra = this.salvarMaoObraCatalogo({
+          id: saida.maoObraId || "",
+          codigo: saida.codigo,
+          descricao: saida.descricao,
+          unidade: "un"
+        });
+        return {
+          ...saida,
+          maoObraId: maoObra.id,
+          codigo: maoObra.codigo,
+          descricao: maoObra.descricao,
+          templateDescricao: saida.templateDescricao || undefined,
+          quantidade: Number(saida.quantidade || 0)
+        };
+      })
+    }));
+
+    this.base.pontos = this.base.pontos.map((ponto) => {
+      const migrado = this.migrarCabosLegados(ponto);
+      const redeNormalizada = String(ponto.rede || "").toLowerCase();
+      return {
+        ...ponto,
+        ...migrado,
+        estruturaId: ponto.estruturaId || "",
+        caboBTId: ponto.caboBTId || migrado.caboBTId || "",
+        caboMTId: ponto.caboMTId || migrado.caboMTId || "",
+        quantidadeCabo: Number(ponto.quantidadeCabo || 0),
+        rede: MAPA_REDE_LEGADA[redeNormalizada] || redeNormalizada || ""
+      };
+    });
+  }
+
+  migrarCabosLegados(ponto) {
+    if (!ponto.caboId) return {};
+    const material = this.base.materiais.find((item) => item.id === ponto.caboId);
+    if (material?.tipoCabo === "MT") {
+      return { caboMTId: ponto.caboId, caboBTId: ponto.caboBTId || "" };
+    }
+    return { caboBTId: ponto.caboId, caboMTId: ponto.caboMTId || "" };
+  }
+
+  mostrarAviso(texto) {
+    this.elementos.aviso.textContent = texto;
+    this.elementos.aviso.classList.remove("oculto");
+    window.clearTimeout(this.avisoTimer);
+    this.avisoTimer = window.setTimeout(() => this.elementos.aviso.classList.add("oculto"), 3500);
+  }
+}
+
+const casosDeUso = new CasosDeUsoApp(RepositorioLocal);
+new AplicacaoMedicao(casosDeUso);
