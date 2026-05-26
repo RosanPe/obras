@@ -315,7 +315,9 @@ class AplicacaoMedicao {
       maoObraReinstalacao: []
     };
     this.itensEstruturaTemporarios = [];
-    this.saidasRegraTemporarias = [];
+    this.saidasRegraPorOperacaoTemporarias = { I: [], D: [], R: [] };
+    this.grupoRegraEdicaoId = "";
+    this.regrasOriginaisGrupoEdicao = [];
     this.materiaisRegraSelecionados = [];
     this.filtrosResultado = { material: "I", maoObra: "I" };
     this.contextoSeletorItem = null;
@@ -357,15 +359,28 @@ class AplicacaoMedicao {
       formRegra: document.querySelector("#form-regra"),
       campoMaterialRegra: document.querySelector("#campo-material-regra"),
       itensMateriaisRegra: document.querySelector("#itens-materiais-regra"),
+      buscaMaterialRegra: document.querySelector("#busca-material-regra"),
+      opcoesMaterialRegra: document.querySelector("#opcoes-material-regra"),
       adicionarMaterialRegra: document.querySelector("#adicionar-material-regra"),
+      buscaMaoObraRegra: document.querySelector("#busca-mao-obra-regra"),
+      opcoesMaoObraRegra: document.querySelector("#opcoes-mao-obra-regra"),
       adicionarMaoObraRegra: document.querySelector("#adicionar-mao-obra-regra"),
+      statusOperacaoRegra: document.querySelector("#status-operacao-regra"),
       saidasRegra: document.querySelector("#saidas-regra"),
       listaRegras: document.querySelector("#lista-regras"),
       novaRegra: document.querySelector("#nova-regra"),
       resultadoMaterial: document.querySelector("#resultado-material"),
       resultadoMaoObra: document.querySelector("#resultado-mao-obra"),
-      adicionarResultadoMaterial: document.querySelector("#adicionar-resultado-material"),
-      adicionarResultadoMaoObra: document.querySelector("#adicionar-resultado-mao-obra"),
+      linhaResultadoMaterial: document.querySelector("#linha-resultado-material"),
+      buscaResultadoMaterial: document.querySelector("#busca-resultado-material"),
+      opcoesResultadoMaterial: document.querySelector("#opcoes-resultado-material"),
+      quantidadeResultadoMaterial: document.querySelector("#quantidade-resultado-material"),
+      confirmarResultadoMaterial: document.querySelector("#confirmar-resultado-material"),
+      linhaResultadoMaoObra: document.querySelector("#linha-resultado-mao-obra"),
+      buscaResultadoMaoObra: document.querySelector("#busca-resultado-mao-obra"),
+      opcoesResultadoMaoObra: document.querySelector("#opcoes-resultado-mao-obra"),
+      quantidadeResultadoMaoObra: document.querySelector("#quantidade-resultado-mao-obra"),
+      confirmarResultadoMaoObra: document.querySelector("#confirmar-resultado-mao-obra"),
       abasResultado: document.querySelectorAll(".aba-resultado"),
       baixarJson: document.querySelector("#baixar-json"),
       baixarCsv: document.querySelector("#baixar-csv"),
@@ -385,7 +400,7 @@ class AplicacaoMedicao {
       materialEstruturaStatus: document.querySelector("#material-estrutura-status"),
       datalistMateriaisEstrutura: document.querySelector("#materiais-estrutura"),
       formSeletorItem: document.querySelector("#form-seletor-item"),
-      listaSeletorItem: document.querySelector("#lista-seletor-item"),
+      datalistSeletorItem: document.querySelector("#opcoes-seletor-item"),
       statusSeletorItem: document.querySelector("#status-seletor-item"),
       campoCodigoSeletorItem: document.querySelector("#campo-codigo-seletor-item"),
       campoDescricaoSeletorItem: document.querySelector("#campo-descricao-seletor-item"),
@@ -405,18 +420,45 @@ class AplicacaoMedicao {
     this.elementos.formEstrutura.addEventListener("submit", (evento) => this.salvarEstrutura(evento));
     this.elementos.formRegra.addEventListener("submit", (evento) => this.salvarRegra(evento));
     this.elementos.incluirItemEstrutura.addEventListener("click", () => this.incluirItemEstrutura());
-    this.elementos.adicionarMaterialRegra.addEventListener("click", () => this.abrirSeletorItem("regra-materiais"));
-    this.elementos.adicionarMaoObraRegra.addEventListener("click", () => this.abrirSeletorItem("regra-mao-obra"));
+    this.elementos.adicionarMaterialRegra.addEventListener("click", () => this.incluirMaterialRegraDireto());
+    this.elementos.adicionarMaoObraRegra.addEventListener("click", () => this.incluirMaoObraRegraDireto());
     this.elementos.novoMaterial.addEventListener("click", () => this.abrirModalCadastro("material"));
     this.elementos.novaMaoObra.addEventListener("click", () => this.abrirModalCadastro("maoObra"));
     this.elementos.novaEstrutura.addEventListener("click", () => this.abrirModalCadastro("estrutura"));
     this.elementos.novaRegra.addEventListener("click", () => this.abrirModalCadastro("regra"));
-    this.elementos.adicionarResultadoMaterial.addEventListener("click", () => this.abrirSeletorItem("resultado-material"));
-    this.elementos.adicionarResultadoMaoObra.addEventListener("click", () => this.abrirSeletorItem("resultado-mao-obra"));
+    this.elementos.confirmarResultadoMaterial.addEventListener("click", () => this.incluirResultadoMaterialDireto());
+    this.elementos.confirmarResultadoMaoObra.addEventListener("click", () => this.incluirResultadoMaoObraDireto());
     this.elementos.formMaterial.elements.categoria.addEventListener("change", () => this.atualizarFormularioMaterial());
     this.elementos.formRegra.elements.categoriaRegra.addEventListener("change", () => this.atualizarFormularioRegra());
+    this.elementos.formRegra.querySelectorAll("input[name='operacoes']").forEach((item) => {
+      item.addEventListener("change", () => this.renderizarItensTemporarios());
+    });
     this.elementos.formEstrutura.elements.materialBusca.addEventListener("input", () => this.sincronizarBuscaMaterialEstrutura());
     this.elementos.formEstrutura.elements.materialBusca.addEventListener("change", () => this.sincronizarBuscaMaterialEstrutura());
+    this.elementos.buscaMaterialRegra?.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter") {
+        evento.preventDefault();
+        this.incluirMaterialRegraDireto();
+      }
+    });
+    this.elementos.buscaMaoObraRegra?.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter") {
+        evento.preventDefault();
+        this.incluirMaoObraRegraDireto();
+      }
+    });
+    this.elementos.buscaResultadoMaterial?.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter") {
+        evento.preventDefault();
+        this.incluirResultadoMaterialDireto();
+      }
+    });
+    this.elementos.buscaResultadoMaoObra?.addEventListener("keydown", (evento) => {
+      if (evento.key === "Enter") {
+        evento.preventDefault();
+        this.incluirResultadoMaoObraDireto();
+      }
+    });
     this.elementos.formSeletorItem.addEventListener("submit", (evento) => this.confirmarSeletorItem(evento));
     this.elementos.formSeletorItem.elements.busca.addEventListener("input", () => this.sincronizarSeletorItem());
     this.elementos.formSeletorItem.elements.busca.addEventListener("change", () => this.sincronizarSeletorItem());
@@ -534,10 +576,7 @@ class AplicacaoMedicao {
     const ponto = this.base.pontos[Number(campo.dataset.indice)];
     const campoId = campo.dataset.buscaPonto;
     const itens = this.opcoesBuscaPonto(campoId);
-    const termo = this.normalizarTexto(campo.value);
-    const encontrado = itens.find((item) => this.normalizarTexto(`${item.descricao || ""}`).includes(termo)
-      || this.normalizarTexto(`${item.codigo || ""}`).includes(termo)
-      || this.normalizarTexto(`${item.id || ""}`).includes(termo));
+    const encontrado = this.itemPorBusca(itens, campo.value);
     if (encontrado) ponto[campoId] = encontrado.id;
     else ponto[campoId] = "";
     this.renderizarTudo();
@@ -611,6 +650,8 @@ class AplicacaoMedicao {
     if (datalistCabosMt) datalistCabosMt.innerHTML = opcoesCabos;
     const materiaisGerais = this.materiaisPorCategoria("geral");
     this.elementos.formRegra.elements.materialId.innerHTML = `<option value="">Selecione</option>${materiaisGerais.map((item) => `<option value="${item.id}">${item.descricao}</option>`).join("")}`;
+    this.atualizarOpcoesBuscaRegra();
+    this.atualizarOpcoesBuscaResultado();
     this.renderizarSeletoresRegra();
   }
 
@@ -639,8 +680,62 @@ class AplicacaoMedicao {
 
   atualizarFormularioRegra() {
     this.elementos.campoMaterialRegra.classList.remove("oculto");
+    this.atualizarOpcoesBuscaRegra();
     this.renderizarSeletoresRegra();
     this.renderizarItensTemporarios();
+  }
+
+  operacoesRegraSelecionadas() {
+    return [...this.elementos.formRegra.querySelectorAll("input[name='operacoes']:checked")].map((item) => item.value);
+  }
+
+  saidasRegraDaOperacao(operacao) {
+    if (!this.saidasRegraPorOperacaoTemporarias[operacao]) this.saidasRegraPorOperacaoTemporarias[operacao] = [];
+    return this.saidasRegraPorOperacaoTemporarias[operacao];
+  }
+
+  operacaoRegraAtiva() {
+    const operacoes = this.operacoesRegraSelecionadas();
+    return operacoes.length === 1 ? operacoes[0] : null;
+  }
+
+  itemPorBusca(itens, textoBusca) {
+    const termo = this.normalizarTexto(textoBusca);
+    if (!termo) return null;
+
+    const correspondenciaExata = itens.find((item) => {
+      const descricao = this.normalizarTexto(item.descricao);
+      const codigo = this.normalizarTexto(item.codigo);
+      const id = this.normalizarTexto(item.id);
+      return descricao === termo || codigo === termo || id === termo;
+    });
+    if (correspondenciaExata) return correspondenciaExata;
+
+    return itens.find((item) => this.correspondeBuscaCatalogo(item, termo)) || null;
+  }
+
+  atualizarOpcoesBuscaRegra() {
+    const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+    let itens = [];
+    if (categoria === "estrutura") itens = this.base.estruturas;
+    if (categoria === "poste") itens = this.materiaisPorCategoria("poste");
+    if (categoria === "cabo") itens = this.materiaisPorCategoria("cabo");
+    if (categoria === "geral") itens = this.materiaisPorCategoria("geral");
+    this.elementos.opcoesMaterialRegra.innerHTML = itens
+      .map((item) => `<option value="${item.descricao || item.id}">${item.codigo || item.id || ""}</option>`)
+      .join("");
+    this.elementos.opcoesMaoObraRegra.innerHTML = this.base.maoObra
+      .map((item) => `<option value="${item.descricao || item.id}">${item.codigo || item.id || ""}</option>`)
+      .join("");
+  }
+
+  atualizarOpcoesBuscaResultado() {
+    this.elementos.opcoesResultadoMaterial.innerHTML = this.base.materiais
+      .map((item) => `<option value="${item.descricao || item.id}">${item.codigo || item.id || ""}</option>`)
+      .join("");
+    this.elementos.opcoesResultadoMaoObra.innerHTML = this.base.maoObra
+      .map((item) => `<option value="${item.descricao || item.id}">${item.codigo || item.id || ""}</option>`)
+      .join("");
   }
 
   renderizarCadastros() {
@@ -776,7 +871,85 @@ class AplicacaoMedicao {
   }
 
   incluirSaidaRegra() {
+    if (!this.operacaoRegraAtiva()) {
+      return this.mostrarAviso("Marque apenas uma operacao (I, D ou R) para incluir mao de obra.");
+    }
     this.abrirSeletorItem("regra-mao-obra");
+  }
+
+  incluirMaterialRegraDireto() {
+    const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
+    const texto = this.elementos.buscaMaterialRegra.value.trim();
+    let itens = [];
+    if (categoria === "estrutura") itens = this.base.estruturas;
+    if (categoria === "poste") itens = this.materiaisPorCategoria("poste");
+    if (categoria === "cabo") itens = this.materiaisPorCategoria("cabo");
+    if (categoria === "geral") itens = this.materiaisPorCategoria("geral");
+    const selecionado = this.itemPorBusca(itens, texto);
+    if (!selecionado) return this.mostrarAviso("Selecione um item valido.");
+
+    const nomeSelecionado = this.normalizarTexto(selecionado.descricao || "");
+    const jaExisteMesmoNome = this.materiaisRegraSelecionados.some((id) => {
+      const itemAtual = categoria === "estrutura"
+        ? this.base.estruturas.find((estrutura) => estrutura.id === id)
+        : this.materialPorId(id);
+      return this.normalizarTexto(itemAtual?.descricao || "") === nomeSelecionado;
+    });
+    if (jaExisteMesmoNome) return this.mostrarAviso("Item com mesmo nome ja foi selecionado.");
+
+    this.materiaisRegraSelecionados.push(selecionado.id);
+    this.elementos.buscaMaterialRegra.value = "";
+    this.renderizarSeletoresRegra();
+    return this.mostrarAviso("Item adicionado na regra.");
+  }
+
+  incluirMaoObraRegraDireto() {
+    const operacaoAtiva = this.operacaoRegraAtiva();
+    if (!operacaoAtiva) return this.mostrarAviso("Marque apenas uma operacao (I, D ou R) para incluir mao de obra.");
+    const texto = this.elementos.buscaMaoObraRegra.value.trim();
+    const selecionado = this.itemPorBusca(this.base.maoObra, texto);
+    if (!selecionado) return this.mostrarAviso("Selecione uma mao de obra valida.");
+    const saidasOperacao = this.saidasRegraDaOperacao(operacaoAtiva);
+    if (saidasOperacao.some((item) => item.maoObraId === selecionado.id)) {
+      return this.mostrarAviso("Mao de obra ja adicionada na regra.");
+    }
+    const categoriaRegra = this.elementos.formRegra.elements.categoriaRegra.value;
+    const quantidadeSaida = categoriaRegra === "cabo" ? 1 : 1;
+    saidasOperacao.push({
+      maoObraId: selecionado.id,
+      codigo: selecionado.codigo,
+      descricao: selecionado.descricao,
+      quantidade: quantidadeSaida
+    });
+    this.elementos.buscaMaoObraRegra.value = "";
+    this.renderizarItensTemporarios();
+    return this.mostrarAviso("Mao de obra adicionada na regra.");
+  }
+
+  incluirResultadoMaterialDireto() {
+    const texto = this.elementos.buscaResultadoMaterial.value.trim();
+    const selecionado = this.itemPorBusca(this.base.materiais, texto);
+    if (!selecionado) return this.mostrarAviso("Selecione um material valido.");
+    const quantidade = Number(this.elementos.quantidadeResultadoMaterial.value || 0);
+    if (quantidade <= 0) return this.mostrarAviso("Informe uma quantidade valida.");
+    this.adicionarLinhaManualAoResultado(this.grupoResultadoMaterialAtual(), selecionado, quantidade);
+    this.elementos.buscaResultadoMaterial.value = "";
+    this.elementos.quantidadeResultadoMaterial.value = 1;
+    this.renderizarResultado();
+    return this.mostrarAviso("Material adicionado ao resultado.");
+  }
+
+  incluirResultadoMaoObraDireto() {
+    const texto = this.elementos.buscaResultadoMaoObra.value.trim();
+    const selecionado = this.itemPorBusca(this.base.maoObra, texto);
+    if (!selecionado) return this.mostrarAviso("Selecione uma mao de obra valida.");
+    const quantidade = Number(this.elementos.quantidadeResultadoMaoObra.value || 0);
+    if (quantidade <= 0) return this.mostrarAviso("Informe uma quantidade valida.");
+    this.adicionarLinhaManualAoResultado(this.grupoResultadoMaoObraAtual(), selecionado, quantidade);
+    this.elementos.buscaResultadoMaoObra.value = "";
+    this.elementos.quantidadeResultadoMaoObra.value = 1;
+    this.renderizarResultado();
+    return this.mostrarAviso("Mao de obra adicionada ao resultado.");
   }
 
   salvarRegra(evento) {
@@ -784,42 +957,64 @@ class AplicacaoMedicao {
     const form = evento.currentTarget;
     const nome = String(form.elements.nome.value || "").trim();
     if (!nome) return this.mostrarAviso("Nome da regra e obrigatorio.");
-    const operacoes = [...form.querySelectorAll("input[name='operacoes']:checked")].map((item) => item.value);
+    const operacoes = this.operacoesRegraSelecionadas();
     const categoria = form.elements.categoriaRegra.value;
     const materialIds = [...new Set(this.materiaisRegraSelecionados)];
     const estruturaIds = categoria === "estrutura" ? [...new Set(this.materiaisRegraSelecionados)] : [];
-    const saidasNormalizadas = clonar(this.saidasRegraTemporarias).map((saida) => ({
-      ...saida,
-      quantidade: categoria === "cabo" ? 1 : Number(saida.quantidade || 0)
-    }));
-    const regra = {
-      id: form.elements.id.value || this.criarId(form.elements.nome.value),
-      nome,
-      tipoGatilho: categoria === "estrutura" ? "estrutura" : "material",
-      materialId: categoria === "geral" ? (materialIds[0] || null) : null,
-      materialIds: categoria === "estrutura" ? [] : materialIds,
-      estruturaId: null,
-      estruturaIds: categoria === "estrutura" ? estruturaIds : [],
-      categorias: categoria === "estrutura" ? [] : [categoria],
-      gatilho: {
-        tipo: categoria === "estrutura" ? "estrutura" : "material",
-        materialId: categoria === "geral" ? (materialIds[0] || undefined) : undefined,
-        materialIds: categoria === "estrutura" ? [] : materialIds,
-        estruturaIds: categoria === "estrutura" ? estruturaIds : [],
-        categorias: categoria === "estrutura" ? [] : [categoria]
-      },
-      operacoes,
-      saidas: saidasNormalizadas
-    };
     if (!operacoes.length) return this.mostrarAviso("Selecione ao menos uma operacao.");
     if ((categoria === "poste" || categoria === "cabo" || categoria === "geral") && !materialIds.length) return this.mostrarAviso("Selecione ao menos um material.");
     if (categoria === "estrutura" && !estruturaIds.length) return this.mostrarAviso("Selecione ao menos uma estrutura.");
-    if (!regra.saidas.length) return this.mostrarAviso("Inclua pelo menos uma saida de mao de obra.");
-    this.salvarPorId(this.base.regrasMaoObra, regra);
+    const saidasPorOperacao = {};
+    for (const operacao of operacoes) {
+      const saidasNormalizadas = clonar(this.saidasRegraDaOperacao(operacao)).map((saida) => ({
+        ...saida,
+        quantidade: categoria === "cabo" ? 1 : Number(saida.quantidade || 0)
+      }));
+      if (!saidasNormalizadas.length) return this.mostrarAviso(`Inclua pelo menos uma saida de mao de obra para ${operacao}.`);
+      saidasPorOperacao[operacao] = saidasNormalizadas;
+    }
+
+    const grupoRegraId = this.grupoRegraEdicaoId || this.criarIdUnico(this.base.regrasMaoObra, `${nome}_grupo`);
+    const regrasGrupoAnteriores = this.grupoRegraEdicaoId
+      ? this.base.regrasMaoObra.filter((item) => item.grupoRegraId === this.grupoRegraEdicaoId)
+      : [];
+    const regraAntigaPorOperacao = Object.fromEntries(regrasGrupoAnteriores.map((regra) => [regra.operacoes?.[0], regra]));
+    const regrasAtualizadas = [];
+
+    operacoes.forEach((operacao) => {
+      const regraAntiga = regraAntigaPorOperacao[operacao];
+      const idRegra = regraAntiga?.id || this.criarIdUnico(this.base.regrasMaoObra, `${nome}_${operacao}`);
+      regrasAtualizadas.push({
+        id: idRegra,
+        nome: `${nome} [${operacao}]`,
+        nomeBaseGrupo: nome,
+        grupoRegraId,
+        tipoGatilho: categoria === "estrutura" ? "estrutura" : "material",
+        materialId: categoria === "geral" ? (materialIds[0] || null) : null,
+        materialIds: categoria === "estrutura" ? [] : materialIds,
+        estruturaId: null,
+        estruturaIds: categoria === "estrutura" ? estruturaIds : [],
+        categorias: categoria === "estrutura" ? [] : [categoria],
+        gatilho: {
+          tipo: categoria === "estrutura" ? "estrutura" : "material",
+          materialId: categoria === "geral" ? (materialIds[0] || undefined) : undefined,
+          materialIds: categoria === "estrutura" ? [] : materialIds,
+          estruturaIds: categoria === "estrutura" ? estruturaIds : [],
+          categorias: categoria === "estrutura" ? [] : [categoria]
+        },
+        operacoes: [operacao],
+        saidas: saidasPorOperacao[operacao]
+      });
+    });
+
+    if (this.grupoRegraEdicaoId) {
+      this.base.regrasMaoObra = this.base.regrasMaoObra.filter((item) => item.grupoRegraId !== this.grupoRegraEdicaoId);
+    }
+    regrasAtualizadas.forEach((regra) => this.salvarPorId(this.base.regrasMaoObra, regra));
     this.limparFormularioRegra();
     this.fecharModalCadastro("regra");
     this.renderizarTudo();
-    this.mostrarAviso("Regra salva.");
+    this.mostrarAviso(`Pacote de regra salvo (${operacoes.join("/")}).`);
   }
 
   renderizarItensTemporarios() {
@@ -828,20 +1023,42 @@ class AplicacaoMedicao {
       return `<div class="item-temporario"><span>${material?.descricao || item.materialId} | ${item.quantidade}</span><button data-remover-item-estrutura="${indice}" type="button">Remover</button></div>`;
     }).join("");
 
-    this.elementos.saidasRegra.innerHTML = this.saidasRegraTemporarias.map((item, indice) => {
+    const operacoesSelecionadas = this.operacoesRegraSelecionadas();
+    const operacaoAtiva = this.operacaoRegraAtiva();
+    const selecaoMultipla = operacoesSelecionadas.length > 1;
+    const mapaRotulos = { I: "Instalacao", D: "Desativacao", R: "Reinstalacao" };
+    const mapaClasses = { I: "tag-operacao-i", D: "tag-operacao-d", R: "tag-operacao-r" };
+
+    this.elementos.buscaMaoObraRegra.disabled = selecaoMultipla || !operacaoAtiva;
+    this.elementos.adicionarMaoObraRegra.disabled = selecaoMultipla || !operacaoAtiva;
+
+    if (this.elementos.statusOperacaoRegra) {
+      if (!operacoesSelecionadas.length) this.elementos.statusOperacaoRegra.textContent = "Selecione ao menos uma operacao.";
+      else if (operacaoAtiva) this.elementos.statusOperacaoRegra.textContent = `Operacao ativa: ${operacaoAtiva} (${mapaRotulos[operacaoAtiva]}).`;
+      else this.elementos.statusOperacaoRegra.textContent = "Multiplas operacoes selecionadas: lista consolidada por cor. Para incluir, deixe apenas uma operacao marcada.";
+    }
+
+    const saidasRender = selecaoMultipla
+      ? operacoesSelecionadas.flatMap((operacao) => this.saidasRegraDaOperacao(operacao).map((item, indice) => ({ item, indice, operacao })))
+      : (operacaoAtiva ? this.saidasRegraDaOperacao(operacaoAtiva).map((item, indice) => ({ item, indice, operacao: operacaoAtiva })) : []);
+
+    this.elementos.saidasRegra.innerHTML = saidasRender.map(({ item, indice, operacao }) => {
       const maoObra = this.base.maoObra.find((atual) => atual.id === item.maoObraId);
       const codigo = maoObra?.codigo || item.codigo || "MO";
       const descricao = maoObra?.descricao || item.descricao || "";
       const categoria = this.elementos.formRegra.elements.categoriaRegra.value;
       const quantidadeCampo = categoria === "cabo"
         ? `<span class="texto-apoio">Qtd. automatica por metragem de cabo</span>`
-        : `<input data-quantidade-saida-regra="${indice}" type="number" min="0" step="0.01" value="${Number(item.quantidade || 0)}">`;
+        : `<input data-quantidade-saida-regra="${indice}" data-operacao-saida-regra="${operacao}" type="number" min="0" step="0.01" value="${Number(item.quantidade || 0)}" ${selecaoMultipla ? "disabled" : ""}>`;
+      const acoes = selecaoMultipla
+        ? ""
+        : `<button data-remover-saida-regra="${indice}" data-operacao-saida-regra="${operacao}" type="button">Remover</button>`;
       return `
         <div class="item-temporario">
-          <span>${descricao}</span>
+          <span><span class="tag-operacao ${mapaClasses[operacao] || ""}">${operacao}</span> ${descricao} <small>(${codigo})</small></span>
           <div class="campo-busca-regra-acoes">
             ${quantidadeCampo}
-            <button data-remover-saida-regra="${indice}" type="button">Remover</button>
+            ${acoes}
           </div>
         </div>
       `;
@@ -852,12 +1069,14 @@ class AplicacaoMedicao {
       this.renderizarItensTemporarios();
     }));
     document.querySelectorAll("[data-remover-saida-regra]").forEach((botao) => botao.addEventListener("click", () => {
-      this.saidasRegraTemporarias.splice(Number(botao.dataset.removerSaidaRegra), 1);
+      const operacao = botao.dataset.operacaoSaidaRegra;
+      this.saidasRegraDaOperacao(operacao).splice(Number(botao.dataset.removerSaidaRegra), 1);
       this.renderizarItensTemporarios();
     }));
     document.querySelectorAll("[data-quantidade-saida-regra]").forEach((campo) => campo.addEventListener("change", () => {
       const indice = Number(campo.dataset.quantidadeSaidaRegra);
-      this.saidasRegraTemporarias[indice].quantidade = Number(campo.value || 0);
+      const operacao = campo.dataset.operacaoSaidaRegra;
+      this.saidasRegraDaOperacao(operacao)[indice].quantidade = Number(campo.value || 0);
     }));
   }
 
@@ -890,6 +1109,9 @@ class AplicacaoMedicao {
         this.resultado[campo.dataset.resultadoGrupo][Number(campo.dataset.resultadoIndice)].quantidade = Number(campo.value || 0);
       });
     });
+    document.querySelectorAll("[data-remover-resultado]").forEach((botao) => {
+      botao.addEventListener("click", () => this.removerLinhaResultado(botao.dataset.removerResultado, Number(botao.dataset.resultadoIndice)));
+    });
   }
 
   alterarResultado(aba) {
@@ -902,9 +1124,18 @@ class AplicacaoMedicao {
     return linhas.map((linha, indice) => `
       <div class="linha-resultado">
         <div><strong>${linha.descricao}</strong><span>${linha.codigo} | ${linha.unidade}</span></div>
-        <input class="quantidade-editavel" data-resultado-grupo="${grupo}" data-resultado-indice="${indice}" type="number" step="0.01" value="${linha.quantidade}">
+        <div class="mini-acoes">
+          <input class="quantidade-editavel" data-resultado-grupo="${grupo}" data-resultado-indice="${indice}" type="number" step="0.01" value="${linha.quantidade}">
+          <button class="botao perigo" data-remover-resultado="${grupo}" data-resultado-indice="${indice}" type="button" aria-label="Remover item" title="Remover item">🗑</button>
+        </div>
       </div>
     `).join("");
+  }
+
+  removerLinhaResultado(grupo, indice) {
+    if (!this.resultado?.[grupo]) return;
+    this.resultado[grupo].splice(indice, 1);
+    this.renderizarResultado();
   }
 
   editarCadastro(tipo, id) {
@@ -949,6 +1180,9 @@ class AplicacaoMedicao {
 
     if (tipo === "regra") {
       const regra = this.base.regrasMaoObra.find((item) => item.id === id);
+      const grupoRegraId = regra.grupoRegraId || regra.id;
+      const regrasGrupo = this.base.regrasMaoObra.filter((item) => (item.grupoRegraId || item.id) === grupoRegraId);
+      const regraBase = regrasGrupo[0] || regra;
       const tipoGatilho = regra.gatilho?.tipo || regra.tipoGatilho;
       const materialIdRegra = regra.gatilho?.materialId ?? regra.materialId;
       const materialIdsRegra = regra.gatilho?.materialIds ?? regra.materialIds ?? [];
@@ -961,15 +1195,23 @@ class AplicacaoMedicao {
           : categoriasRegra?.[0] || "poste";
       this.limparFormularioRegra();
       this.elementos.tituloModalRegra.textContent = "Editar regra";
-      this.elementos.formRegra.elements.id.value = regra.id;
-      this.elementos.formRegra.elements.nome.value = regra.nome;
+      this.grupoRegraEdicaoId = grupoRegraId;
+      this.regrasOriginaisGrupoEdicao = regrasGrupo.map((item) => item.id);
+      this.elementos.formRegra.elements.id.value = regraBase.id;
+      this.elementos.formRegra.elements.nome.value = regraBase.nomeBaseGrupo || regraBase.nome?.replace(/\s\[[IDR]\]$/, "") || regraBase.nome;
       this.elementos.formRegra.elements.categoriaRegra.value = categoria;
       this.atualizarFormularioRegra();
       this.elementos.formRegra.elements.materialId.value = materialIdRegra || "";
       this.materiaisRegraSelecionados = categoria === "estrutura" ? [...estruturaIdsRegra] : [...materialIdsRegra];
       this.renderizarSeletoresRegra();
-      this.elementos.formRegra.querySelectorAll("input[name='operacoes']").forEach((item) => item.checked = regra.operacoes.includes(item.value));
-      this.saidasRegraTemporarias = clonar(regra.saidas);
+      const operacoesGrupo = [...new Set(regrasGrupo.flatMap((item) => item.operacoes || []))];
+      this.elementos.formRegra.querySelectorAll("input[name='operacoes']").forEach((item) => item.checked = operacoesGrupo.includes(item.value));
+      this.saidasRegraPorOperacaoTemporarias = { I: [], D: [], R: [] };
+      regrasGrupo.forEach((regraGrupo) => {
+        const operacao = regraGrupo.operacoes?.[0];
+        if (!operacao) return;
+        this.saidasRegraPorOperacaoTemporarias[operacao] = clonar(regraGrupo.saidas || []);
+      });
       this.renderizarItensTemporarios();
       this.abrirModal("regra");
     }
@@ -979,7 +1221,12 @@ class AplicacaoMedicao {
     if (tipo === "material") this.base.materiais = this.base.materiais.filter((item) => item.id !== id);
     if (tipo === "maoObra") this.base.maoObra = this.base.maoObra.filter((item) => item.id !== id);
     if (tipo === "estrutura") this.base.estruturas = this.base.estruturas.filter((item) => item.id !== id);
-    if (tipo === "regra") this.base.regrasMaoObra = this.base.regrasMaoObra.filter((item) => item.id !== id);
+    if (tipo === "regra") {
+      const regra = this.base.regrasMaoObra.find((item) => item.id === id);
+      const grupoRegraId = regra?.grupoRegraId;
+      if (grupoRegraId) this.base.regrasMaoObra = this.base.regrasMaoObra.filter((item) => item.grupoRegraId !== grupoRegraId);
+      else this.base.regrasMaoObra = this.base.regrasMaoObra.filter((item) => item.id !== id);
+    }
     this.renderizarTudo();
   }
 
@@ -1041,6 +1288,14 @@ class AplicacaoMedicao {
       .replace(/^_|_$/g, "");
   }
 
+  criarIdUnico(lista, textoBase) {
+    const base = this.criarId(textoBase) || "item";
+    if (!lista.some((item) => item.id === base)) return base;
+    let contador = 2;
+    while (lista.some((item) => item.id === `${base}_${contador}`)) contador += 1;
+    return `${base}_${contador}`;
+  }
+
   normalizarTexto(texto) {
     return String(texto || "")
       .normalize("NFD")
@@ -1094,9 +1349,13 @@ class AplicacaoMedicao {
     this.elementos.formRegra.reset();
     this.elementos.formRegra.elements.id.value = "";
     this.elementos.formRegra.elements.categoriaRegra.value = "poste";
+    this.elementos.buscaMaterialRegra.value = "";
+    this.elementos.buscaMaoObraRegra.value = "";
     this.materiaisRegraSelecionados = [];
+    this.grupoRegraEdicaoId = "";
+    this.regrasOriginaisGrupoEdicao = [];
+    this.saidasRegraPorOperacaoTemporarias = { I: [], D: [], R: [] };
     this.elementos.tituloModalRegra.textContent = "Nova regra";
-    this.saidasRegraTemporarias = [];
     this.renderizarItensTemporarios();
     this.atualizarFormularioRegra();
   }
@@ -1256,6 +1515,12 @@ class AplicacaoMedicao {
     if (contexto === "regra-mao-obra" && categoriaRegra === "cabo") {
       config.placeholder = "Digite a descricao da mao de obra (quantidade automatica por metragem)";
     }
+    if (contexto === "regra-mao-obra") {
+      const operacaoAtiva = this.operacaoRegraAtiva();
+      config.titulo = operacaoAtiva
+        ? `Selecionar mao de obra da regra (${operacaoAtiva})`
+        : "Selecionar mao de obra da regra";
+    }
 
     this.elementos.rotuloModalSeletorItem.textContent = config.rotulo;
     this.elementos.tituloModalSeletorItem.textContent = config.titulo;
@@ -1264,6 +1529,7 @@ class AplicacaoMedicao {
     this.elementos.campoCodigoSeletorItem.classList.toggle("oculto", !config.mostrarCodigo);
     this.elementos.campoDescricaoSeletorItem.classList.toggle("oculto", !config.mostrarDescricao);
     this.elementos.campoQuantidadeSeletorItem.classList.toggle("oculto", !config.mostrarQuantidade);
+    this.atualizarDatalistSeletorItem(contexto);
 
     this.sincronizarSeletorItem();
     this.abrirModal("seletorItem");
@@ -1275,20 +1541,16 @@ class AplicacaoMedicao {
     this.elementos.formSeletorItem.reset();
     this.elementos.formSeletorItem.elements.quantidade.value = 1;
     this.elementos.statusSeletorItem.textContent = "Nenhum item selecionado.";
-    this.elementos.listaSeletorItem.innerHTML = "";
+    this.elementos.datalistSeletorItem.innerHTML = "";
   }
 
   sincronizarSeletorItem() {
     if (!this.contextoSeletorItem) return;
-    const termo = this.normalizarTexto(this.elementos.formSeletorItem.elements.busca.value);
+    const textoBusca = this.elementos.formSeletorItem.elements.busca.value;
+    const termo = this.normalizarTexto(textoBusca);
     const itens = this.opcoesSeletorItem(this.contextoSeletorItem);
-    const filtrados = termo
-      ? itens.filter((item) => this.correspondeBuscaCatalogo(item, termo))
-      : itens;
-    const ordenados = [...filtrados].sort((a, b) => this.pontuacaoBusca(a, termo) - this.pontuacaoBusca(b, termo));
-
-    this.selecaoAtualSeletorItem = ordenados[0] || null;
-    this.renderizarListaSeletorItem(ordenados);
+    const encontrado = termo ? this.itemPorBusca(itens, textoBusca) : null;
+    this.selecaoAtualSeletorItem = encontrado;
 
     if (this.contextoSeletorItem === "resultado-mao-obra") {
       if (this.selecaoAtualSeletorItem) {
@@ -1313,37 +1575,11 @@ class AplicacaoMedicao {
       : "Nenhum item selecionado.";
   }
 
-  renderizarListaSeletorItem(itens) {
-    if (!itens.length) {
-      this.elementos.listaSeletorItem.innerHTML = `<div class="preview-vazio">Nenhum item encontrado.</div>`;
-      return;
-    }
-
-    this.elementos.listaSeletorItem.innerHTML = itens.map((item) => {
-      const ativo = this.selecaoAtualSeletorItem?.id === item.id ? "ativo" : "";
-      return `
-        <button class="item-seletor ${ativo}" data-seletor-item="${item.id}" type="button">
-          <strong>${item.descricao || item.id}</strong>
-        </button>
-      `;
-    }).join("");
-
-    this.elementos.listaSeletorItem.querySelectorAll("[data-seletor-item]").forEach((botao) => {
-      botao.addEventListener("click", () => this.selecionarItemDoSeletor(botao.dataset.seletorItem));
-    });
-  }
-
-  selecionarItemDoSeletor(id) {
-    const item = this.opcoesSeletorItem(this.contextoSeletorItem).find((atual) => atual.id === id);
-    if (!item) return;
-    this.selecaoAtualSeletorItem = item;
-    // Mantem a busca pela descricao para evitar perder a selecao no filtro.
-    this.elementos.formSeletorItem.elements.busca.value = `${item.descricao || ""}`.trim();
-    if (this.contextoSeletorItem === "resultado-mao-obra") {
-      this.elementos.formSeletorItem.elements.codigo.value = item.codigo || "";
-      this.elementos.formSeletorItem.elements.descricao.value = item.descricao || "";
-    }
-    this.sincronizarSeletorItem();
+  atualizarDatalistSeletorItem(contexto) {
+    const itens = this.opcoesSeletorItem(contexto);
+    this.elementos.datalistSeletorItem.innerHTML = itens
+      .map((item) => `<option value="${item.descricao || item.id}">${item.codigo || item.id || ""}</option>`)
+      .join("");
   }
 
   opcoesSeletorItem(contexto) {
@@ -1365,20 +1601,6 @@ class AplicacaoMedicao {
     const combinado = `${item.descricao || ""} ${item.codigo || ""} ${item.id || ""} ${item.unidade || ""}`;
     const campos = [item.descricao, item.codigo, item.id, item.unidade, combinado];
     return campos.some((campo) => this.normalizarTexto(campo).includes(termo));
-  }
-
-  pontuacaoBusca(item, termo) {
-    if (!termo) return 0;
-    const descricao = this.normalizarTexto(item.descricao);
-    const codigo = this.normalizarTexto(item.codigo);
-    const id = this.normalizarTexto(item.id);
-    if (descricao.startsWith(termo)) return 0;
-    if (descricao.includes(termo)) return 1;
-    if (codigo.startsWith(termo)) return 2;
-    if (codigo.includes(termo)) return 3;
-    if (id.startsWith(termo)) return 4;
-    if (id.includes(termo)) return 5;
-    return 6;
   }
 
   confirmarSeletorItem(evento) {
@@ -1429,13 +1651,19 @@ class AplicacaoMedicao {
 
     if (this.contextoSeletorItem === "regra-mao-obra") {
       if (!this.selecaoAtualSeletorItem) return this.mostrarAviso("Selecione uma mao de obra.");
-      if (this.saidasRegraTemporarias.some((item) => item.maoObraId === this.selecaoAtualSeletorItem.id)) {
+      const operacaoAtiva = this.operacaoRegraAtiva();
+      if (!operacaoAtiva) {
+        this.fecharModalCadastro("seletorItem");
+        return this.mostrarAviso("Marque apenas uma operacao (I, D ou R) para incluir mao de obra.");
+      }
+      const saidasOperacao = this.saidasRegraDaOperacao(operacaoAtiva);
+      if (saidasOperacao.some((item) => item.maoObraId === this.selecaoAtualSeletorItem.id)) {
         this.fecharModalCadastro("seletorItem");
         return this.mostrarAviso("Mao de obra ja adicionada na regra.");
       }
       const categoriaRegra = this.elementos.formRegra.elements.categoriaRegra.value;
       const quantidadeSaida = categoriaRegra === "cabo" ? 1 : 1;
-      this.saidasRegraTemporarias.push({
+      saidasOperacao.push({
         maoObraId: this.selecaoAtualSeletorItem.id,
         codigo: this.selecaoAtualSeletorItem.codigo,
         descricao: this.selecaoAtualSeletorItem.descricao,
@@ -1492,6 +1720,83 @@ class AplicacaoMedicao {
     return base ? `MO-${base}` : "MO";
   }
 
+  nomeBaseRegra(nome) {
+    const texto = String(nome || "").trim();
+    if (!texto) return "Regra";
+    return texto
+      .replace(/\s*\[[IDR]\]\s*$/i, "")
+      .replace(/^\s*(instalar|instalacao|desativar|desativacao|reinstalar|reinstalacao)\s+/i, "")
+      .trim() || texto;
+  }
+
+  assinaturaGatilhoRegra(regra) {
+    const gatilho = regra.gatilho || {};
+    const tipo = gatilho.tipo || regra.tipoGatilho || "material";
+    const categorias = [...(gatilho.categorias || regra.categorias || [])].sort();
+    const materialIds = [...(gatilho.materialIds || regra.materialIds || [])].sort();
+    const estruturaIds = [...(gatilho.estruturaIds || regra.estruturaIds || [])].sort();
+    const materialId = gatilho.materialId ?? regra.materialId ?? "";
+    const estruturaId = gatilho.estruturaId ?? regra.estruturaId ?? "";
+    return JSON.stringify({ tipo, categorias, materialIds, estruturaIds, materialId, estruturaId });
+  }
+
+  migrarRegrasParaPacotes(regras) {
+    const regrasAtomicas = [];
+    regras.forEach((regra) => {
+      const operacoesOriginais = Array.isArray(regra.operacoes) && regra.operacoes.length ? regra.operacoes : [];
+      if (operacoesOriginais.length <= 1) {
+        regrasAtomicas.push({
+          ...regra,
+          operacoes: operacoesOriginais.length ? [operacoesOriginais[0]] : []
+        });
+        return;
+      }
+
+      operacoesOriginais.forEach((operacao) => {
+        regrasAtomicas.push({
+          ...regra,
+          id: this.criarIdUnico(regrasAtomicas, `${regra.id || regra.nome || "regra"}_${operacao}`),
+          operacoes: [operacao]
+        });
+      });
+    });
+
+    const gruposPorAssinatura = new Map();
+    regrasAtomicas.forEach((regra) => {
+      const chave = this.assinaturaGatilhoRegra(regra);
+      if (!gruposPorAssinatura.has(chave)) gruposPorAssinatura.set(chave, []);
+      gruposPorAssinatura.get(chave).push(regra);
+    });
+
+    gruposPorAssinatura.forEach((grupo) => {
+      const porOperacao = { I: [], D: [], R: [] };
+      grupo.forEach((regra) => {
+        const operacao = regra.operacoes?.[0];
+        if (!porOperacao[operacao]) return;
+        porOperacao[operacao].push(regra);
+      });
+
+      const haOperacoesMultiplas = Object.values(porOperacao).filter((lista) => lista.length > 0).length > 1;
+      const temConflitoMesmaOperacao = Object.values(porOperacao).some((lista) => lista.length > 1);
+      if (!haOperacoesMultiplas || temConflitoMesmaOperacao) {
+        grupo.forEach((regra) => {
+          if (!regra.nomeBaseGrupo) regra.nomeBaseGrupo = this.nomeBaseRegra(regra.nome);
+        });
+        return;
+      }
+
+      const nomeBase = this.nomeBaseRegra(grupo[0]?.nome);
+      const grupoRegraId = this.criarId(`grupo_${nomeBase}_${this.assinaturaGatilhoRegra(grupo[0])}`);
+      grupo.forEach((regra) => {
+        regra.grupoRegraId = grupoRegraId;
+        regra.nomeBaseGrupo = nomeBase;
+        regra.nome = `${nomeBase} [${regra.operacoes?.[0] || ""}]`.trim();
+      });
+    });
+
+    return regrasAtomicas;
+  }
+
   normalizarBase() {
     this.base.maoObra = Array.isArray(this.base.maoObra) ? this.base.maoObra : [];
     this.base.materiais = this.base.materiais.map((material) => ({
@@ -1536,6 +1841,7 @@ class AplicacaoMedicao {
         };
       })
     }));
+    this.base.regrasMaoObra = this.migrarRegrasParaPacotes(this.base.regrasMaoObra);
 
     this.base.pontos = this.base.pontos.map((ponto) => {
       const migrado = this.migrarCabosLegados(ponto);
