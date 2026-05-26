@@ -382,6 +382,7 @@ class AplicacaoMedicao {
       quantidadeResultadoMaoObra: document.querySelector("#quantidade-resultado-mao-obra"),
       confirmarResultadoMaoObra: document.querySelector("#confirmar-resultado-mao-obra"),
       abasResultado: document.querySelectorAll(".aba-resultado"),
+      refreshResultado: document.querySelector("#refresh-resultado"),
       baixarJson: document.querySelector("#baixar-json"),
       baixarCsv: document.querySelector("#baixar-csv"),
       arquivoJson: document.querySelector("#arquivo-json"),
@@ -475,6 +476,7 @@ class AplicacaoMedicao {
       if (evento.key === "Escape") this.fecharModalAtual();
     });
     this.elementos.abasResultado.forEach((aba) => aba.addEventListener("click", () => this.alterarResultado(aba)));
+    this.elementos.refreshResultado?.addEventListener("click", () => this.atualizarMaoObraPorMateriaisResultado());
     this.elementos.baixarJson.addEventListener("click", () => this.baixarArquivo("base-medicao.json", JSON.stringify(this.base, null, 2), "application/json"));
     this.elementos.baixarCsv.addEventListener("click", () => this.baixarExcel());
     this.elementos.arquivoJson.addEventListener("change", (evento) => this.importarJson(evento));
@@ -1315,6 +1317,91 @@ class AplicacaoMedicao {
       </html>
     `;
     this.baixarArquivo("resultado-medicao.xls", conteudo, "application/vnd.ms-excel;charset=utf-8");
+  }
+
+  chaveLinhaResultado(item) {
+    return `${item.codigo || ""}||${item.descricao || ""}||${item.unidade || "un"}`;
+  }
+
+  somarNoMapaResultado(mapa, codigo, descricao, quantidade, unidade = "un") {
+    const chave = `${codigo || ""}||${descricao || ""}||${unidade || "un"}`;
+    if (!mapa[chave]) mapa[chave] = { codigo: codigo || "", descricao: descricao || "", quantidade: 0, unidade: unidade || "un" };
+    mapa[chave].quantidade += Number(quantidade || 0);
+  }
+
+  materialPorLinhaResultado(linha) {
+    const codigo = String(linha.codigo || "").trim();
+    const descricao = this.normalizarTexto(linha.descricao || "");
+    return this.base.materiais.find((item) => String(item.codigo || "").trim() === codigo)
+      || this.base.materiais.find((item) => this.normalizarTexto(item.descricao || "") === descricao)
+      || null;
+  }
+
+  regraAplicaAoMaterial(regra, operacao, material) {
+    if (!material) return false;
+    if (regra.operacoes?.length && !regra.operacoes.includes(operacao)) return false;
+    const tipo = regra.gatilho?.tipo || regra.tipoGatilho;
+    if (tipo === "estrutura" || tipo === "contexto") return false;
+    const materialId = regra.gatilho?.materialId ?? regra.materialId;
+    const materialIds = regra.gatilho?.materialIds ?? regra.materialIds ?? [];
+    const categorias = regra.gatilho?.categorias ?? regra.categorias ?? [];
+    if (materialId) return materialId === material.id;
+    if (materialIds.length) return materialIds.includes(material.id);
+    return categorias.includes(material.categoria);
+  }
+
+  atualizarMaoObraPorMateriaisResultado() {
+    const baseDosPontos = this.casosDeUso.gerarMedicao(this.base);
+    const operacoesMateriais = [
+      { operacao: "I", grupoMaterial: "materiaisInstalacao", grupoMaoObra: "maoObraInstalacao" },
+      { operacao: "D", grupoMaterial: "materiaisDesativacao", grupoMaoObra: "maoObraDesativacao" }
+    ];
+
+    operacoesMateriais.forEach(({ operacao, grupoMaterial, grupoMaoObra }) => {
+      const baseMateriais = baseDosPontos[grupoMaterial] || [];
+      const atuaisMateriais = this.resultado[grupoMaterial] || [];
+      const mapaBase = {};
+      const mapaAtual = {};
+      baseMateriais.forEach((item) => { mapaBase[this.chaveLinhaResultado(item)] = Number(item.quantidade || 0); });
+      atuaisMateriais.forEach((item) => { mapaAtual[this.chaveLinhaResultado(item)] = Number(item.quantidade || 0); });
+
+      const mapaMaoObraFinal = {};
+      (baseDosPontos[grupoMaoObra] || []).forEach((item) => {
+        this.somarNoMapaResultado(mapaMaoObraFinal, item.codigo, item.descricao, Number(item.quantidade || 0), item.unidade || "un");
+      });
+
+      const todasChaves = [...new Set([...Object.keys(mapaBase), ...Object.keys(mapaAtual)])];
+      todasChaves.forEach((chave) => {
+        const delta = Number(mapaAtual[chave] || 0) - Number(mapaBase[chave] || 0);
+        if (!delta) return;
+        const linhaAtual = atuaisMateriais.find((item) => this.chaveLinhaResultado(item) === chave)
+          || baseMateriais.find((item) => this.chaveLinhaResultado(item) === chave);
+        const material = this.materialPorLinhaResultado(linhaAtual || {});
+        if (!material) return;
+        const regrasAplicaveis = this.base.regrasMaoObra.filter((regra) => this.regraAplicaAoMaterial(regra, operacao, material));
+        regrasAplicaveis.forEach((regra) => {
+          (regra.saidas || []).forEach((saida) => {
+            const quantidadeSaida = Number(saida.quantidade || 0);
+            if (!quantidadeSaida) return;
+            this.somarNoMapaResultado(
+              mapaMaoObraFinal,
+              saida.codigo || "MO",
+              saida.descricao || "",
+              delta * quantidadeSaida,
+              "un"
+            );
+          });
+        });
+      });
+
+      this.resultado[grupoMaoObra] = Object.values(mapaMaoObraFinal)
+        .filter((item) => Number(item.quantidade || 0) > 0)
+        .sort((a, b) => a.descricao.localeCompare(b.descricao, "pt-BR"));
+    });
+
+    this.resultado.maoObraReinstalacao = [...(baseDosPontos.maoObraReinstalacao || [])];
+    this.renderizarResultado();
+    this.mostrarAviso("Mao de obra atualizada com base nas regras dos materiais.");
   }
 
   importarJson(evento) {
