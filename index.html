@@ -157,7 +157,12 @@
               <div class="titulo-resultado">
                 <div class="titulo-resultado-topo">
                   <h3>Materiais</h3>
-                  <button id="adicionar-resultado-material" class="botao secundario botao-adicao-resultado" type="button">+Material</button>
+                  <div id="linha-resultado-material" class="linha-formulario">
+                    <input id="busca-resultado-material" list="opcoes-resultado-material" placeholder="Digite codigo ou descricao do material" />
+                    <datalist id="opcoes-resultado-material"></datalist>
+                    <input id="quantidade-resultado-material" type="number" min="0" step="0.01" value="1" />
+                    <button id="confirmar-resultado-material" class="botao secundario" type="button">+</button>
+                  </div>
                 </div>
                 <div class="abas-resultado" aria-label="Filtros de materiais">
                   <button class="aba-resultado ativa" data-resultado-secao="material" data-resultado-operacao="I" type="button">I - Instalacao</button>
@@ -170,7 +175,12 @@
               <div class="titulo-resultado">
                 <div class="titulo-resultado-topo">
                   <h3>Mao de obra</h3>
-                  <button id="adicionar-resultado-mao-obra" class="botao secundario botao-adicao-resultado" type="button">+M.O</button>
+                  <div id="linha-resultado-mao-obra" class="linha-formulario">
+                    <input id="busca-resultado-mao-obra" list="opcoes-resultado-mao-obra" placeholder="Digite codigo ou descricao da mao de obra" />
+                    <datalist id="opcoes-resultado-mao-obra"></datalist>
+                    <input id="quantidade-resultado-mao-obra" type="number" min="0" step="0.01" value="1" />
+                    <button id="confirmar-resultado-mao-obra" class="botao secundario" type="button">+</button>
+                  </div>
                 </div>
                 <div class="abas-resultado" aria-label="Filtros de mao de obra">
                   <button class="aba-resultado ativa" data-resultado-secao="maoObra" data-resultado-operacao="I" type="button">I - Instalacao</button>
@@ -292,11 +302,15 @@
             </label>
           </section>
           <section id="campo-material-regra" class="bloco-regra campo-busca-regra">
-            <h3>Itens relacionados</h3>
-            <p class="texto-apoio">Selecione varios itens da categoria escolhida.</p>
-            <div class="campo-busca-regra-acoes">
-              <button id="adicionar-material-regra" class="botao secundario" type="button">Selecionar itens</button>
+            <div class="cabecalho-inline-regra">
+              <h3>Materiais</h3>
+              <div class="campo-busca-regra-acoes">
+                <input id="busca-material-regra" list="opcoes-material-regra" placeholder="Digite codigo ou descricao do item" />
+                <button id="adicionar-material-regra" class="botao secundario" type="button">+</button>
+              </div>
             </div>
+            <p class="texto-apoio">Selecione varios itens da categoria escolhida.</p>
+            <datalist id="opcoes-material-regra"></datalist>
             <div id="itens-materiais-regra" class="itens-temporarios"></div>
           </section>
           <fieldset class="bloco-regra grupo-operacoes">
@@ -306,9 +320,16 @@
             <label><input type="checkbox" name="operacoes" value="R" /> R - Reinstalacao</label>
           </fieldset>
           <section class="bloco-regra">
-            <div class="linha-formulario">
-              <button id="adicionar-mao-obra-regra" class="botao secundario" type="button">Selecionar mao de obra</button>
+            <div class="cabecalho-inline-regra">
+              <h3>Mao de obra por operacao</h3>
+              <div class="campo-busca-regra-acoes">
+                <input id="busca-mao-obra-regra" list="opcoes-mao-obra-regra" placeholder="Digite codigo ou descricao da mao de obra" />
+                <button id="adicionar-mao-obra-regra" class="botao secundario" type="button">+</button>
+              </div>
             </div>
+            <p class="texto-apoio">Marque a operacao para incluir mao de obra. Com mais de uma operacao marcada, a lista aparece consolidada por cor.</p>
+            <p id="status-operacao-regra" class="texto-apoio"></p>
+            <datalist id="opcoes-mao-obra-regra"></datalist>
             <div id="saidas-regra" class="itens-temporarios"></div>
           </section>
           <div class="acoes-formulario">
@@ -330,10 +351,10 @@
         </div>
         <form id="form-seletor-item" class="formulario formulario-seletor-item">
           <label>Buscar
-            <input name="busca" autocomplete="off" placeholder="Digite codigo ou descricao" />
+            <input name="busca" list="opcoes-seletor-item" autocomplete="off" placeholder="Digite codigo ou descricao" />
           </label>
+          <datalist id="opcoes-seletor-item"></datalist>
           <p id="status-seletor-item" class="texto-apoio">Nenhum item selecionado.</p>
-          <div id="lista-seletor-item" class="lista-seletor-item"></div>
           <div class="linha-formulario linha-formulario-seletor">
             <label id="campo-codigo-seletor-item" class="oculto">Codigo
               <input name="codigo" placeholder="MO-001" />

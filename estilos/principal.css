@@ -70,8 +70,7 @@ button,
 input,
 select,
 table,
-.painel,
-.aviso {
+.painel {
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
@@ -84,8 +83,7 @@ table,
 
 .cabecalho,
 .painel,
-.abas,
-.aviso {
+.abas {
   border: 1px solid var(--linha);
   background: var(--superficie);
   box-shadow: var(--sombra);
@@ -272,11 +270,22 @@ body[data-tema="escuro"] .aba-resultado.ativa {
 }
 
 .aviso {
-  margin-bottom: 16px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  color: var(--alerta);
-  box-shadow: var(--sombra-suave);
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 1200;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+  pointer-events: none;
+  max-width: min(92vw, 520px);
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .painel-aba {
@@ -389,7 +398,8 @@ body[data-tema="escuro"] #aba-cadastros .painel-cadastro[data-cadastro-painel="m
   font-size: 1.32rem;
 }
 
-#aba-cadastros .lista-cadastro {
+#aba-cadastros .lista-cadastro,
+#aba-regras .lista-cadastro {
   gap: 12px;
   max-height: 56vh;
   overflow: auto;
@@ -565,11 +575,50 @@ body[data-tema="escuro"] .bloco-regra {
   gap: 8px;
 }
 
+.cabecalho-inline-regra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
 .campo-busca-regra-acoes {
   display: flex;
   gap: 8px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.campo-busca-regra-acoes input,
+#linha-resultado-material input,
+#linha-resultado-mao-obra input {
+  min-height: 38px;
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--texto);
+}
+
+.campo-busca-regra-acoes input {
+  flex: 1 1 320px;
+}
+
+.cabecalho-inline-regra .campo-busca-regra-acoes input {
+  min-width: 280px;
+}
+
+#linha-resultado-material,
+#linha-resultado-mao-obra {
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
+
+#quantidade-resultado-material,
+#quantidade-resultado-mao-obra {
+  width: 110px;
 }
 
 .grupo-operacoes label {
@@ -625,6 +674,36 @@ body[data-tema="escuro"] .bloco-regra {
 .grupo-operacoes input {
   width: auto;
   min-height: auto;
+}
+
+#status-operacao-regra {
+  margin-top: 0;
+}
+
+.tag-operacao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin-right: 6px;
+}
+
+.tag-operacao-i {
+  background: #1f9d55;
+}
+
+.tag-operacao-d {
+  background: #d64545;
+}
+
+.tag-operacao-r {
+  background: #2f6fed;
 }
 
 body[data-tema="escuro"] .grupo-operacoes {
@@ -835,7 +914,15 @@ body[data-tema="escuro"] .indicadores div {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+}
+
+.titulo-resultado-topo h3 {
+  white-space: nowrap;
+}
+
+.titulo-resultado-topo .linha-formulario {
+  margin: 0;
 }
 
 .titulo-resultado h3 {
