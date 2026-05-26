@@ -1,0 +1,348 @@
+﻿estrutura;codigo;quantidade;descricao
+CE1;90389;2;Arruela quadrada.
+CE1;Tabela A;1;Braco tipo L.
+CE1;Tabela M;2;Parafuso de cabeca quadrada.
+CE1 Circ;Tabela A;1;Braco tipo L.
+CE1 Circ;Tabela B;2;Cinta para poste circular.
+CE1 Circ;Tabela C;2;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE2;90389;3;Arruela quadrada.
+CE2;90409;2;Sapatilha.
+CE2;Tabela L;1;Braco tipo C.
+CE2;Tabela M;3;Parafuso de cabeca quadrada.
+CE2;Tabela N;3;Pino curto para isolador.
+CE2;90387;1;Porca-olhal.
+CE2;Tabela J;3;Isolador polimerico tipo pino.
+CE2;90302;2;Alca pre-formada de aco 9,53 mm.
+CE2 Circ;90409;2;Sapatilha.
+CE2 Circ;Tabela L;1;Braco tipo C.
+CE2 Circ;Tabela B;3;Cinta para poste circular.
+CE2 Circ;Tabela C;3;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE2 Circ;Tabela N;3;Pino curto para isolador.
+CE2 Circ;90387;1;Porca-olhal.
+CE2 Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE2 Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+CE2 SH;90389;3;Arruela quadrada.
+CE2 SH;90409;2;Sapatilha.
+CE2 SH;Tabela XX;1;Suporte afastador horizontal.
+CE2 SH;Tabela L;1;Braco tipo C.
+CE2 SH;Tabela M;3;Parafuso de cabeca quadrada.
+CE2 SH;Tabela N;3;Pino curto para isolador.
+CE2 SH;90387;1;Porca-olhal.
+CE2 SH;Tabela J;3;Isolador polimerico tipo pino.
+CE2 SH;90302;2;Alca pre-formada de aco 9,53 mm.
+CE2 SH Circ;90409;2;Sapatilha.
+CE2 SH Circ;Tabela XX;1;Suporte afastador horizontal.
+CE2 SH Circ;Tabela B;3;Cinta para poste circular.
+CE2 SH Circ;Tabela C;3;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE2 SH Circ;Tabela N;3;Pino curto para isolador.
+CE2 SH Circ;90387;1;Porca-olhal.
+CE2 SH Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE2 SH Circ;90302;2;Alca pre-formada de aco 9,53 mm.CE3;90389;3;Arruela quadrada.
+CE3;90409;1;Sapatilha.
+CE3;90416;1;Cantoneira auxiliar de abas retas.
+CE3;90448;3;Gancho-olhal.
+CE3;90440;2;Manilha-sapatilha.
+CE3;90244;1;Manilha torcida.
+CE3;Tabela M;3;Parafuso de cabeca quadrada.
+CE3;Tabela C;3;Parafuso Cabeca Abaulada M16 x 45 mm.
+CE3;90387;3;Porca-olhal.
+CE3;Tabela O;3;Isolador composto tipo bastao.
+CE3;90302;1;Alca pre-formada de aco 9,53 mm.
+CE3 Circ;90409;1;Sapatilha.
+CE3 Circ;90416;1;Cantoneira auxiliar de abas retas.
+CE3 Circ;Tabela B;3;Cinta para poste circular.
+CE3 Circ;90448;3;Gancho-olhal.
+CE3 Circ;90440;2;Manilha-sapatilha.
+CE3 Circ;90244;1;Manilha torcida.
+CE3 Circ;Tabela C;6;Parafuso Cabeca Abaulada M16 x 45 mm.
+CE3 Circ;90387;3;Porca-olhal.
+CE3 Circ;Tabela O;3;Isolador composto tipo bastao.
+CE3 Circ;90302;1;Alca pre-formada de aco 9,53 mm.
+CE3U;90389;3;Arruela quadrada.
+CE3U;90409;1;Sapatilha.
+CE3U;90448;3;Gancho-olhal.
+CE3U;90515;1;Fixador para perfil U.
+CE3U;90440;3;Manilha-sapatilha.
+CE3U;Tabela M;3;Parafuso de cabeca quadrada.
+CE3U;Tabela C;2;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE3U;Tabela I;4;Parafuso de rosca dupla.
+CE3U;90447;1;Perfil U.
+CE3U;90387;4;Porca-olhal.
+CE3U;90302;1;Alca pre-formada de aco 9,53 mm.
+CE3U Circ;90409;1;Sapatilha.
+CE3U Circ;Tabela B;3;Cinta para poste circular.
+CE3U Circ;90448;3;Gancho-olhal.
+CE3U Circ;90515;1;Fixador para perfil U.
+CE3U Circ;90440;3;Manilha-sapatilha.
+CE3U Circ;Tabela C;5;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE3U Circ;Tabela I;2;Parafuso de rosca dupla.
+CE3U Circ;90447;1;Perfil U.
+CE3U Circ;90387;4;Porca-olhal.
+CE3U Circ;90302;1;Alca pre-formada de aco 9,53 mm.
+CE4;90389;3;Arruela quadrada.
+CE4;90409;2;Sapatilha.
+CE4;Tabela L;1;Braco tipo C.
+CE4;90448;6;Gancho-olhal.
+CE4;90440;6;Manilha-sapatilha.
+CE4;Tabela M;9;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE4;Tabela C;6;Parafuso de cabeca abaulada.
+CE4;Tabela N;3;Pino curto para isolador.
+CE4;90387;6;Porca-olhal.
+CE4;Tabela O;6;Isolador composto tipo bastao.
+CE4;Tabela J;3;Isolador polimerico tipo pino.
+CE4;90302;2;Alca pre-formada de aco 9,53 mm.
+CE4 Circ;90389;1;Arruela quadrada.
+CE4 Circ;90409;2;Sapatilha.
+CE4 Circ;Tabela L;1;Braco tipo C.
+CE4 Circ;Tabela B;3;Cinta para poste circular.
+CE4 Circ;90448;6;Gancho-olhal.
+CE4 Circ;90440;6;Manilha-sapatilha.
+CE4 Circ;Tabela M;6;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE4 Circ;Tabela C;6;Parafuso de cabeca abaulada.
+CE4 Circ;Tabela N;3;Pino curto para isolador.
+CE4 Circ;90387;6;Porca-olhal.
+CE4 Circ;Tabela O;6;Isolador composto tipo bastao.
+CE4 Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE4 Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+CE4U;90389;3;Arruela quadrada.
+CE4U;90409;2;Sapatilha.
+CE4U;90448;6;Gancho-olhal.
+CE4U;90515;1;Fixador para perfil U.
+CE4U;90440;6;Manilha-sapatilha.
+CE4U;Tabela M;6;Parafuso de cabeca quadrada.
+CE4U;Tabela I;4;Parafuso de rosca dupla.
+CE4U;90447;1;Perfil U.
+CE4U;Tabela N;3;Pino curto para isolador.
+CE4U;90387;8;Porca-olhal.
+CE4U;Tabela O;6;Isolador composto tipo bastao.
+CE4U;Tabela J;3;Isolador polimerico tipo pino.
+CE4U;90302;2;Alca pre-formada de aco 9,53 mm.
+CE4U Circ;90409;2;Sapatilha.
+CE4U Circ;Tabela B;4;Cinta para poste circular.
+CE4U Circ;90448;6;Gancho-olhal.
+CE4U Circ;90515;1;Fixador para perfil U.
+CE4U Circ;90440;6;Manilha-sapatilha.
+CE4U Circ;Tabela C;5;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE4U Circ;Tabela I;2;Parafuso de rosca dupla.
+CE4U Circ;90447;1;Perfil U.
+CE4U Circ;Tabela N;3;Pino curto para isolador.
+CE4U Circ;90387;8;Porca-olhal.
+CE4U Circ;Tabela O;6;Isolador composto tipo bastao.
+CE4U Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE4U Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+estrutura;codigo;quantidade;descricao
+CE3-CE3;90389;6;Arruela quadrada.
+CE3-CE3;90409;2;Sapatilha.
+CE3-CE3;Tabela L;2;Braco tipo C.
+CE3-CE3;90416;2;Cantoneira auxiliar para braco tipo C.
+CE3-CE3;90448;6;Gancho-olhal.
+CE3-CE3;90440;4;Manilha-sapatilha.
+CE3-CE3;90244;2;Manilha torcida.
+CE3-CE3;Tabela M;6;Parafuso de cabeca quadrada.
+CE3-CE3;Tabela C;6;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE3-CE3;90387;6;Porca-olhal.
+CE3-CE3;Tabela O;6;Isolador composto tipo bastao.
+CE3-CE3;90302;2;Alca pre-formada de aco 9,53 mm.
+CE3-CE3 Circ;90409;2;Sapatilha.
+CE3-CE3 Circ;Tabela L;2;Braco tipo C.
+CE3-CE3 Circ;90416;2;Cantoneira auxiliar para braco tipo C.
+CE3-CE3 Circ;Tabela B;6;Cinta para poste circular.
+CE3-CE3 Circ;90448;6;Gancho-olhal.
+CE3-CE3 Circ;90440;4;Manilha-sapatilha.
+CE3-CE3 Circ;90244;2;Manilha torcida.
+CE3-CE3 Circ;Tabela C;12;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE3-CE3 Circ;90387;6;Porca-olhal.
+CE3-CE3 Circ;Tabela O;6;Isolador composto tipo bastao.
+CE3-CE3 Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+CE3U-CE3U;90389;7;Arruela quadrada.
+CE3U-CE3U;90409;2;Sapatilha.
+CE3U-CE3U;90515;2;Fixador para perfil U.
+CE3U-CE3U;90448;6;Gancho-olhal.
+CE3U-CE3U;90440;6;Manilha-sapatilha.
+CE3U-CE3U;Tabela I;8;Parafuso de rosca total.
+CE3U-CE3U;90447;1;Perfil U.
+CE3U-CE3U;Tabela M;7;Parafuso de cabeca quadrada.
+CE3U-CE3U;Tabela C;4;Parafuso frances M16 x 70 mm.
+CE3U-CE3U;90244;2;Manilha torcida.
+CE3U-CE3U;90387;8;Porca-olhal.
+CE3U-CE3U;Tabela O;6;Isolador composto tipo bastao.
+CE3U-CE3U;Tabela J;2;Isolador polimerico tipo pino.
+CE3U-CE3U;90302;2;Alca pre-formada de aco 9,53 mm.
+CE3U-CE3U;90523;3;Suporte Z.
+CE3U-CE3U;Tabela N;2;Pino curto para isolador.
+CE3U-CE3U Circ;90409;2;Sapatilha.
+CE3U-CE3U Circ;90515;2;Fixador para perfil U.
+CE3U-CE3U Circ;Tabela B;6;Cinta para poste circular.
+CE3U-CE3U Circ;90448;6;Gancho-olhal.
+CE3U-CE3U Circ;90440;4;Manilha-sapatilha.
+CE3U-CE3U Circ;Tabela I;4;Parafuso de rosca total.
+CE3U-CE3U Circ;90447;1;Perfil U.
+CE3U-CE3U Circ;Tabela M;7;Parafuso de cabeca quadrada.
+CE3U-CE3U Circ;Tabela C;11;Parafuso frances M16 x 70 mm.
+CE3U-CE3U Circ;90244;2;Manilha torcida.
+CE3U-CE3U Circ;90387;8;Porca-olhal.
+CE3U-CE3U Circ;Tabela O;6;Isolador composto tipo bastao.
+CE3U-CE3U Circ;Tabela J;2;Isolador polimerico tipo pino.
+CE3U-CE3U Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+CE3U-CE3U Circ;90523;3;Suporte Z.
+CE3U-CE3U Circ;Tabela N;2;Pino curto para isolador.
+CE2-3;90389;3;Arruela quadrada.
+CE2-3;90409;3;Sapatilha.
+CE2-3;Tabela L;1;Braco tipo C.
+CE2-3;90416;1;Cantoneira auxiliar para braco tipo C.
+CE2-3;90448;3;Gancho-olhal.
+CE2-3;90440;2;Manilha-sapatilha.
+CE2-3;90244;1;Manilha torcida.
+CE2-3;Tabela M;3;Parafuso de cabeca quadrada.
+CE2-3;Tabela C;3;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE2-3;Tabela I;1;Parafuso de rosca dupla.
+CE2-3;Tabela N;3;Pino curto para isolador.
+CE2-3;90387;3;Porca-olhal.
+CE2-3;Tabela O;3;Isolador composto tipo bastao.
+CE2-3;Tabela J;3;Isolador polimerico tipo pino.
+CE2-3;90302;3;Alca pre-formada de aco 9,53 mm.
+CE2-3 Circ;90409;3;Sapatilha.
+CE2-3 Circ;Tabela L;1;Braco tipo C.
+CE2-3 Circ;90416;1;Cantoneira auxiliar para braco tipo C.
+CE2-3 Circ;Tabela B;3;Cinta para poste circular.
+CE2-3 Circ;90448;3;Gancho-olhal.
+CE2-3 Circ;90440;2;Manilha-sapatilha.
+CE2-3 Circ;90244;1;Manilha torcida.
+CE2-3 Circ;Tabela C;6;Parafuso Cabeca Abaulada M16 x 70 mm.
+CE2-3 Circ;Tabela N;3;Pino curto para isolador.
+CE2-3 Circ;90387;3;Porca-olhal.
+CE2-3 Circ;Tabela O;3;Isolador composto tipo bastao.
+CE2-3 Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE2-3 Circ;90302;3;Alca pre-formada de aco 9,53 mm.
+CEJ1;90389;2;Arruela quadrada.
+CEJ1;90536;1;Braco J.
+CEJ1;Tabela H;1;Espacador losangular autotravante.
+CEJ1;90399;1;Estribo para braco tipo L.
+CEJ1;Tabela C;1;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ1;Tabela I;2;Parafuso de rosca dupla M16.
+CEJ1 Circ;90536;1;Braco J.
+CEJ1 Circ;Tabela H;1;Espacador losangular autotravante.
+CEJ1 Circ;90399;1;Estribo para braco tipo L.
+CEJ1 Circ;Tabela B;2;Cinta para poste circular.
+CEJ1 Circ;Tabela C;4;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ1 Circ;Tabela C;2;Parafuso Cabeca Abaulada M16 x 45 mm.
+CEJ1A;90389;2;Arruela quadrada.
+CEJ1A;90536;1;Braco J.
+CEJ1A;Tabela H;1;Espacador losangular autotravante.
+CEJ1A;90399;1;Estribo para braco tipo L.
+CEJ1A;Tabela C;1;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ1A;Tabela C;4;Parafuso Cabeca Abaulada M16 x 45 mm.
+CEJ1A;Tabela I;2;Parafuso de rosca dupla M16.
+CEJ1A;Tabela O;1;Isolador composto tipo bastao.
+CEJ1A;Tabela A;1;Braco tipo L.
+CEJ1A;90440;1;Manilha-sapatilha.
+CEJ1A Circ;90536;1;Braco J.
+CEJ1A Circ;Tabela H;1;Espacador losangular autotravante.
+CEJ1A Circ;90399;1;Estribo para braco tipo L.
+CEJ1A Circ;Tabela B;2;Cinta para poste circular.
+CEJ1A Circ;Tabela C;4;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ1A Circ;Tabela C;4;Parafuso Cabeca Abaulada M16 x 45 mm.
+CEJ1A Circ;Tabela O;1;Isolador composto tipo bastao.
+CEJ1A Circ;Tabela A;1;Braco tipo L.
+CEJ1A Circ;90440;1;Manilha-sapatilha.
+CEJ2;90389;3;Arruela quadrada.
+CEJ2;90536;1;Braco J.
+CEJ2;Tabela M;3;Parafuso de rosca dupla M16.
+CEJ2;Tabela J;3;Isolador polimerico tipo pino.
+CEJ2;Tabela N;3;Pino curto para isolador.
+CEJ2 Circ;90389;3;Arruela quadrada.
+CEJ2 Circ;90536;1;Braco J.
+CEJ2 Circ;Tabela B;3;Cinta para poste circular.
+CEJ2 Circ;Tabela C;8;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ2 Circ;Tabela C;1;Parafuso Cabeca Abaulada M16 x 45 mm.
+CEJ2 Circ;Tabela J;3;Isolador polimerico tipo pino.
+CEJ2 Circ;Tabela N;3;Pino curto para isolador.
+CEJ4;90389;3;Arruela quadrada.
+CEJ4;Tabela M;6;Parafuso de rosca dupla M16 x tamanho.
+CEJ4;90536;1;Braco J.
+CEJ4;90448;6;Gancho-olhal.
+CEJ4;90440;6;Manilha-sapatilha.
+CEJ4;Tabela M;9;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ4;90387;6;Porca-olhal.
+CEJ4;Tabela O;6;Isolador composto tipo bastao.
+CEJ4;Tabela A;1;Braco tipo L.
+CEJ4;90302;2;Alca pre-formada de aco 9,53 mm.
+CEJ4 Circ;90389;1;Arruela quadrada.
+CEJ4 Circ;Tabela M;6;Parafuso de rosca dupla M16 x tamanho.
+CEJ4 Circ;90536;1;Braco J.
+CEJ4 Circ;Tabela B;3;Cinta para poste circular.
+CEJ4 Circ;90448;6;Gancho-olhal.
+CEJ4 Circ;90440;6;Manilha-sapatilha.
+CEJ4 Circ;Tabela M;6;Parafuso Cabeca Abaulada M16 x 70 mm.
+CEJ4 Circ;Tabela C;3;Parafuso de cabeca abaulada.
+CEJ4 Circ;90387;6;Porca-olhal.
+CEJ4 Circ;Tabela O;6;Isolador composto tipo bastao.
+CEJ4 Circ;Tabela A;1;Braco tipo L.
+CEJ4 Circ;90302;2;Alca pre-formada de aco 9,53 mm.
+CE3-N3-PR;90389;13;Arruela quadrada.
+CE3-N3-PR;90409;1;Sapatilha.
+CE3-N3-PR;Tabela R;3;Para-raios de distribuicao.
+CE3-N3-PR;Tabela AA;6;Mao-francesa plana.
+CE3-N3-PR;90440;6;Manilha-sapatilha.
+CE3-N3-PR;Tabela M;10;Parafuso de cabeca quadrada.
+CE3-N3-PR;Tabela I;5;Parafuso de rosca total.
+CE3-N3-PR;Tabela N;3;Pino para isolador.
+CE3-N3-PR;90387;7;Porca-olhal.
+CE3-N3-PR;90552;3;Suporte L.
+CE3-N3-PR;Tabela O;6;Isolador composto tipo bastao.
+CE3-N3-PR;Tabela J;3;Isolador polimerico tipo pino.
+CE3-N3-PR;90302;1;Alca pre-formada de estai.
+CE3-N3-PR;Tabela W;3;Cruzeta de distribuicao.
+CE3-N3-PR Circ;90389;11;Arruela quadrada.
+CE3-N3-PR Circ;90409;1;Sapatilha.
+CE3-N3-PR Circ;Tabela R;3;Para-raios de distribuicao.
+CE3-N3-PR Circ;Tabela B;4;Cinta para poste circular.
+CE3-N3-PR Circ;Tabela AA;6;Mao-francesa plana.
+CE3-N3-PR Circ;90440;6;Manilha-sapatilha.
+CE3-N3-PR Circ;Tabela M;6;Parafuso de cabeca quadrada.
+CE3-N3-PR Circ;Tabela C;6;Parafuso de cabeca abaulada.
+CE3-N3-PR Circ;Tabela I;4;Parafuso de rosca total.
+CE3-N3-PR Circ;Tabela N;3;Pino para isolador.
+CE3-N3-PR Circ;90387;7;Porca-olhal.
+CE3-N3-PR Circ;90552;3;Suporte L.
+CE3-N3-PR Circ;Tabela O;6;Isolador composto tipo bastao.
+CE3-N3-PR Circ;Tabela J;3;Isolador polimerico tipo pino.
+CE3-N3-PR Circ;90302;1;Alca pre-formada de estai.
+CE3-N3-PR Circ;Tabela W;3;Cruzeta de distribuicao.
+CE3-TRA;90389;5;Arruela quadrada.
+CE3-TRA;90409;1;Sapatilha.
+CE3-TRA;Tabela Z;2;Suporte para transformador em poste de concreto duplo T.
+CE3-TRA;Tabela U;3;Chave-fusivel de distribuicao.
+CE3-TRA;Tabela R;3;Para-raios de distribuicao.
+CE3-TRA;Tabela V;1;Transformador de distribuicao.
+CE3-TRA;90536;1;Braco J.
+CE3-TRA;90448;3;Gancho-olhal.
+CE3-TRA;90515;1;Fixador de perfil U.
+CE3-TRA;90440;3;Manilha-sapatilha.
+CE3-TRA;Tabela M;5;Parafuso de cabeca quadrada.
+CE3-TRA;Tabela C;6;Parafuso de cabeca abaulada.
+CE3-TRA;Tabela I;3;Parafuso de rosca dupla.
+CE3-TRA;90447;1;Perfil U.
+CE3-TRA;90387;4;Porca-olhal.
+CE3-TRA;90523;6;Suporte Z.
+CE3-TRA;Tabela O;3;Isolador composto tipo bastao.
+CE3-TRA;90302;1;Alca pre-formada de aco 9,53 mm.
+CE3-TRA Circ;90409;1;Sapatilha.
+CE3-TRA Circ;Tabela X;2;Suporte para transformador em poste de concreto circular.
+CE3-TRA Circ;Tabela U;3;Chave-fusivel de distribuicao.
+CE3-TRA Circ;Tabela R;3;Para-raios de distribuicao.
+CE3-TRA Circ;Tabela V;1;Transformador de distribuicao.
+CE3-TRA Circ;90536;1;Braco J.
+CE3-TRA Circ;Tabela B;5;Cinta para poste circular.
+CE3-TRA Circ;90448;3;Gancho-olhal.
+CE3-TRA Circ;90515;1;Fixador de perfil U.
+CE3-TRA Circ;90440;3;Manilha-sapatilha.
+CE3-TRA Circ;Tabela C;11;Parafuso de cabeca abaulada.
+CE3-TRA Circ;Tabela I;2;Parafuso de rosca dupla.
+CE3-TRA Circ;90447;1;Perfil U.
+CE3-TRA Circ;90387;4;Porca-olhal.
+CE3-TRA Circ;90523;6;Suporte Z.
+CE3-TRA Circ;Tabela O;3;Isolador composto tipo bastao.
+CE3-TRA Circ;90302;1;Alca pre-formada de aco 9,53 mm.
+
+
