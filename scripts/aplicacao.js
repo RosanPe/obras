@@ -476,7 +476,7 @@ class AplicacaoMedicao {
     });
     this.elementos.abasResultado.forEach((aba) => aba.addEventListener("click", () => this.alterarResultado(aba)));
     this.elementos.baixarJson.addEventListener("click", () => this.baixarArquivo("base-medicao.json", JSON.stringify(this.base, null, 2), "application/json"));
-    this.elementos.baixarCsv.addEventListener("click", () => this.baixarCsv());
+    this.elementos.baixarCsv.addEventListener("click", () => this.baixarExcel());
     this.elementos.arquivoJson.addEventListener("change", (evento) => this.importarJson(evento));
   }
 
@@ -1230,17 +1230,91 @@ class AplicacaoMedicao {
     this.renderizarTudo();
   }
 
-  baixarCsv() {
-    const grupos = [
-      ["Materiais Instalacao", this.resultado.materiaisInstalacao],
-      ["Materiais Desativacao", this.resultado.materiaisDesativacao],
-      ["Mao de Obra Instalacao", this.resultado.maoObraInstalacao],
-      ["Mao de Obra Reinstalacao", this.resultado.maoObraReinstalacao],
-      ["Mao de Obra Desativacao", this.resultado.maoObraDesativacao]
+  escaparHtml(texto) {
+    return String(texto ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;");
+  }
+
+  baixarExcel() {
+    const gruposMateriais = [
+      ["Instalacao", this.resultado.materiaisInstalacao],
+      ["Desativacao", this.resultado.materiaisDesativacao]
     ];
-    const linhas = ["Grupo;Codigo;Descricao;Quantidade;Unidade"];
-    grupos.forEach(([grupo, itens]) => itens.forEach((item) => linhas.push(`${grupo};${item.codigo};${item.descricao};${item.quantidade};${item.unidade}`)));
-    this.baixarArquivo("resultado-medicao.csv", linhas.join("\n"), "text/csv;charset=utf-8");
+    const gruposMaoObra = [
+      ["Instalacao", this.resultado.maoObraInstalacao],
+      ["Reinstalacao", this.resultado.maoObraReinstalacao],
+      ["Desativacao", this.resultado.maoObraDesativacao]
+    ];
+
+    const linhasMateriais = gruposMateriais.flatMap(([operacao, itens]) => itens.map((item) => `
+      <tr>
+        <td>${this.escaparHtml(operacao)}</td>
+        <td>${this.escaparHtml(item.codigo)}</td>
+        <td>${this.escaparHtml(item.descricao)}</td>
+        <td>${Number(item.quantidade || 0)}</td>
+        <td>${this.escaparHtml(item.unidade || "un")}</td>
+      </tr>
+    `)).join("");
+    const linhasMaoObra = gruposMaoObra.flatMap(([operacao, itens]) => itens.map((item) => `
+      <tr>
+        <td>${this.escaparHtml(operacao)}</td>
+        <td>${this.escaparHtml(item.codigo)}</td>
+        <td>${this.escaparHtml(item.descricao)}</td>
+        <td>${Number(item.quantidade || 0)}</td>
+        <td>${this.escaparHtml(item.unidade || "un")}</td>
+      </tr>
+    `)).join("");
+
+    const conteudo = `
+      <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+      <head>
+        <meta charset="UTF-8" />
+        <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Resultado</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+      </head>
+      <body>
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td valign="top">
+              <h3>Materiais</h3>
+              <table border="1">
+                <thead>
+                  <tr>
+                    <th>Operacao</th>
+                    <th>Codigo</th>
+                    <th>Descricao</th>
+                    <th>Quantidade</th>
+                    <th>Unidade</th>
+                  </tr>
+                </thead>
+                <tbody>${linhasMateriais}</tbody>
+              </table>
+            </td>
+            <td style="width:120px;"></td>
+            <td style="width:120px;"></td>
+            <td valign="top">
+              <h3>Mao de Obra</h3>
+              <table border="1">
+                <thead>
+                  <tr>
+                    <th>Operacao</th>
+                    <th>Codigo</th>
+                    <th>Descricao</th>
+                    <th>Quantidade</th>
+                    <th>Unidade</th>
+                  </tr>
+                </thead>
+                <tbody>${linhasMaoObra}</tbody>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
+    `;
+    this.baixarArquivo("resultado-medicao.xls", conteudo, "application/vnd.ms-excel;charset=utf-8");
   }
 
   importarJson(evento) {
