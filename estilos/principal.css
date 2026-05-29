@@ -254,7 +254,25 @@ body[data-tema="escuro"] .aba-resultado {
   align-items: center;
 }
 
+.acoes-aba-medicao {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.acoes-aba-medicao #adicionar-ponto {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border-radius: 4px;
+  font-weight: 800;
+}
+
 .acoes-aba-resultado.oculto,
+.acoes-aba-medicao.oculto,
 .acoes-cadastro .oculto {
   display: none !important;
 }

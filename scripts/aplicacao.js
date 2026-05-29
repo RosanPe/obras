@@ -334,6 +334,7 @@ class AplicacaoMedicao {
       body: document.body,
       aviso: document.querySelector("#aviso"),
       abas: document.querySelectorAll(".aba"),
+      acoesAbaMedicao: document.querySelector("#acoes-aba-medicao"),
       acoesAbaResultado: document.querySelector("#acoes-aba-resultado"),
       paineis: document.querySelectorAll(".painel-aba"),
       abasCadastro: document.querySelectorAll(".aba-cadastro"),
@@ -518,6 +519,9 @@ class AplicacaoMedicao {
   abrirAba(nome) {
     this.elementos.abas.forEach((aba) => aba.classList.toggle("ativa", aba.dataset.aba === nome));
     this.elementos.paineis.forEach((painel) => painel.classList.toggle("ativo", painel.id === `aba-${nome}`));
+    if (this.elementos.acoesAbaMedicao) {
+      this.elementos.acoesAbaMedicao.classList.toggle("oculto", nome !== "medicao");
+    }
     if (this.elementos.acoesAbaResultado) {
       this.elementos.acoesAbaResultado.classList.toggle("oculto", nome !== "resultado");
     }
