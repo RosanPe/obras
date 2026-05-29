@@ -11,8 +11,8 @@
     },
     {
       "id": "isolador_tipo_pilar_porcelana_vertical",
-      "codigo": "Tabela A",
-      "descricao": "Isolador Tipo Pilar Porcelana Vertical",
+      "codigo": "90253",
+      "descricao": "ISOLADOR PULAR PORCEL 15KV",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -50,14 +50,6 @@
       "tipoCabo": ""
     },
     {
-      "id": "laco_pre_formado",
-      "codigo": "Tabela 02",
-      "descricao": "Laco pre-formado",
-      "unidade": "un",
-      "categoria": "geral",
-      "tipoCabo": ""
-    },
-    {
       "id": "alca_pre_formada_distribuicao",
       "codigo": "Tabela D",
       "descricao": "Alca Pre-Formada Distribuicao",
@@ -75,8 +67,8 @@
     },
     {
       "id": "isolador_suspensao_tipo_bastao_polimerico",
-      "codigo": "Tabela E",
-      "descricao": "Isolador Suspensao Tipo Bastao Polimerico",
+      "codigo": "90277",
+      "descricao": "Isolador BASTAO POLIM ANCOR 15KV",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -155,8 +147,8 @@
     },
     {
       "id": "cruzeta_de_distribuicao_de_concreto_quad_2_400_mm",
-      "codigo": "Tabela G",
-      "descricao": "Cruzeta de Distribuicao de Concreto Quad.2.400 mm",
+      "codigo": "90404",
+      "descricao": "Cruzeta DISTR PRFV RETANG 2.400 mm",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -419,8 +411,8 @@
     },
     {
       "id": "chave_fusivel_de_distribuicao",
-      "codigo": "Tabela M",
-      "descricao": "Chave Fusivel de Distribuicao",
+      "codigo": "90547",
+      "descricao": "Chave Fusivel de Distribuicao 15KV",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -714,14 +706,6 @@
       "tipoCabo": ""
     },
     {
-      "id": "poste_poste_circular_madeira_10m_med_mad_730mm_460x620mm",
-      "codigo": "670113",
-      "descricao": "POSTE CIRCULAR MADEIRA 10M MED-MAD 730MM 460X620MM",
-      "unidade": "un",
-      "categoria": "poste",
-      "tipoCabo": ""
-    },
-    {
       "id": "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
       "codigo": "90195",
       "descricao": "POSTE DISTR CONCR DT 10/600 310X420MM 110X140MM CL2",
@@ -732,14 +716,6 @@
     {
       "id": "poste_poste_circular_madeira_9m_leve_mad_580mm_350x510mm",
       "codigo": "670110",
-      "descricao": "POSTE CIRCULAR MADEIRA 9M LEVE-MAD 580MM 350X510MM",
-      "unidade": "un",
-      "categoria": "poste",
-      "tipoCabo": ""
-    },
-    {
-      "id": "poste_poste_circular_madeira_9m_leve_mad_580mm_350x510mm",
-      "codigo": "670111",
       "descricao": "POSTE CIRCULAR MADEIRA 9M LEVE-MAD 580MM 350X510MM",
       "unidade": "un",
       "categoria": "poste",
@@ -884,14 +860,6 @@
     {
       "id": "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
       "codigo": "90203",
-      "descricao": "POSTE DISTR CONCR DT 12/600 350X476MM 110X140MM CL2",
-      "unidade": "un",
-      "categoria": "poste",
-      "tipoCabo": ""
-    },
-    {
-      "id": "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-      "codigo": "690369",
       "descricao": "POSTE DISTR CONCR DT 12/600 350X476MM 110X140MM CL2",
       "unidade": "un",
       "categoria": "poste",
@@ -1388,7 +1356,7 @@
     {
       "id": "braa_o_tipo_l",
       "codigo": "Tabela A",
-      "descricao": "BraÃ§o tipo L.",
+      "descricao": "Brao tipo L.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1396,7 +1364,7 @@
     {
       "id": "parafuso_de_cabea_a_quadrada",
       "codigo": "Tabela M",
-      "descricao": "Parafuso de cabeÃ§a quadrada.",
+      "descricao": "Parafuso de cabea quadrada.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1412,7 +1380,7 @@
     {
       "id": "parafuso_cabea_a_abaulada_m16_x_70_mm",
       "codigo": "Tabela C",
-      "descricao": "Parafuso CabeÃ§a Abaulada M16 x 70 mm.",
+      "descricao": "Parafuso Cabea Abaulada M16 x 70 mm.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1428,7 +1396,7 @@
     {
       "id": "braa_o_tipo_c",
       "codigo": "Tabela L",
-      "descricao": "BraÃ§o tipo C.",
+      "descricao": "Brao tipo C.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1452,7 +1420,7 @@
     {
       "id": "isolador_polima_rico_tipo_pino",
       "codigo": "Tabela J",
-      "descricao": "Isolador polimÃ©rico tipo pino.",
+      "descricao": "Isolador polimrico tipo pino.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1460,7 +1428,7 @@
     {
       "id": "ala_a_pra_formada_de_aa_o_9_53_mm",
       "codigo": "90302",
-      "descricao": "AlÃ§a prÃ©-formada de aÃ§o 9,53 mm.",
+      "descricao": "Ala pr-formada de ao 9,53 mm.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1508,15 +1476,15 @@
     {
       "id": "parafuso_cabea_a_abaulada_m16_x_45_mm",
       "codigo": "Tabela C",
-      "descricao": "Parafuso CabeÃ§a Abaulada M16 x 45 mm.",
+      "descricao": "Parafuso Cabea Abaulada M16 x 45 mm.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
     },
     {
       "id": "isolador_composto_tipo_basta_o",
-      "codigo": "Tabela O",
-      "descricao": "Isolador composto tipo bastÃ£o.",
+      "codigo": "90277",
+      "descricao": "Isolador composto tipo basto.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1548,7 +1516,7 @@
     {
       "id": "parafuso_cabea_a_abaulada_m16_x_70_mm_2",
       "codigo": "Tabela M",
-      "descricao": "Parafuso CabeÃ§a Abaulada M16 x 70 mm.",
+      "descricao": "Parafuso Cabea Abaulada M16 x 70 mm.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1556,7 +1524,7 @@
     {
       "id": "parafuso_de_cabea_a_abaulada",
       "codigo": "Tabela C",
-      "descricao": "Parafuso de cabeÃ§a abaulada.",
+      "descricao": "Parafuso de cabea abaulada.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1564,7 +1532,7 @@
     {
       "id": "cantoneira_auxiliar_para_braa_o_tipo_c",
       "codigo": "90416",
-      "descricao": "Cantoneira auxiliar para braÃ§o tipo C.",
+      "descricao": "Cantoneira auxiliar para brao tipo C.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1580,7 +1548,7 @@
     {
       "id": "parafuso_franca_s_m16_x_70_mm",
       "codigo": "Tabela C",
-      "descricao": "Parafuso francÃªs M16 x 70 mm.",
+      "descricao": "Parafuso francs M16 x 70 mm.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1596,7 +1564,7 @@
     {
       "id": "braa_o_j",
       "codigo": "90536",
-      "descricao": "BraÃ§o J.",
+      "descricao": "Brao J.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1604,7 +1572,7 @@
     {
       "id": "espaa_ador_losangular_autotravante",
       "codigo": "Tabela H",
-      "descricao": "EspaÃ§ador losangular autotravante.",
+      "descricao": "Espaador losangular autotravante.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1612,7 +1580,7 @@
     {
       "id": "estribo_para_braa_o_tipo_l",
       "codigo": "90399",
-      "descricao": "Estribo para braÃ§o tipo L.",
+      "descricao": "Estribo para brao tipo L.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1644,7 +1612,7 @@
     {
       "id": "para_raios_de_distribuia_a_o",
       "codigo": "Tabela R",
-      "descricao": "Para-raios de distribuiÃ§Ã£o.",
+      "descricao": "Para-raios de distribuio.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1652,7 +1620,7 @@
     {
       "id": "ma_o_francesa_plana",
       "codigo": "Tabela AA",
-      "descricao": "MÃ£o-francesa plana.",
+      "descricao": "Mo-francesa plana.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1676,7 +1644,7 @@
     {
       "id": "ala_a_pra_formada_de_estai",
       "codigo": "90302",
-      "descricao": "AlÃ§a prÃ©-formada de estai.",
+      "descricao": "Ala pr-formada de estai.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1684,7 +1652,7 @@
     {
       "id": "cruzeta_de_distribuia_a_o",
       "codigo": "Tabela W",
-      "descricao": "Cruzeta de distribuiÃ§Ã£o.",
+      "descricao": "Cruzeta de distribuio.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1700,7 +1668,7 @@
     {
       "id": "chave_fusa_vel_de_distribuia_a_o",
       "codigo": "Tabela U",
-      "descricao": "Chave-fusÃ­vel de distribuiÃ§Ã£o.",
+      "descricao": "Chave-fusvel de distribuicao.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1708,7 +1676,7 @@
     {
       "id": "transformador_de_distribuia_a_o",
       "codigo": "Tabela V",
-      "descricao": "Transformador de distribuiÃ§Ã£o.",
+      "descricao": "Transformador de distribuio.",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1731,7 +1699,7 @@
     },
     {
       "id": "isolador_composto_tipo_bast_o",
-      "codigo": "Tabela O",
+      "codigo": "90277",
       "descricao": "Isolador composto tipo bastao.",
       "unidade": "un",
       "categoria": "geral",
@@ -1763,8 +1731,8 @@
     },
     {
       "id": "chave_fus_vel_de_distribui_o",
-      "codigo": "Tabela U",
-      "descricao": "Chave-fusivel de distribuicao.",
+      "codigo": "90547",
+      "descricao": "Chave-fusivel de distribuicao 15KV",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1773,6 +1741,158 @@
       "id": "transformador_de_distribui_o",
       "codigo": "Tabela V",
       "descricao": "Transformador de distribuicao.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "braco_tipo_c",
+      "codigo": "Tabela L",
+      "descricao": "Braco tipo C.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "parafuso_de_cabeca_quadrada",
+      "codigo": "Tabela M",
+      "descricao": "Parafuso de cabeca quadrada.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "isolador_polimerico_tipo_pino",
+      "codigo": "Tabela J",
+      "descricao": "Isolador polimerico tipo pino.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "braco_j",
+      "codigo": "90536",
+      "descricao": "Braco J.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "espacador_losangular_autotravante",
+      "codigo": "Tabela H",
+      "descricao": "Espacador losangular autotravante.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "estribo_para_braco_tipo_l",
+      "codigo": "90399",
+      "descricao": "Estribo para braco tipo L.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "parafuso_cabeca_abaulada_m16_x_70_mm",
+      "codigo": "Tabela C",
+      "descricao": "Parafuso Cabeca Abaulada M16 x 70 mm.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "parafuso_cabeca_abaulada_m16_x_45_mm",
+      "codigo": "Tabela C",
+      "descricao": "Parafuso Cabeca Abaulada M16 x 45 mm.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "braco_tipo_l",
+      "codigo": "Tabela A",
+      "descricao": "Braco tipo L.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "parafuso_frances_m16_x_70_mm",
+      "codigo": "Tabela C",
+      "descricao": "Parafuso frances M16 x 70 mm.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "parafuso_de_cabeca_abaulada",
+      "codigo": "Tabela C",
+      "descricao": "Parafuso de cabeca abaulada.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "cantoneira_auxiliar_para_braco_tipo_c",
+      "codigo": "90416",
+      "descricao": "Cantoneira auxiliar para braco tipo C.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "alca_pre_formada_de_estai",
+      "codigo": "90302",
+      "descricao": "Alca pre-formada de estai.",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "cordoalha_aco_caz_9_5mm",
+      "codigo": "90256",
+      "descricao": "Cordoalha aco CAZ 9,5mm",
+      "unidade": "un",
+      "categoria": "cabo",
+      "tipoCabo": "BT"
+    },
+    {
+      "id": "poste_circular_concr_9_800",
+      "codigo": "628007",
+      "descricao": "POSTE CIRCULAR CONCR 9/800",
+      "unidade": "un",
+      "categoria": "poste",
+      "tipoCabo": ""
+    },
+    {
+      "id": "poste_duplo_t_9_150",
+      "codigo": "629538",
+      "descricao": "POSTE DUPLO T 9/150",
+      "unidade": "un",
+      "categoria": "poste",
+      "tipoCabo": ""
+    },
+    {
+      "id": "haste_aterramento_circ_2400mm",
+      "codigo": "90638",
+      "descricao": "HASTE ATERRAMENTO CIRC C/RSC 2400MM",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "haste_aterramento_circ_s_rsc_2400mm",
+      "codigo": "90462",
+      "descricao": "HASTE ATERRAMENTO CIRC S/RSC 2400MM",
+      "unidade": "un",
+      "categoria": "geral",
+      "tipoCabo": ""
+    },
+    {
+      "id": "placa_concreto_estai_esc_plana",
+      "codigo": "90585",
+      "descricao": "PLACA CONCRETO ESTAI/ESC PLANA",
       "unidade": "un",
       "categoria": "geral",
       "tipoCabo": ""
@@ -1818,7 +1938,7 @@
     {
       "id": "24497_linha_viva_reinst_estr_prim_t4_e_te_crz_conc",
       "codigo": "24497",
-      "descricao": "LINHA VIVA - REINST ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  T4 E TE CRZ CONC",
+      "descricao": "LINHA VIVA - REINST ESTR. PRIM T4 E TE CRZ CONC",
       "unidade": "un"
     },
     {
@@ -2016,7 +2136,7 @@
     {
       "id": "24477_linha_viva_inst_cb_al_proteg_95mm",
       "codigo": "24477",
-      "descricao": "LINHA VIVA - INST CB AL PROTEG =<95MMÃƒâ€šÃ‚Â²",
+      "descricao": "LINHA VIVA - INST CB AL PROTEG =<95MM",
       "unidade": "un"
     },
     {
@@ -2046,7 +2166,7 @@
     {
       "id": "24478_linha_viva_inst_cb_al_proteg_95mm",
       "codigo": "24478",
-      "descricao": "LINHA VIVA - INST CB AL PROTEG >95MMÃƒâ€šÃ‚Â²",
+      "descricao": "LINHA VIVA - INST CB AL PROTEG >95MM",
       "unidade": "un"
     },
     {
@@ -2190,7 +2310,7 @@
     {
       "id": "7394_inst_estr_prim_te_e_t4_crz_conc_lm",
       "codigo": "7394",
-      "descricao": "INST ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  TE E T4 CRZ CONC LM",
+      "descricao": "INST ESTR. PRIM TE E T4 CRZ CONC LM",
       "unidade": "un"
     },
     {
@@ -2370,7 +2490,7 @@
     {
       "id": "6710_instal_estr_prim_n3_2_m3_2_n2_3_m2_3_lv",
       "codigo": "6710",
-      "descricao": "INSTAL ESTR PRIM N3-2/M3-2/N2-3/M2-3  LV",
+      "descricao": "INSTAL ESTR PRIM N3-2/M3-2/N2-3/M2-3 LV",
       "unidade": "un"
     },
     {
@@ -2460,13 +2580,13 @@
     {
       "id": "6943_reinst_relig_na_rede_mt_lm",
       "codigo": "6943",
-      "descricao": "REINST  RELIG NA REDE MT LM",
+      "descricao": "REINST RELIG NA REDE MT LM",
       "unidade": "un"
     },
     {
       "id": "7141_desat_est_n4_m4_b4_crz_conc_lm",
       "codigo": "7141",
-      "descricao": "DESAT EST  N4, M4, B4 CRZ CONC LM",
+      "descricao": "DESAT EST N4, M4, B4 CRZ CONC LM",
       "unidade": "un"
     },
     {
@@ -2580,7 +2700,7 @@
     {
       "id": "6696_instalacao_estribo_em_rede_exist_at_lv",
       "codigo": "6696",
-      "descricao": "INSTALACAO ESTRIBO EM REDE EXIST AT  LV",
+      "descricao": "INSTALACAO ESTRIBO EM REDE EXIST AT LV",
       "unidade": "un"
     },
     {
@@ -2790,7 +2910,7 @@
     {
       "id": "7175_desat_estr_prim_te_e_t4_crz_conc_lm",
       "codigo": "7175",
-      "descricao": "DESAT ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  TE E T4 CRZ CONC LM",
+      "descricao": "DESAT ESTR. PRIM TE E T4 CRZ CONC LM",
       "unidade": "un"
     },
     {
@@ -2952,7 +3072,7 @@
     {
       "id": "7580_reinst_estr_prim_t4_e_te_crz_conc_lm",
       "codigo": "7580",
-      "descricao": "REINST ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  T4 E TE CRZ CONC LM",
+      "descricao": "REINST ESTR. PRIM T4 E TE CRZ CONC LM",
       "unidade": "un"
     },
     {
@@ -2994,7 +3114,7 @@
     {
       "id": "24482_linha_viva_reinst_condutor_alum_prot_95_mm",
       "codigo": "24482",
-      "descricao": "LINHA VIVA - REINST CONDUTOR ALUM PROT > 95 MMÃƒâ€šÃ‚Â²",
+      "descricao": "LINHA VIVA - REINST CONDUTOR ALUM PROT > 95 MM",
       "unidade": "un"
     },
     {
@@ -3048,7 +3168,7 @@
     {
       "id": "24495_linha_viva_inst_estr_prim_te_e_t4_crz_conc",
       "codigo": "24495",
-      "descricao": "LINHA VIVA - INST ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  TE E T4 CRZ CONC",
+      "descricao": "LINHA VIVA - INST ESTR. PRIM TE E T4 CRZ CONC",
       "unidade": "un"
     },
     {
@@ -3276,7 +3396,7 @@
     {
       "id": "24522_linha_viva_desat_est_n4_m4_b4_crz_conc",
       "codigo": "24522",
-      "descricao": "LINHA VIVA - DESAT EST  N4, M4, B4 CRZ CONC",
+      "descricao": "LINHA VIVA - DESAT EST N4, M4, B4 CRZ CONC",
       "unidade": "un"
     },
     {
@@ -3366,7 +3486,7 @@
     {
       "id": "24481_linha_viva_reinst_condutor_alum_prot_95_mm",
       "codigo": "24481",
-      "descricao": "LINHA VIVA - REINST CONDUTOR ALUM PROT =< 95 MMÃƒâ€šÃ‚Â²",
+      "descricao": "LINHA VIVA - REINST CONDUTOR ALUM PROT =< 95 MM",
       "unidade": "un"
     },
     {
@@ -3660,13 +3780,13 @@
     {
       "id": "6859_desat_ch_seccionadora_15kv_by_pass_lv",
       "codigo": "6859",
-      "descricao": "DESAT CH SECCIONADORA  =>15KV BY PASS LV",
+      "descricao": "DESAT CH SECCIONADORA =>15KV BY PASS LV",
       "unidade": "un"
     },
     {
       "id": "7531_reinst_n4_m4_b4_crz_conc_lm",
       "codigo": "7531",
-      "descricao": "REINST  N4, M4, B4 CRZ CONC LM",
+      "descricao": "REINST N4, M4, B4 CRZ CONC LM",
       "unidade": "un"
     },
     {
@@ -3744,7 +3864,7 @@
     {
       "id": "6427_inst_espacador_losang_35a185mm_lm",
       "codigo": "6427",
-      "descricao": "INST ESPACADOR LOSANG 35A185MMÃƒâ€šÃ‚Â² LM",
+      "descricao": "INST ESPACADOR LOSANG 35A185MM LM",
       "unidade": "un"
     },
     {
@@ -3894,7 +4014,7 @@
     {
       "id": "6949_reinst_condutor_alum_prot_95_mm_lm",
       "codigo": "6949",
-      "descricao": "REINST CONDUTOR ALUM PROT > 95 MMÃƒâ€šÃ‚Â² LM",
+      "descricao": "REINST CONDUTOR ALUM PROT > 95 MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
       "unidade": "un"
     },
     {
@@ -3918,7 +4038,7 @@
     {
       "id": "6364_desat_espac_losang_35a185mm_lm",
       "codigo": "6364",
-      "descricao": "DESAT ESPAC LOSANG 35A185MMÃƒâ€šÃ‚Â² LM",
+      "descricao": "DESAT ESPAC LOSANG 35A185MM LM",
       "unidade": "un"
     },
     {
@@ -3930,7 +4050,7 @@
     {
       "id": "6408_inst_cruzamento_aereo_mt_fly_tap_lm",
       "codigo": "6408",
-      "descricao": "INST CRUZAMENTO AEREO MT FLY TAP  LM",
+      "descricao": "INST CRUZAMENTO AEREO MT FLY TAP LM",
       "unidade": "un"
     },
     {
@@ -4248,7 +4368,7 @@
     {
       "id": "24523_linha_viva_desat_estr_prim_te_e_t4_crz_conc",
       "codigo": "24523",
-      "descricao": "LINHA VIVA - DESAT ESTR. PRIM Ãƒâ€šÃ¢â‚¬â€œ  TE E T4 CRZ CONC",
+      "descricao": "LINHA VIVA - DESAT ESTR. PRIM TE E T4 CRZ CONC",
       "unidade": "un"
     },
     {
@@ -4416,7 +4536,7 @@
     {
       "id": "7957_inst_chave_secc_faca_15kv_lv",
       "codigo": "7957",
-      "descricao": "INST CHAVE SECC FACA  >= 15KV LV",
+      "descricao": "INST CHAVE SECC FACA >= 15KV LV",
       "unidade": "un"
     },
     {
@@ -4512,7 +4632,7 @@
     {
       "id": "6474_inst_cb_al_proteg_95mm_lm",
       "codigo": "6474",
-      "descricao": "INST CB AL PROTEG >95MMÃƒâ€šÃ‚Â² LM",
+      "descricao": "INST CB AL PROTEG >95MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
       "unidade": "un"
     },
     {
@@ -4614,7 +4734,7 @@
     {
       "id": "6950_reinst_condutor_alum_prot_95_mm_lm",
       "codigo": "6950",
-      "descricao": "REINST CONDUTOR ALUM PROT =< 95 MMÃƒâ€šÃ‚Â² LM",
+      "descricao": "REINST CONDUTOR ALUM PROT =< 95 MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
       "unidade": "un"
     },
     {
@@ -4663,6 +4783,18 @@
       "id": "6419_inst_espac_rede_bt_lv",
       "codigo": "6419",
       "descricao": "INST ESPAC REDE BT LV",
+      "unidade": "un"
+    },
+    {
+      "id": "38651_pelicula_alfanum_adesiva_ident_9",
+      "codigo": "38651",
+      "descricao": "PELICULA ALFANUM ADESIVA IDENT-9",
+      "unidade": "un"
+    },
+    {
+      "id": "90444_mao_francesa_plana_aco_galv_726x32mm",
+      "codigo": "90444",
+      "descricao": "MAO FRANCESA PLANA ACO GALV 726X32MM",
       "unidade": "un"
     }
   ],
@@ -5234,11 +5366,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 3
         },
         {
@@ -5250,7 +5382,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -5268,23 +5400,23 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "espacador_losangular_autotravante",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "estribo_para_braco_tipo_l",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 4
         },
         {
@@ -5296,7 +5428,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -5330,11 +5462,11 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 2
         },
         {
@@ -5368,7 +5500,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -5380,7 +5512,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 9
         },
         {
@@ -5392,7 +5524,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -5410,7 +5542,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -5418,15 +5550,15 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 8
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -5468,11 +5600,11 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 7
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_frances_m16_x_70_mm",
           "quantidade": 4
         },
         {
@@ -5488,7 +5620,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 2
         },
         {
@@ -5530,7 +5662,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 5
         },
         {
@@ -5556,7 +5688,7 @@
       "descricao": "CE1 Circ",
       "itens": [
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -5564,7 +5696,7 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 2
         }
       ]
@@ -5582,7 +5714,7 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
@@ -5598,11 +5730,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 6
         },
         {
@@ -5618,7 +5750,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -5636,11 +5768,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "cantoneira_auxiliar_para_braco_tipo_c",
           "quantidade": 2
         },
         {
@@ -5660,7 +5792,7 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 12
         },
         {
@@ -5690,7 +5822,7 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
@@ -5702,11 +5834,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 9
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 6
         },
         {
@@ -5722,7 +5854,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -5760,7 +5892,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -5776,11 +5908,11 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 5
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 6
         },
         {
@@ -5834,7 +5966,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -5854,7 +5986,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 11
         },
         {
@@ -5912,11 +6044,11 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 3
         },
         {
@@ -5966,11 +6098,11 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 7
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_frances_m16_x_70_mm",
           "quantidade": 11
         },
         {
@@ -5986,7 +6118,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 2
         },
         {
@@ -6012,7 +6144,7 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
@@ -6020,7 +6152,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 3
         },
         {
@@ -6032,7 +6164,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6066,7 +6198,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 10
         },
         {
@@ -6090,11 +6222,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "alca_pre_formada_de_estai",
           "quantidade": 1
         },
         {
@@ -6116,11 +6248,11 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "cantoneira_auxiliar_para_braco_tipo_c",
           "quantidade": 1
         },
         {
@@ -6136,11 +6268,11 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 3
         },
         {
@@ -6160,7 +6292,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6174,15 +6306,15 @@
       "descricao": "CEJ1A Circ",
       "itens": [
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "espacador_losangular_autotravante",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "estribo_para_braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -6190,11 +6322,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 4
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 4
         },
         {
@@ -6202,7 +6334,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -6220,19 +6352,19 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "espacador_losangular_autotravante",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "estribo_para_braco_tipo_l",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 1
         },
         {
@@ -6266,7 +6398,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 5
         },
         {
@@ -6290,7 +6422,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6312,11 +6444,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "cantoneira_auxiliar_para_braco_tipo_c",
           "quantidade": 2
         },
         {
@@ -6332,11 +6464,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 6
         },
         {
@@ -6382,7 +6514,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 6
         },
         {
@@ -6416,7 +6548,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 3
         },
         {
@@ -6428,7 +6560,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6442,15 +6574,15 @@
       "descricao": "CEJ1 Circ",
       "itens": [
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "espacador_losangular_autotravante",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "estribo_para_braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -6458,11 +6590,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 4
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_45_mm",
           "quantidade": 2
         }
       ]
@@ -6476,11 +6608,11 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "cantoneira_auxiliar_para_braco_tipo_c",
           "quantidade": 1
         },
         {
@@ -6500,7 +6632,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 6
         },
         {
@@ -6516,7 +6648,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6554,11 +6686,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 6
         },
         {
@@ -6582,11 +6714,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "alca_pre_formada_de_estai",
           "quantidade": 1
         },
         {
@@ -6604,11 +6736,11 @@
           "quantidade": 2
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 2
         }
       ]
@@ -6630,11 +6762,11 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_c",
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 3
         },
         {
@@ -6646,7 +6778,7 @@
           "quantidade": 1
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6680,7 +6812,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_quadrada",
           "quantidade": 6
         },
         {
@@ -6704,7 +6836,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -6726,7 +6858,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -6742,11 +6874,11 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_cabeca_abaulada_m16_x_70_mm",
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "parafuso_de_cabeca_abaulada",
           "quantidade": 3
         },
         {
@@ -6758,7 +6890,7 @@
           "quantidade": 6
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_tipo_l",
           "quantidade": 1
         },
         {
@@ -6776,7 +6908,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "braco_j",
           "quantidade": 1
         },
         {
@@ -6784,7 +6916,7 @@
           "quantidade": 3
         },
         {
-          "materialId": "arruela_quadrada_18_0_mm_x_38_0_mm_x_3_mm",
+          "materialId": "isolador_polimerico_tipo_pino",
           "quantidade": 3
         },
         {
@@ -7051,393 +7183,6 @@
     }
   ],
   "regrasMaoObra": [
-    {
-      "id": "instalacao_de_poste",
-      "nome": "de poste [I]",
-      "tipoGatilho": "material",
-      "materialId": null,
-      "materialIds": [
-        "poste_poste_circular_concr_6_1000_330mm_230mm",
-        "poste_poste_circular_concr_6_600_300mm_190mm",
-        "poste_poste_circular_concreto_13_2500",
-        "poste_poste_circular_fbv_13_600",
-        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-      ],
-      "estruturaId": null,
-      "estruturaIds": [],
-      "categorias": [
-        "poste"
-      ],
-      "gatilho": {
-        "tipo": "material",
-        "materialIds": [
-          "poste_poste_circular_concr_6_1000_330mm_230mm",
-          "poste_poste_circular_concr_6_600_300mm_190mm",
-          "poste_poste_circular_concreto_13_2500",
-          "poste_poste_circular_fbv_13_600",
-          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-        ],
-        "estruturaIds": [],
-        "categorias": [
-          "poste"
-        ]
-      },
-      "operacoes": [
-        "I"
-      ],
-      "saidas": [
-        {
-          "maoObraId": "6243_inst_poste_ate_13m_69kv_guin_lm",
-          "codigo": "6243",
-          "descricao": "INST POSTE ATE 13M <69KV GUIN LM",
-          "quantidade": 1
-        },
-        {
-          "maoObraId": "6224_abrir_cava_em_terra_normal",
-          "codigo": "6224",
-          "descricao": "ABRIR CAVA EM TERRA NORMAL",
-          "quantidade": 1
-        },
-        {
-          "maoObraId": "7029_efet_locacao_pst_area_urbana_lm",
-          "codigo": "7029",
-          "descricao": "EFET LOCACAO PST AREA URBANA LM",
-          "quantidade": 1
-        },
-        {
-          "maoObraId": "6466_serv_tec_lm_dist_pst_obra_lm_urbano",
-          "codigo": "6466",
-          "descricao": "SERV TEC LM DIST PST OBRA LM (URBANO)",
-          "quantidade": 1
-        }
-      ],
-      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
-      "nomeBaseGrupo": "de poste"
-    },
-    {
-      "id": "desaticavao_de_poste",
-      "nome": "de poste [D]",
-      "tipoGatilho": "material",
-      "materialId": null,
-      "materialIds": [
-        "poste_poste_circular_concr_6_1000_330mm_230mm",
-        "poste_poste_circular_concr_6_600_300mm_190mm",
-        "poste_poste_circular_concreto_13_2500",
-        "poste_poste_circular_fbv_13_600",
-        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-      ],
-      "estruturaId": null,
-      "estruturaIds": [],
-      "categorias": [
-        "poste"
-      ],
-      "gatilho": {
-        "tipo": "material",
-        "materialIds": [
-          "poste_poste_circular_concr_6_1000_330mm_230mm",
-          "poste_poste_circular_concr_6_600_300mm_190mm",
-          "poste_poste_circular_concreto_13_2500",
-          "poste_poste_circular_fbv_13_600",
-          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-        ],
-        "estruturaIds": [],
-        "categorias": [
-          "poste"
-        ]
-      },
-      "operacoes": [
-        "D"
-      ],
-      "saidas": [
-        {
-          "maoObraId": "6608_desat_poste_ate_13_69kv_manual_lm",
-          "codigo": "6608",
-          "descricao": "DESAT POSTE ATE 13 <69KV MANUAL LM",
-          "quantidade": 1
-        },
-        {
-          "maoObraId": "6663_alocar_poste_no_almoxarifado",
-          "codigo": "6663",
-          "descricao": "ALOCAR POSTE NO ALMOXARIFADO",
-          "quantidade": 1
-        }
-      ],
-      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
-      "nomeBaseGrupo": "de poste"
-    },
-    {
-      "id": "reinstalacao_poste",
-      "nome": "de poste [R]",
-      "tipoGatilho": "material",
-      "materialId": null,
-      "materialIds": [
-        "poste_poste_circular_concr_6_1000_330mm_230mm",
-        "poste_poste_circular_concr_6_600_300mm_190mm",
-        "poste_poste_circular_concreto_13_2500",
-        "poste_poste_circular_fbv_13_600",
-        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-      ],
-      "estruturaId": null,
-      "estruturaIds": [],
-      "categorias": [
-        "poste"
-      ],
-      "gatilho": {
-        "tipo": "material",
-        "materialIds": [
-          "poste_poste_circular_concr_6_1000_330mm_230mm",
-          "poste_poste_circular_concr_6_600_300mm_190mm",
-          "poste_poste_circular_concreto_13_2500",
-          "poste_poste_circular_fbv_13_600",
-          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
-          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
-          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
-          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
-          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
-          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
-          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
-          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
-          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
-          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
-          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
-          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
-          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
-          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
-          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
-          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
-          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
-          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
-          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
-          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
-          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm"
-        ],
-        "estruturaIds": [],
-        "categorias": [
-          "poste"
-        ]
-      },
-      "operacoes": [
-        "R"
-      ],
-      "saidas": [
-        {
-          "maoObraId": "6338_reinst_poste_de_8_5_ate_13m_lm",
-          "codigo": "6338",
-          "descricao": "REINST POSTE DE 8,5 ATE 13M LM",
-          "quantidade": 1
-        },
-        {
-          "maoObraId": "6224_abrir_cava_em_terra_normal",
-          "codigo": "6224",
-          "descricao": "ABRIR CAVA EM TERRA NORMAL",
-          "quantidade": 1
-        }
-      ],
-      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
-      "nomeBaseGrupo": "de poste"
-    },
     {
       "id": "instalacao_de_poste_13",
       "nome": "de poste >13 [I]",
@@ -8081,7 +7826,7 @@
       "id": "inst_cb_prot_95_i",
       "nome": "inst cb prot <=95 [I]",
       "nomeBaseGrupo": "inst cb prot <=95",
-      "grupoRegraId": "inst_cb_prot",
+      "grupoRegraId": "grupo_inst_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_50mm_cabo_alum_prot_xlpe_15_0kv_70mm_cabo_alum_prot_xlpe_36_2kv_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8122,7 +7867,7 @@
       "id": "inst_cb_prot_95_d",
       "nome": "inst cb prot <=95 [D]",
       "nomeBaseGrupo": "inst cb prot <=95",
-      "grupoRegraId": "inst_cb_prot",
+      "grupoRegraId": "grupo_inst_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_50mm_cabo_alum_prot_xlpe_15_0kv_70mm_cabo_alum_prot_xlpe_36_2kv_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8163,7 +7908,7 @@
       "id": "inst_cb_prot_95_r",
       "nome": "inst cb prot <=95 [R]",
       "nomeBaseGrupo": "inst cb prot <=95",
-      "grupoRegraId": "inst_cb_prot",
+      "grupoRegraId": "grupo_inst_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_50mm_cabo_alum_prot_xlpe_15_0kv_70mm_cabo_alum_prot_xlpe_36_2kv_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8195,7 +7940,7 @@
         {
           "maoObraId": "6950_reinst_condutor_alum_prot_95_mm_lm",
           "codigo": "6950",
-          "descricao": "REINST CONDUTOR ALUM PROT =< 95 MMÃƒâ€šÃ‚Â² LM",
+          "descricao": "REINST CONDUTOR ALUM PROT =< 95 MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
           "quantidade": 1
         }
       ]
@@ -8204,7 +7949,7 @@
       "id": "inst_cb_mult_i",
       "nome": "cb mult [I]",
       "nomeBaseGrupo": "cb mult",
-      "grupoRegraId": "inst_cb_mult",
+      "grupoRegraId": "grupo_cb_mult_tipo_material_categorias_cabo_materialids_cabo_multplex_1f_10mm_cabo_multplex_1f_16mm_cabo_multplex_2f_10mm_cabo_multplex_2f_16mm_cabo_multplex_2f_25mm_cabo_multplex_2f_35mm_cabo_multplex_3f_10mm_cabo_multplex_3f_120mm_cabo_multplex_3f_16mm_cabo_multplex_3f_185mm_cabo_multplex_3f_25mm_cabo_multplex_3f_35mm_cabo_multplex_3f_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8265,7 +8010,7 @@
       "id": "inst_cb_mult_d",
       "nome": "cb mult [D]",
       "nomeBaseGrupo": "cb mult",
-      "grupoRegraId": "inst_cb_mult",
+      "grupoRegraId": "grupo_cb_mult_tipo_material_categorias_cabo_materialids_cabo_multplex_1f_10mm_cabo_multplex_1f_16mm_cabo_multplex_2f_10mm_cabo_multplex_2f_16mm_cabo_multplex_2f_25mm_cabo_multplex_2f_35mm_cabo_multplex_3f_10mm_cabo_multplex_3f_120mm_cabo_multplex_3f_16mm_cabo_multplex_3f_185mm_cabo_multplex_3f_25mm_cabo_multplex_3f_35mm_cabo_multplex_3f_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8326,7 +8071,7 @@
       "id": "inst_cb_mult_r",
       "nome": "cb mult [R]",
       "nomeBaseGrupo": "cb mult",
-      "grupoRegraId": "inst_cb_mult",
+      "grupoRegraId": "grupo_cb_mult_tipo_material_categorias_cabo_materialids_cabo_multplex_1f_10mm_cabo_multplex_1f_16mm_cabo_multplex_2f_10mm_cabo_multplex_2f_16mm_cabo_multplex_2f_25mm_cabo_multplex_2f_35mm_cabo_multplex_3f_10mm_cabo_multplex_3f_120mm_cabo_multplex_3f_16mm_cabo_multplex_3f_185mm_cabo_multplex_3f_25mm_cabo_multplex_3f_35mm_cabo_multplex_3f_70mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -8387,7 +8132,7 @@
       "id": "inst_traf",
       "nome": "traf [I]",
       "nomeBaseGrupo": "traf",
-      "grupoRegraId": "grupo_inst_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
+      "grupoRegraId": "grupo_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
       "tipoGatilho": "material",
       "materialId": "transformador_aereo_de_distribuicao_monofasico",
       "materialIds": [
@@ -8431,7 +8176,7 @@
       "id": "desat_transf",
       "nome": "traf [D]",
       "nomeBaseGrupo": "traf",
-      "grupoRegraId": "grupo_inst_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
+      "grupoRegraId": "grupo_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
       "tipoGatilho": "material",
       "materialId": "transformador_aereo_de_distribuicao_monofasico",
       "materialIds": [
@@ -8475,7 +8220,7 @@
       "id": "inst_traf_r",
       "nome": "traf [R]",
       "nomeBaseGrupo": "traf",
-      "grupoRegraId": "grupo_inst_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
+      "grupoRegraId": "grupo_traf_tipo_material_categorias_geral_materialids_transformador_aereo_de_distribuicao_monofasico_transformador_aereo_de_distribuicao_trifasico_transformador_de_distribui_o_transformador_de_distribuia_a_o_estruturaids_materialid_transformador_aereo_de_distribuicao_monofasico_estruturaid",
       "tipoGatilho": "material",
       "materialId": "transformador_aereo_de_distribuicao_monofasico",
       "materialIds": [
@@ -8519,7 +8264,7 @@
       "id": "inst_ce3ce3_i",
       "nome": "inst ce3ce3 [I]",
       "nomeBaseGrupo": "inst ce3ce3",
-      "grupoRegraId": "inst_ce3ce3",
+      "grupoRegraId": "grupo_inst_ce3ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_circ_ce3u_ce3u_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8554,7 +8299,7 @@
       "id": "inst_ce3ce3_d",
       "nome": "inst ce3ce3 [D]",
       "nomeBaseGrupo": "inst ce3ce3",
-      "grupoRegraId": "inst_ce3ce3",
+      "grupoRegraId": "grupo_inst_ce3ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_circ_ce3u_ce3u_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8589,7 +8334,7 @@
       "id": "ce3ce3_r",
       "nome": "inst ce3ce3 [R]",
       "nomeBaseGrupo": "inst ce3ce3",
-      "grupoRegraId": "inst_ce3ce3",
+      "grupoRegraId": "grupo_inst_ce3ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_circ_ce3u_ce3u_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8624,7 +8369,7 @@
       "id": "ce3_i",
       "nome": "ce3 [I]",
       "nomeBaseGrupo": "ce3",
-      "grupoRegraId": "inst_ce3",
+      "grupoRegraId": "grupo_ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_tra_ce3u_ce3u_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8663,7 +8408,7 @@
       "id": "ce3_d",
       "nome": "ce3 [D]",
       "nomeBaseGrupo": "ce3",
-      "grupoRegraId": "inst_ce3",
+      "grupoRegraId": "grupo_ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_tra_ce3u_ce3u_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8702,7 +8447,7 @@
       "id": "ce3_r",
       "nome": "ce3 [R]",
       "nomeBaseGrupo": "ce3",
-      "grupoRegraId": "inst_ce3",
+      "grupoRegraId": "grupo_ce3_tipo_estrutura_categorias_materialids_estruturaids_ce3_ce3_tra_ce3u_ce3u_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8741,7 +8486,7 @@
       "id": "inst_n1_i",
       "nome": "inst n1 [I]",
       "nomeBaseGrupo": "inst n1",
-      "grupoRegraId": "inst_n1",
+      "grupoRegraId": "grupo_inst_n1_tipo_estrutura_categorias_materialids_estruturaids_n1_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8774,7 +8519,7 @@
       "id": "inst_n1_d",
       "nome": "inst n1 [D]",
       "nomeBaseGrupo": "inst n1",
-      "grupoRegraId": "inst_n1",
+      "grupoRegraId": "grupo_inst_n1_tipo_estrutura_categorias_materialids_estruturaids_n1_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8807,7 +8552,7 @@
       "id": "inst_n1_r",
       "nome": "inst n1 [R]",
       "nomeBaseGrupo": "inst n1",
-      "grupoRegraId": "inst_n1",
+      "grupoRegraId": "grupo_inst_n1_tipo_estrutura_categorias_materialids_estruturaids_n1_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8840,7 +8585,7 @@
       "id": "inst_n2_i",
       "nome": "inst n2 [I]",
       "nomeBaseGrupo": "inst n2",
-      "grupoRegraId": "inst_n2",
+      "grupoRegraId": "grupo_inst_n2_tipo_estrutura_categorias_materialids_estruturaids_n2_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8873,7 +8618,7 @@
       "id": "inst_n2_d",
       "nome": "inst n2 [D]",
       "nomeBaseGrupo": "inst n2",
-      "grupoRegraId": "inst_n2",
+      "grupoRegraId": "grupo_inst_n2_tipo_estrutura_categorias_materialids_estruturaids_n2_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8906,7 +8651,7 @@
       "id": "inst_n2_r",
       "nome": "inst n2 [R]",
       "nomeBaseGrupo": "inst n2",
-      "grupoRegraId": "inst_n2",
+      "grupoRegraId": "grupo_inst_n2_tipo_estrutura_categorias_materialids_estruturaids_n2_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8939,7 +8684,7 @@
       "id": "inst_n3_i",
       "nome": "inst n3 [I]",
       "nomeBaseGrupo": "inst n3",
-      "grupoRegraId": "inst_n3",
+      "grupoRegraId": "grupo_inst_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -8972,7 +8717,7 @@
       "id": "inst_n3_d",
       "nome": "inst n3 [D]",
       "nomeBaseGrupo": "inst n3",
-      "grupoRegraId": "inst_n3",
+      "grupoRegraId": "grupo_inst_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9005,7 +8750,7 @@
       "id": "inst_n3_r",
       "nome": "inst n3 [R]",
       "nomeBaseGrupo": "inst n3",
-      "grupoRegraId": "inst_n3",
+      "grupoRegraId": "grupo_inst_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9038,7 +8783,7 @@
       "id": "inst_n3_n3_i",
       "nome": "inst n3-n3 [I]",
       "nomeBaseGrupo": "inst n3-n3",
-      "grupoRegraId": "inst_n3_n3",
+      "grupoRegraId": "grupo_inst_n3_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9071,7 +8816,7 @@
       "id": "inst_n3_n3_d",
       "nome": "inst n3-n3 [D]",
       "nomeBaseGrupo": "inst n3-n3",
-      "grupoRegraId": "inst_n3_n3",
+      "grupoRegraId": "grupo_inst_n3_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9104,7 +8849,7 @@
       "id": "inst_n3_n3_r",
       "nome": "inst n3-n3 [R]",
       "nomeBaseGrupo": "inst n3-n3",
-      "grupoRegraId": "inst_n3_n3",
+      "grupoRegraId": "grupo_inst_n3_n3_tipo_estrutura_categorias_materialids_estruturaids_n3_n3_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9137,7 +8882,7 @@
       "id": "inst_n4_i",
       "nome": "inst n4 [I]",
       "nomeBaseGrupo": "inst n4",
-      "grupoRegraId": "inst_n4",
+      "grupoRegraId": "grupo_inst_n4_tipo_estrutura_categorias_materialids_estruturaids_n4_n4_cfa_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9172,7 +8917,7 @@
       "id": "inst_n4_d",
       "nome": "inst n4 [D]",
       "nomeBaseGrupo": "inst n4",
-      "grupoRegraId": "inst_n4",
+      "grupoRegraId": "grupo_inst_n4_tipo_estrutura_categorias_materialids_estruturaids_n4_n4_cfa_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9207,7 +8952,7 @@
       "id": "inst_n4_r",
       "nome": "inst n4 [R]",
       "nomeBaseGrupo": "inst n4",
-      "grupoRegraId": "inst_n4",
+      "grupoRegraId": "grupo_inst_n4_tipo_estrutura_categorias_materialids_estruturaids_n4_n4_cfa_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9242,7 +8987,7 @@
       "id": "inst_ce3_n3_i",
       "nome": "inst ce3-n3 [I]",
       "nomeBaseGrupo": "inst ce3-n3",
-      "grupoRegraId": "inst_ce3_n3",
+      "grupoRegraId": "grupo_inst_ce3_n3_tipo_estrutura_categorias_materialids_estruturaids_ce3_n3_pr_ce3_n3_pr_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9283,7 +9028,7 @@
       "id": "inst_ce3_n3_d",
       "nome": "inst ce3-n3 [D]",
       "nomeBaseGrupo": "inst ce3-n3",
-      "grupoRegraId": "inst_ce3_n3",
+      "grupoRegraId": "grupo_inst_ce3_n3_tipo_estrutura_categorias_materialids_estruturaids_ce3_n3_pr_ce3_n3_pr_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9324,7 +9069,7 @@
       "id": "inst_ce3_n3_r",
       "nome": "inst ce3-n3 [R]",
       "nomeBaseGrupo": "inst ce3-n3",
-      "grupoRegraId": "inst_ce3_n3",
+      "grupoRegraId": "grupo_inst_ce3_n3_tipo_estrutura_categorias_materialids_estruturaids_ce3_n3_pr_ce3_n3_pr_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9437,7 +9182,7 @@
       "id": "inst_ce2_i",
       "nome": "inst ce2 [I]",
       "nomeBaseGrupo": "inst ce2",
-      "grupoRegraId": "inst_ce2",
+      "grupoRegraId": "grupo_inst_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce2_ce2_circ_ce2_sh_ce2_sh_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9476,7 +9221,7 @@
       "id": "inst_ce2_d",
       "nome": "inst ce2 [D]",
       "nomeBaseGrupo": "inst ce2",
-      "grupoRegraId": "inst_ce2",
+      "grupoRegraId": "grupo_inst_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce2_ce2_circ_ce2_sh_ce2_sh_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9515,7 +9260,7 @@
       "id": "inst_ce2_r",
       "nome": "inst ce2 [R]",
       "nomeBaseGrupo": "inst ce2",
-      "grupoRegraId": "inst_ce2",
+      "grupoRegraId": "grupo_inst_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce2_ce2_circ_ce2_sh_ce2_sh_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9554,7 +9299,7 @@
       "id": "inst_ce1_ce2_i",
       "nome": "inst ce1/ce2 [I]",
       "nomeBaseGrupo": "inst ce1/ce2",
-      "grupoRegraId": "inst_ce1_ce2",
+      "grupoRegraId": "grupo_inst_ce1_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce1_ce1_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9589,7 +9334,7 @@
       "id": "inst_ce1_ce2_d",
       "nome": "inst ce1/ce2 [D]",
       "nomeBaseGrupo": "inst ce1/ce2",
-      "grupoRegraId": "inst_ce1_ce2",
+      "grupoRegraId": "grupo_inst_ce1_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce1_ce1_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9624,7 +9369,7 @@
       "id": "inst_ce1_ce2_r",
       "nome": "inst ce1/ce2 [R]",
       "nomeBaseGrupo": "inst ce1/ce2",
-      "grupoRegraId": "inst_ce1_ce2",
+      "grupoRegraId": "grupo_inst_ce1_ce2_tipo_estrutura_categorias_materialids_estruturaids_ce1_ce1_circ_materialid_estruturaid",
       "tipoGatilho": "estrutura",
       "materialId": null,
       "materialIds": [],
@@ -9659,7 +9404,7 @@
       "id": "cb_prot_95_i",
       "nome": "cb prot >95 [I]",
       "nomeBaseGrupo": "cb prot >95",
-      "grupoRegraId": "cb_prot_95_grupo",
+      "grupoRegraId": "grupo_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_120mm_cabo_alum_prot_xlpe_15_0kv_185mm_cabo_alum_prot_xlpe_36_2kv_120mm_cabo_alum_prot_xlpe_36_2kv_185mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -9693,7 +9438,7 @@
         {
           "maoObraId": "6474_inst_cb_al_proteg_95mm_lm",
           "codigo": "6474",
-          "descricao": "INST CB AL PROTEG >95MMÃƒâ€šÃ‚Â² LM",
+          "descricao": "INST CB AL PROTEG >95MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
           "quantidade": 1
         }
       ]
@@ -9702,7 +9447,7 @@
       "id": "cb_prot_95_d",
       "nome": "cb prot >95 [D]",
       "nomeBaseGrupo": "cb prot >95",
-      "grupoRegraId": "cb_prot_95_grupo",
+      "grupoRegraId": "grupo_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_120mm_cabo_alum_prot_xlpe_15_0kv_185mm_cabo_alum_prot_xlpe_36_2kv_120mm_cabo_alum_prot_xlpe_36_2kv_185mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -9745,7 +9490,7 @@
       "id": "cb_prot_95_r",
       "nome": "cb prot >95 [R]",
       "nomeBaseGrupo": "cb prot >95",
-      "grupoRegraId": "cb_prot_95_grupo",
+      "grupoRegraId": "grupo_cb_prot_95_tipo_material_categorias_cabo_materialids_cabo_alum_prot_xlpe_15_0kv_120mm_cabo_alum_prot_xlpe_15_0kv_185mm_cabo_alum_prot_xlpe_36_2kv_120mm_cabo_alum_prot_xlpe_36_2kv_185mm_estruturaids_materialid_estruturaid",
       "tipoGatilho": "material",
       "materialId": null,
       "materialIds": [
@@ -9779,11 +9524,567 @@
         {
           "maoObraId": "6949_reinst_condutor_alum_prot_95_mm_lm",
           "codigo": "6949",
-          "descricao": "REINST CONDUTOR ALUM PROT > 95 MMÃƒâ€šÃ‚Â² LM",
+          "descricao": "REINST CONDUTOR ALUM PROT > 95 MMÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â² LM",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "chave_fusivel_i",
+      "nome": "chave fusivel [I]",
+      "nomeBaseGrupo": "chave fusivel",
+      "grupoRegraId": "grupo_chave_fusivel_tipo_material_categorias_geral_materialids_chave_fus_vel_de_distribui_o_chave_fusivel_de_distribuicao_estruturaids_materialid_chave_fusivel_de_distribuicao_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": "chave_fusivel_de_distribuicao",
+      "materialIds": [
+        "chave_fusivel_de_distribuicao",
+        "chave_fus_vel_de_distribui_o"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "geral"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialId": "chave_fusivel_de_distribuicao",
+        "materialIds": [
+          "chave_fusivel_de_distribuicao",
+          "chave_fus_vel_de_distribui_o"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "geral"
+        ]
+      },
+      "operacoes": [
+        "I"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "6071_inst_chave_fusivel_34_5_kv_lm",
+          "codigo": "6071",
+          "descricao": "INST CHAVE FUSIVEL < 34,5 KV LM",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "chave_fusivel_d",
+      "nome": "chave fusivel [D]",
+      "nomeBaseGrupo": "chave fusivel",
+      "grupoRegraId": "grupo_chave_fusivel_tipo_material_categorias_geral_materialids_chave_fus_vel_de_distribui_o_chave_fusivel_de_distribuicao_estruturaids_materialid_chave_fusivel_de_distribuicao_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": "chave_fusivel_de_distribuicao",
+      "materialIds": [
+        "chave_fusivel_de_distribuicao",
+        "chave_fus_vel_de_distribui_o"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "geral"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialId": "chave_fusivel_de_distribuicao",
+        "materialIds": [
+          "chave_fusivel_de_distribuicao",
+          "chave_fus_vel_de_distribui_o"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "geral"
+        ]
+      },
+      "operacoes": [
+        "D"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "6042_desat_chave_fusivel_34_5_kv_lm",
+          "codigo": "6042",
+          "descricao": "DESAT CHAVE FUSIVEL < 34,5 KV LM",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "chave_fusivel_r",
+      "nome": "chave fusivel [R]",
+      "nomeBaseGrupo": "chave fusivel",
+      "grupoRegraId": "grupo_chave_fusivel_tipo_material_categorias_geral_materialids_chave_fus_vel_de_distribui_o_chave_fusivel_de_distribuicao_estruturaids_materialid_chave_fusivel_de_distribuicao_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": "chave_fusivel_de_distribuicao",
+      "materialIds": [
+        "chave_fusivel_de_distribuicao",
+        "chave_fus_vel_de_distribui_o"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "geral"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialId": "chave_fusivel_de_distribuicao",
+        "materialIds": [
+          "chave_fusivel_de_distribuicao",
+          "chave_fus_vel_de_distribui_o"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "geral"
+        ]
+      },
+      "operacoes": [
+        "R"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "24468_reinstalacao_chave_fusivel_lm",
+          "codigo": "24468",
+          "descricao": "REINSTALACAO CHAVE FUSIVEL LM",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "instalacao_de_poste",
+      "nome": "de poste [I]",
+      "nomeBaseGrupo": "de poste",
+      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_circular_concr_9_800_poste_duplo_t_9_150_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": null,
+      "materialIds": [
+        "poste_poste_circular_concr_6_1000_330mm_230mm",
+        "poste_poste_circular_concr_6_600_300mm_190mm",
+        "poste_poste_circular_concreto_13_2500",
+        "poste_poste_circular_fbv_13_600",
+        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+        "poste_duplo_t_9_150",
+        "poste_circular_concr_9_800"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "poste"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialIds": [
+          "poste_poste_circular_concr_6_1000_330mm_230mm",
+          "poste_poste_circular_concr_6_600_300mm_190mm",
+          "poste_poste_circular_concreto_13_2500",
+          "poste_poste_circular_fbv_13_600",
+          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+          "poste_duplo_t_9_150",
+          "poste_circular_concr_9_800"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "poste"
+        ]
+      },
+      "operacoes": [
+        "I"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "6243_inst_poste_ate_13m_69kv_guin_lm",
+          "codigo": "6243",
+          "descricao": "INST POSTE ATE 13M <69KV GUIN LM",
+          "quantidade": 1
+        },
+        {
+          "maoObraId": "6224_abrir_cava_em_terra_normal",
+          "codigo": "6224",
+          "descricao": "ABRIR CAVA EM TERRA NORMAL",
+          "quantidade": 1
+        },
+        {
+          "maoObraId": "7029_efet_locacao_pst_area_urbana_lm",
+          "codigo": "7029",
+          "descricao": "EFET LOCACAO PST AREA URBANA LM",
+          "quantidade": 1
+        },
+        {
+          "maoObraId": "6466_serv_tec_lm_dist_pst_obra_lm_urbano",
+          "codigo": "6466",
+          "descricao": "SERV TEC LM DIST PST OBRA LM (URBANO)",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "desaticavao_de_poste",
+      "nome": "de poste [D]",
+      "nomeBaseGrupo": "de poste",
+      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_circular_concr_9_800_poste_duplo_t_9_150_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": null,
+      "materialIds": [
+        "poste_poste_circular_concr_6_1000_330mm_230mm",
+        "poste_poste_circular_concr_6_600_300mm_190mm",
+        "poste_poste_circular_concreto_13_2500",
+        "poste_poste_circular_fbv_13_600",
+        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+        "poste_duplo_t_9_150",
+        "poste_circular_concr_9_800"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "poste"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialIds": [
+          "poste_poste_circular_concr_6_1000_330mm_230mm",
+          "poste_poste_circular_concr_6_600_300mm_190mm",
+          "poste_poste_circular_concreto_13_2500",
+          "poste_poste_circular_fbv_13_600",
+          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+          "poste_duplo_t_9_150",
+          "poste_circular_concr_9_800"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "poste"
+        ]
+      },
+      "operacoes": [
+        "D"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "6608_desat_poste_ate_13_69kv_manual_lm",
+          "codigo": "6608",
+          "descricao": "DESAT POSTE ATE 13 <69KV MANUAL LM",
+          "quantidade": 1
+        },
+        {
+          "maoObraId": "6663_alocar_poste_no_almoxarifado",
+          "codigo": "6663",
+          "descricao": "ALOCAR POSTE NO ALMOXARIFADO",
+          "quantidade": 1
+        }
+      ]
+    },
+    {
+      "id": "reinstalacao_poste",
+      "nome": "de poste [R]",
+      "nomeBaseGrupo": "de poste",
+      "grupoRegraId": "grupo_de_poste_tipo_material_categorias_poste_materialids_poste_circular_concr_9_800_poste_duplo_t_9_150_poste_poste_circular_concr_6_1000_330mm_230mm_poste_poste_circular_concr_6_600_300mm_190mm_poste_poste_circular_concreto_13_2500_poste_poste_circular_fbv_13_600_poste_poste_circular_fib_vid_10_150_370mm_165mm_poste_poste_circular_fib_vid_10_300_373mm_168mm_poste_poste_circular_fib_vid_10_600_381mm_176mm_poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii_poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii_poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm_poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm_poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2_poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2_poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2_poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2_poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2_poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2_poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2_poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2_poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2_poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2_poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2_poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2_poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2_poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2_poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2_poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2_poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2_poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2_poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2_poste_poste_dt_concr_tipo_b_5_5_12_2500_poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm_poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm_poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm_poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm_poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm_estruturaids_materialid_estruturaid",
+      "tipoGatilho": "material",
+      "materialId": null,
+      "materialIds": [
+        "poste_poste_circular_concr_6_1000_330mm_230mm",
+        "poste_poste_circular_concr_6_600_300mm_190mm",
+        "poste_poste_circular_concreto_13_2500",
+        "poste_poste_circular_fbv_13_600",
+        "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+        "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+        "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+        "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+        "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+        "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+        "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+        "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+        "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+        "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+        "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+        "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+        "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+        "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+        "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+        "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+        "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+        "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+        "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+        "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+        "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+        "poste_duplo_t_9_150",
+        "poste_circular_concr_9_800"
+      ],
+      "estruturaId": null,
+      "estruturaIds": [],
+      "categorias": [
+        "poste"
+      ],
+      "gatilho": {
+        "tipo": "material",
+        "materialIds": [
+          "poste_poste_circular_concr_6_1000_330mm_230mm",
+          "poste_poste_circular_concr_6_600_300mm_190mm",
+          "poste_poste_circular_concreto_13_2500",
+          "poste_poste_circular_fbv_13_600",
+          "poste_poste_circular_fib_vid_10_150_370mm_165mm",
+          "poste_poste_circular_fib_vid_10_300_373mm_168mm",
+          "poste_poste_circular_fib_vid_10_600_381mm_176mm",
+          "poste_poste_concr_dupl_t_13_2000_470x644mm_200x266mm_cl_ii",
+          "poste_poste_concr_duplo_t_8_150_190x264mm_80x100mm_cl_ii",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_11_300_373mm_168mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+          "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_600_391mm_188mm",
+          "poste_poste_distr_concr_circ_10_600_390mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_11_1000_450mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_11_1500_510mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_11_600_410mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_12_1000_470mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_12_1500_530mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_12_600_430mm_190mm_cl2",
+          "poste_poste_distr_concr_circ_13_1000_490mm_230mm_cl2",
+          "poste_poste_distr_concr_circ_13_1500_550mm_290mm_cl2",
+          "poste_poste_distr_concr_circ_13_600_450mm_190mm_cl2",
+          "poste_poste_distr_concr_dt_10_150_200x280mm_100x120mm_cl2",
+          "poste_poste_distr_concr_dt_10_300_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_10_600_310x420mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_1000_360x490mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_11_1500_390x532mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_11_300_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_11_600_330x448mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_1000_380x518mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_12_1500_410x560mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_12_300_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+          "poste_poste_distr_concr_dt_13_1000_400x546mm_140x182mm_cl2",
+          "poste_poste_distr_concr_dt_13_1500_430x588mm_170x224mm_cl2",
+          "poste_poste_distr_concr_dt_13_600_370x504mm_110x140mm_cl2",
+          "poste_poste_dt_concr_tipo_b_5_5_12_2500",
+          "poste_poste_dup_t_concreto_11_1200_390x532mm_170x225mm",
+          "poste_poste_dup_t_concreto_11_400_330x448mm_110x140mm",
+          "poste_poste_dup_t_concreto_13_3000_490x672mm_230x308mm",
+          "poste_poste_duplo_t_concr_12_500_350x476mm_110x140mm",
+          "poste_poste_duplo_t_concr_6_600_230x310mm_80x100mm",
+          "poste_duplo_t_9_150",
+          "poste_circular_concr_9_800"
+        ],
+        "estruturaIds": [],
+        "categorias": [
+          "poste"
+        ]
+      },
+      "operacoes": [
+        "R"
+      ],
+      "saidas": [
+        {
+          "maoObraId": "6338_reinst_poste_de_8_5_ate_13m_lm",
+          "codigo": "6338",
+          "descricao": "REINST POSTE DE 8,5 ATE 13M LM",
+          "quantidade": 1
+        },
+        {
+          "maoObraId": "6224_abrir_cava_em_terra_normal",
+          "codigo": "6224",
+          "descricao": "ABRIR CAVA EM TERRA NORMAL",
           "quantidade": 1
         }
       ]
     }
   ],
-  "pontos": []
+  "pontos": [
+    {
+      "id": "2b960110-c6d3-41b1-af78-d726c58a9fbf",
+      "numero": "1",
+      "operacao": "I",
+      "estruturaId": "N1",
+      "posteId": "poste_poste_distr_concr_dt_12_600_350x476mm_110x140mm_cl2",
+      "caboBTId": "",
+      "caboMTId": "",
+      "quantidadeCabo": 0,
+      "rede": "",
+      "quantidadePontos": 1
+    },
+    {
+      "id": "a1eaef75-396b-4a21-a999-12d6e4317526",
+      "numero": "2",
+      "operacao": "I",
+      "estruturaId": "TRAFO TRI",
+      "posteId": "",
+      "caboBTId": "",
+      "caboMTId": "",
+      "quantidadeCabo": 0,
+      "rede": "",
+      "quantidadePontos": 1
+    },
+    {
+      "id": "9a8efbf7-ac34-4837-ad49-b892e2d347e1",
+      "numero": "3",
+      "operacao": "D",
+      "estruturaId": "N1",
+      "posteId": "poste_poste_dist_prfv_bs_circ_tp_quad_2p_12_300_386mm_181mm",
+      "caboBTId": "",
+      "caboMTId": "",
+      "quantidadeCabo": 0,
+      "rede": "",
+      "quantidadePontos": 1
+    }
+  ]
 }
