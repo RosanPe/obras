@@ -1280,6 +1280,16 @@ td select,
   max-height: 58vh;
 }
 
+#resultado-material,
+#resultado-mao-obra {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#aba-resultado .painel-resultado {
+  min-height: 0;
+}
+
 @media (max-width: 1080px) {
   .resultado-secoes {
     grid-template-columns: 1fr;
