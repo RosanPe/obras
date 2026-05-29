@@ -27,6 +27,10 @@
         <button class="aba" data-aba="cadastros" type="button">Cadastros</button>
         <button class="aba" data-aba="regras" type="button">Regras</button>
         <button class="aba" data-aba="resultado" type="button">Resultado</button>
+        <div id="acoes-aba-resultado" class="acoes-aba-resultado oculto">
+          <button id="refresh-resultado" class="botao secundario" type="button">Refresh medicao</button>
+          <button id="baixar-csv" class="botao secundario" type="button">Exportar Excel</button>
+        </div>
       </nav>
 
       <section id="aviso" class="aviso oculto" role="status"></section>
@@ -34,13 +38,6 @@
       <section id="aba-medicao" class="painel-aba ativo">
         <div class="grade-medicao">
           <section class="painel">
-            <div class="titulo-painel">
-              <div>
-                <p class="rotulo">Entrada</p>
-                <h2>Pontos de medicao</h2>
-              </div>
-              <button id="adicionar-ponto" class="botao secundario" type="button">Adicionar ponto</button>
-            </div>
             <div class="tabela-container">
               <table>
                 <thead>
@@ -62,15 +59,8 @@
               <datalist id="opcoes-cabos-bt-ponto"></datalist>
               <datalist id="opcoes-cabos-mt-ponto"></datalist>
             </div>
-            <div class="indicadores">
-              <div>
-                <strong id="total-pontos">0</strong>
-                <span>pontos</span>
-              </div>
-              <div>
-                <strong id="total-erros">0</strong>
-                <span>pendencias</span>
-              </div>
+            <div class="acoes-pontos-final">
+              <button id="adicionar-ponto" class="botao secundario" type="button">+</button>
             </div>
           </section>
         </div>
@@ -81,16 +71,14 @@
           <button class="aba-cadastro ativa" data-cadastro="materiais" type="button">Materiais</button>
           <button class="aba-cadastro" data-cadastro="estruturas" type="button">Estruturas</button>
           <button class="aba-cadastro" data-cadastro="mao-obra" type="button">Mao de obra</button>
+          <div id="acoes-cadastro" class="acoes-cadastro">
+            <button id="novo-material" class="botao secundario" type="button">Novo material</button>
+            <button id="nova-estrutura" class="botao secundario oculto" type="button">Nova estrutura</button>
+            <button id="nova-mao-obra" class="botao secundario oculto" type="button">Nova mao de obra</button>
+          </div>
         </nav>
         <div class="grade-cadastros">
           <section class="painel painel-cadastro ativo" data-cadastro-painel="materiais">
-            <div class="titulo-painel">
-              <div>
-                <p class="rotulo">Catalogo</p>
-                <h2>Materiais</h2>
-              </div>
-              <button id="novo-material" class="botao secundario" type="button">Novo material</button>
-            </div>
             <label class="cadastro-filtro">
               <span>Pesquisar</span>
               <input id="filtro-materiais" type="search" placeholder="Codigo, descricao ou unidade" />
@@ -99,13 +87,6 @@
           </section>
 
           <section class="painel painel-cadastro" data-cadastro-painel="estruturas">
-            <div class="titulo-painel">
-              <div>
-                <p class="rotulo">Templates</p>
-                <h2>Estruturas</h2>
-              </div>
-              <button id="nova-estrutura" class="botao secundario" type="button">Nova estrutura</button>
-            </div>
             <label class="cadastro-filtro">
               <span>Pesquisar</span>
               <input id="filtro-estruturas" type="search" placeholder="ID, descricao ou item" />
@@ -114,13 +95,6 @@
           </section>
 
           <section class="painel painel-cadastro" data-cadastro-painel="mao-obra">
-            <div class="titulo-painel">
-              <div>
-                <p class="rotulo">Catalogo</p>
-                <h2>Mao de obra</h2>
-              </div>
-              <button id="nova-mao-obra" class="botao secundario" type="button">Nova mao de obra</button>
-            </div>
             <label class="cadastro-filtro">
               <span>Pesquisar</span>
               <input id="filtro-mao-obra" type="search" placeholder="Codigo, descricao ou unidade" />
@@ -145,16 +119,6 @@
 
       <section id="aba-resultado" class="painel-aba">
         <section class="painel">
-          <div class="titulo-painel">
-            <div>
-              <p class="rotulo">Consolidado</p>
-              <h2>Resultado final</h2>
-            </div>
-            <div class="campo-busca-regra-acoes">
-              <button id="refresh-resultado" class="botao secundario" type="button">Refresh medicao</button>
-              <button id="baixar-csv" class="botao secundario" type="button">Exportar Excel</button>
-            </div>
-          </div>
           <div class="resultado-secoes">
             <article class="painel-resultado">
               <div class="titulo-resultado">
@@ -184,11 +148,6 @@
                     <input id="quantidade-resultado-mao-obra" type="number" min="0" step="0.01" value="1" />
                     <button id="confirmar-resultado-mao-obra" class="botao secundario" type="button">+</button>
                   </div>
-                </div>
-                <div class="abas-resultado" aria-label="Filtros de mao de obra">
-                  <button class="aba-resultado ativa" data-resultado-secao="maoObra" data-resultado-operacao="I" type="button">I - Instalacao</button>
-                  <button class="aba-resultado" data-resultado-secao="maoObra" data-resultado-operacao="R" type="button">R - Reinstalacao</button>
-                  <button class="aba-resultado" data-resultado-secao="maoObra" data-resultado-operacao="D" type="button">D - Desativacao</button>
                 </div>
               </div>
               <div id="resultado-mao-obra" class="resultado-lista"></div>

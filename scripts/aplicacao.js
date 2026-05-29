@@ -322,6 +322,7 @@ class AplicacaoMedicao {
     this.filtrosResultado = { material: "I", maoObra: "I" };
     this.contextoSeletorItem = null;
     this.selecaoAtualSeletorItem = null;
+    this.timersDebounce = {};
     this.elementos = this.mapearElementos();
     this.normalizarBase();
     this.registrarEventos();
@@ -333,6 +334,7 @@ class AplicacaoMedicao {
       body: document.body,
       aviso: document.querySelector("#aviso"),
       abas: document.querySelectorAll(".aba"),
+      acoesAbaResultado: document.querySelector("#acoes-aba-resultado"),
       paineis: document.querySelectorAll(".painel-aba"),
       abasCadastro: document.querySelectorAll(".aba-cadastro"),
       paineisCadastro: document.querySelectorAll(".painel-cadastro"),
@@ -461,35 +463,72 @@ class AplicacaoMedicao {
       }
     });
     this.elementos.formSeletorItem.addEventListener("submit", (evento) => this.confirmarSeletorItem(evento));
-    this.elementos.formSeletorItem.elements.busca.addEventListener("input", () => this.sincronizarSeletorItem());
+    this.elementos.formSeletorItem.elements.busca.addEventListener("input", () => {
+      this.debounce("seletor-item", () => this.sincronizarSeletorItem(), 120);
+    });
     this.elementos.formSeletorItem.elements.busca.addEventListener("change", () => this.sincronizarSeletorItem());
-    this.elementos.filtroMateriais?.addEventListener("input", () => this.renderizarCadastros());
-    this.elementos.filtroEstruturas?.addEventListener("input", () => this.renderizarCadastros());
-    this.elementos.filtroMaoObra?.addEventListener("input", () => this.renderizarCadastros());
+    this.elementos.filtroMateriais?.addEventListener("input", () => {
+      this.debounce("filtro-materiais", () => this.renderizarCadastros("materiais"), 120);
+    });
+    this.elementos.filtroEstruturas?.addEventListener("input", () => {
+      this.debounce("filtro-estruturas", () => this.renderizarCadastros("estruturas"), 120);
+    });
+    this.elementos.filtroMaoObra?.addEventListener("input", () => {
+      this.debounce("filtro-mao-obra", () => this.renderizarCadastros("maoObra"), 120);
+    });
     this.elementos.fecharModal.forEach((botao) => botao.addEventListener("click", () => this.fecharModalCadastro(botao.dataset.fecharModal)));
     [this.elementos.modalMaterial, this.elementos.modalMaoObra, this.elementos.modalEstrutura, this.elementos.modalRegra, this.elementos.modalSeletorItem].forEach((modal) => {
-      modal.addEventListener("click", (evento) => {
-        if (evento.target === modal) this.fecharModalAtual();
+      modal.addEventListener("click", () => {
+        // Modal nao fecha ao clicar fora. Fechamento apenas por botoes Fechar/Cancelar ou ESC.
       });
     });
-    document.addEventListener("keydown", (evento) => {
-      if (evento.key === "Escape") this.fecharModalAtual();
+    document.addEventListener("keydown", () => {
+      // Modal nao fecha por ESC. Fechamento apenas por botoes Fechar/Cancelar.
     });
     this.elementos.abasResultado.forEach((aba) => aba.addEventListener("click", () => this.alterarResultado(aba)));
     this.elementos.refreshResultado?.addEventListener("click", () => this.atualizarMaoObraPorMateriaisResultado());
     this.elementos.baixarJson.addEventListener("click", () => this.baixarArquivo("base-medicao.json", JSON.stringify(this.base, null, 2), "application/json"));
     this.elementos.baixarCsv.addEventListener("click", () => this.baixarExcel());
     this.elementos.arquivoJson.addEventListener("change", (evento) => this.importarJson(evento));
+    this.elementos.listaMateriais.addEventListener("click", (evento) => this.tratarCliqueCadastro(evento));
+    this.elementos.listaEstruturas.addEventListener("click", (evento) => this.tratarCliqueCadastro(evento));
+    this.elementos.listaMaoObra.addEventListener("click", (evento) => this.tratarCliqueCadastro(evento));
+    this.elementos.listaRegras.addEventListener("click", (evento) => this.tratarCliqueCadastro(evento));
+    const abaAtivaInicial = document.querySelector(".aba.ativa")?.dataset.aba || "medicao";
+    this.abrirAba(abaAtivaInicial);
+  }
+
+  debounce(chave, callback, atraso = 100) {
+    window.clearTimeout(this.timersDebounce[chave]);
+    this.timersDebounce[chave] = window.setTimeout(callback, atraso);
+  }
+
+  tratarCliqueCadastro(evento) {
+    const botaoEditar = evento.target.closest("[data-editar]");
+    if (botaoEditar) {
+      this.editarCadastro(botaoEditar.dataset.tipo, botaoEditar.dataset.editar);
+      return;
+    }
+    const botaoExcluir = evento.target.closest("[data-excluir]");
+    if (botaoExcluir) {
+      this.excluirCadastro(botaoExcluir.dataset.tipo, botaoExcluir.dataset.excluir);
+    }
   }
 
   abrirAba(nome) {
     this.elementos.abas.forEach((aba) => aba.classList.toggle("ativa", aba.dataset.aba === nome));
     this.elementos.paineis.forEach((painel) => painel.classList.toggle("ativo", painel.id === `aba-${nome}`));
+    if (this.elementos.acoesAbaResultado) {
+      this.elementos.acoesAbaResultado.classList.toggle("oculto", nome !== "resultado");
+    }
   }
 
   abrirAbaCadastro(nome) {
     this.elementos.abasCadastro.forEach((aba) => aba.classList.toggle("ativa", aba.dataset.cadastro === nome));
     this.elementos.paineisCadastro.forEach((painel) => painel.classList.toggle("ativo", painel.dataset.cadastroPainel === nome));
+    this.elementos.novoMaterial?.classList.toggle("oculto", nome !== "materiais");
+    this.elementos.novaEstrutura?.classList.toggle("oculto", nome !== "estruturas");
+    this.elementos.novaMaoObra?.classList.toggle("oculto", nome !== "mao-obra");
   }
 
   renderizarTudo() {
@@ -535,8 +574,8 @@ class AplicacaoMedicao {
       botao.addEventListener("click", () => this.removerPonto(Number(botao.dataset.removerPonto)));
     });
 
-    this.elementos.totalPontos.textContent = String(this.base.pontos.length);
-    this.elementos.totalErros.textContent = String(erros.size);
+    if (this.elementos.totalPontos) this.elementos.totalPontos.textContent = String(this.base.pontos.length);
+    if (this.elementos.totalErros) this.elementos.totalErros.textContent = String(erros.size);
   }
 
   selectOperacao(valor, indice) {
@@ -740,56 +779,60 @@ class AplicacaoMedicao {
       .join("");
   }
 
-  renderizarCadastros() {
+  renderizarCadastros(alvo = "todos") {
     const termoMateriais = this.normalizarTexto(this.elementos.filtroMateriais?.value || "");
     const termoEstruturas = this.normalizarTexto(this.elementos.filtroEstruturas?.value || "");
     const termoMaoObra = this.normalizarTexto(this.elementos.filtroMaoObra?.value || "");
 
-    const materiaisFiltrados = termoMateriais
-      ? this.base.materiais.filter((material) => this.correspondeBuscaCatalogo(material, termoMateriais))
-      : this.base.materiais;
-    const estruturasFiltradas = termoEstruturas
-      ? this.base.estruturas.filter((estrutura) => {
-        const materiaisEstrutura = estrutura.itens
-          .map((item) => this.materialPorId(item.materialId)?.descricao || item.materialId)
-          .join(" ");
-        return this.normalizarTexto(`${estrutura.id} ${estrutura.descricao} ${materiaisEstrutura}`).includes(termoEstruturas);
-      })
-      : this.base.estruturas;
-    const maoObraFiltrada = termoMaoObra
-      ? this.base.maoObra.filter((item) => this.correspondeBuscaCatalogo(item, termoMaoObra))
-      : this.base.maoObra;
+    if (alvo === "todos" || alvo === "materiais") {
+      const materiaisFiltrados = termoMateriais
+        ? this.base.materiais.filter((material) => this.correspondeBuscaCatalogo(material, termoMateriais))
+        : this.base.materiais;
+      this.elementos.listaMateriais.innerHTML = materiaisFiltrados.map((material) => this.cartaoCadastro(
+        material.id,
+        material.descricao,
+        `${material.codigo} | ${material.unidade} | ${material.categoria}`,
+        "material"
+      )).join("");
+    }
 
-    this.elementos.listaMateriais.innerHTML = materiaisFiltrados.map((material) => this.cartaoCadastro(
-      material.id,
-      material.descricao,
-      `${material.codigo} | ${material.unidade} | ${material.categoria}`,
-      "material"
-    )).join("");
+    if (alvo === "todos" || alvo === "estruturas") {
+      const estruturasFiltradas = termoEstruturas
+        ? this.base.estruturas.filter((estrutura) => {
+          const materiaisEstrutura = estrutura.itens
+            .map((item) => this.materialPorId(item.materialId)?.descricao || item.materialId)
+            .join(" ");
+          return this.normalizarTexto(`${estrutura.id} ${estrutura.descricao} ${materiaisEstrutura}`).includes(termoEstruturas);
+        })
+        : this.base.estruturas;
+      this.elementos.listaEstruturas.innerHTML = estruturasFiltradas.map((estrutura) => this.cartaoCadastro(
+        estrutura.id,
+        estrutura.descricao,
+        `${estrutura.itens.length} materiais vinculados`,
+        "estrutura"
+      )).join("");
+    }
 
-    this.elementos.listaEstruturas.innerHTML = estruturasFiltradas.map((estrutura) => this.cartaoCadastro(
-      estrutura.id,
-      estrutura.descricao,
-      `${estrutura.itens.length} materiais vinculados`,
-      "estrutura"
-    )).join("");
+    if (alvo === "todos" || alvo === "maoObra") {
+      const maoObraFiltrada = termoMaoObra
+        ? this.base.maoObra.filter((item) => this.correspondeBuscaCatalogo(item, termoMaoObra))
+        : this.base.maoObra;
+      this.elementos.listaMaoObra.innerHTML = maoObraFiltrada.map((item) => this.cartaoCadastro(
+        item.id,
+        item.descricao,
+        `${item.codigo} | ${item.unidade}`,
+        "maoObra"
+      )).join("");
+    }
 
-    this.elementos.listaMaoObra.innerHTML = maoObraFiltrada.map((item) => this.cartaoCadastro(
-      item.id,
-      item.descricao,
-      `${item.codigo} | ${item.unidade}`,
-      "maoObra"
-    )).join("");
-
-    this.elementos.listaRegras.innerHTML = this.base.regrasMaoObra.map((regra) => this.cartaoCadastro(
-      regra.id,
-      regra.nome,
-      `${regra.operacoes.join(", ")} | ${this.resumoRegra(regra)} | ${regra.saidas.length} saidas`,
-      "regra"
-    )).join("");
-
-    document.querySelectorAll("[data-editar]").forEach((botao) => botao.addEventListener("click", () => this.editarCadastro(botao.dataset.tipo, botao.dataset.editar)));
-    document.querySelectorAll("[data-excluir]").forEach((botao) => botao.addEventListener("click", () => this.excluirCadastro(botao.dataset.tipo, botao.dataset.excluir)));
+    if (alvo === "todos" || alvo === "regras") {
+      this.elementos.listaRegras.innerHTML = this.base.regrasMaoObra.map((regra) => this.cartaoCadastro(
+        regra.id,
+        regra.nome,
+        `${regra.operacoes.join(", ")} | ${this.resumoRegra(regra)} | ${regra.saidas.length} saidas`,
+        "regra"
+      )).join("");
+    }
   }
 
   cartaoCadastro(id, titulo, detalhe, tipo) {
@@ -1093,14 +1136,13 @@ class AplicacaoMedicao {
 
   renderizarResultado() {
     const grupoMaterial = this.filtrosResultado.material === "D" ? "materiaisDesativacao" : "materiaisInstalacao";
-    const gruposMaoObra = {
-      I: "maoObraInstalacao",
-      D: "maoObraDesativacao",
-      R: "maoObraReinstalacao"
-    };
-    const grupoMaoObra = gruposMaoObra[this.filtrosResultado.maoObra];
+    const linhasMaoObra = [
+      ...this.resultado.maoObraInstalacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraInstalacao", __indice: indice })),
+      ...this.resultado.maoObraReinstalacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraReinstalacao", __indice: indice })),
+      ...this.resultado.maoObraDesativacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraDesativacao", __indice: indice }))
+    ];
     this.elementos.resultadoMaterial.innerHTML = this.linhasResultado(this.resultado[grupoMaterial], grupoMaterial);
-    this.elementos.resultadoMaoObra.innerHTML = this.linhasResultado(this.resultado[grupoMaoObra], grupoMaoObra);
+    this.elementos.resultadoMaoObra.innerHTML = this.linhasResultadoMaoObra(linhasMaoObra);
     this.elementos.abasResultado.forEach((aba) => {
       const ativa = this.filtrosResultado[aba.dataset.resultadoSecao] === aba.dataset.resultadoOperacao;
       aba.classList.toggle("ativa", ativa);
@@ -1128,7 +1170,20 @@ class AplicacaoMedicao {
         <div><strong>${linha.descricao}</strong><span>${linha.codigo} | ${linha.unidade}</span></div>
         <div class="mini-acoes">
           <input class="quantidade-editavel" data-resultado-grupo="${grupo}" data-resultado-indice="${indice}" type="number" step="0.01" value="${linha.quantidade}">
-          <button class="botao perigo" data-remover-resultado="${grupo}" data-resultado-indice="${indice}" type="button" aria-label="Remover item" title="Remover item">🗑</button>
+          <button class="botao perigo" data-remover-resultado="${grupo}" data-resultado-indice="${indice}" type="button" aria-label="Remover item" title="Remover item">Remover</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  linhasResultadoMaoObra(linhas) {
+    if (!linhas.length) return `<div class="preview-vazio">Gere a medicao para visualizar.</div>`;
+    return linhas.map((linha) => `
+      <div class="linha-resultado">
+        <div><strong>${linha.descricao}</strong><span>${linha.codigo} | ${linha.unidade}</span></div>
+        <div class="mini-acoes">
+          <input class="quantidade-editavel" data-resultado-grupo="${linha.__grupo}" data-resultado-indice="${linha.__indice}" type="number" step="0.01" value="${linha.quantidade}">
+          <button class="botao perigo" data-remover-resultado="${linha.__grupo}" data-resultado-indice="${linha.__indice}" type="button" aria-label="Remover item" title="Remover item">Remover</button>
         </div>
       </div>
     `).join("");
@@ -1841,12 +1896,7 @@ class AplicacaoMedicao {
   }
 
   grupoResultadoMaoObraAtual() {
-    const grupos = {
-      I: "maoObraInstalacao",
-      D: "maoObraDesativacao",
-      R: "maoObraReinstalacao"
-    };
-    return grupos[this.filtrosResultado.maoObra];
+    return "maoObraInstalacao";
   }
 
   adicionarLinhaManualAoResultado(grupo, item, quantidade) {
