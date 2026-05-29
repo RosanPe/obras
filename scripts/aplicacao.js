@@ -1144,7 +1144,13 @@ class AplicacaoMedicao {
       ...this.resultado.maoObraInstalacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraInstalacao", __indice: indice })),
       ...this.resultado.maoObraReinstalacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraReinstalacao", __indice: indice })),
       ...this.resultado.maoObraDesativacao.map((linha, indice) => ({ ...linha, __grupo: "maoObraDesativacao", __indice: indice }))
-    ];
+    ].sort((a, b) => {
+      const descricaoA = String(a.descricao || "");
+      const descricaoB = String(b.descricao || "");
+      const comparacaoDescricao = descricaoA.localeCompare(descricaoB, "pt-BR");
+      if (comparacaoDescricao !== 0) return comparacaoDescricao;
+      return String(a.codigo || "").localeCompare(String(b.codigo || ""), "pt-BR");
+    });
     this.elementos.resultadoMaterial.innerHTML = this.linhasResultado(this.resultado[grupoMaterial], grupoMaterial);
     this.elementos.resultadoMaoObra.innerHTML = this.linhasResultadoMaoObra(linhasMaoObra);
     this.elementos.abasResultado.forEach((aba) => {
