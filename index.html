@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Medicao</title>
+    <link rel="stylesheet" href="estilos/principal.css" />
+  </head>
+  <body>
+    <main class="aplicacao">
+      <header class="cabecalho">
+        <section>
+          <p class="rotulo">Operacoes tecnicas</p>
+          <h1>Medicao de Materiais e Mao de Obra</h1>
+        </section>
+        <div class="acoes-cabecalho">
+          <button id="alternar-tema" class="botao secundario botao-tema" type="button" aria-label="Alternar tema"></button>
+          <label class="botao secundario" for="arquivo-json">Carregar base</label>
+          <input id="arquivo-json" class="campo-arquivo" type="file" accept="application/json" />
+          <button id="baixar-json" class="botao secundario" type="button">Baixar base</button>
+          <button id="gerar-medicao" class="botao primario" type="button">Gerar medicao</button>
+        </div>
+      </header>
+
+      <nav class="abas" aria-label="Areas do sistema">
+        <button class="aba ativa" data-aba="medicao" type="button">Medicao</button>
+        <button class="aba" data-aba="cadastros" type="button">Cadastros</button>
+        <button class="aba" data-aba="regras" type="button">Regras</button>
+        <button class="aba" data-aba="resultado" type="button">Resultado</button>
+        <div id="acoes-aba-medicao" class="acoes-aba-medicao">
+          <button id="adicionar-ponto" class="botao secundario" type="button">+</button>
+          <button id="zerar-medicao" class="botao secundario botao-zerar-medicao" type="button">Zerar</button>
+        </div>
+        <div id="acoes-aba-resultado" class="acoes-aba-resultado oculto">
+          <button id="refresh-resultado" class="botao secundario" type="button">Atualizar</button>
+          <button id="baixar-csv" class="botao secundario" type="button">Exportar Excel</button>
+        </div>
+      </nav>
+
+      <section id="aviso" class="aviso oculto" role="status"></section>
+
+      <section id="aba-medicao" class="painel-aba ativo">
+        <div class="grade-medicao">
+          <section class="painel">
+            <div class="tabela-container">
+              <table class="tabela-medicao">
+                <colgroup>
+                  <col class="col-ponto" />
+                  <col class="col-operacao" />
+                  <col class="col-estrutura" />
+                  <col class="col-estrutura" />
+                  <col class="col-estrutura" />
+                  <col class="col-poste" />
+                  <col class="col-cabo" />
+                  <col class="col-cabo" />
+                  <col class="col-qtd-cabo" />
+                  <col class="col-acao" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Ponto</th>
+                    <th>Operacao</th>
+                    <th>Estrutura</th>
+                    <th>Estrutura 2</th>
+                    <th>Estrutura 3</th>
+                    <th>Poste</th>
+                    <th>Cabo MT</th>
+                    <th>Cabo BT</th>
+                    <th>Qtd. cabo</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="lista-pontos"></tbody>
+              </table>
+              <datalist id="opcoes-estruturas-ponto"></datalist>
+              <datalist id="opcoes-postes-ponto"></datalist>
+              <datalist id="opcoes-cabos-bt-ponto"></datalist>
+              <datalist id="opcoes-cabos-mt-ponto"></datalist>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="aba-cadastros" class="painel-aba">
+        <nav class="abas-cadastro" aria-label="Cadastros internos">
+          <button class="aba-cadastro ativa" data-cadastro="materiais" type="button">Materiais</button>
+          <button class="aba-cadastro" data-cadastro="estruturas" type="button">Estruturas</button>
+          <button class="aba-cadastro" data-cadastro="mao-obra" type="button">Mao de obra</button>
+          <div id="acoes-cadastro" class="acoes-cadastro">
+            <button id="novo-material" class="botao secundario" type="button">Novo material</button>
+            <button id="nova-estrutura" class="botao secundario oculto" type="button">Nova estrutura</button>
+            <button id="nova-mao-obra" class="botao secundario oculto" type="button">Nova mao de obra</button>
+          </div>
+        </nav>
+        <div class="grade-cadastros">
+          <section class="painel painel-cadastro ativo" data-cadastro-painel="materiais">
+            <label class="cadastro-filtro">
+              <span>Pesquisar</span>
+              <input id="filtro-materiais" type="search" placeholder="Codigo, descricao ou unidade" />
+            </label>
+            <div id="lista-materiais" class="lista-cadastro"></div>
+          </section>
+
+          <section class="painel painel-cadastro" data-cadastro-painel="estruturas">
+            <label class="cadastro-filtro">
+              <span>Pesquisar</span>
+              <input id="filtro-estruturas" type="search" placeholder="ID, descricao ou item" />
+            </label>
+            <div id="lista-estruturas" class="lista-cadastro"></div>
+          </section>
+
+          <section class="painel painel-cadastro" data-cadastro-painel="mao-obra">
+            <label class="cadastro-filtro">
+              <span>Pesquisar</span>
+              <input id="filtro-mao-obra" type="search" placeholder="Codigo, descricao ou unidade" />
+            </label>
+            <div id="lista-mao-obra" class="lista-cadastro"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="aba-regras" class="painel-aba">
+        <section class="painel">
+          <div class="titulo-painel">
+            <div>
+              <p class="rotulo">Motor dinamico</p>
+              <h2>Regras de mao de obra</h2>
+            </div>
+            <button id="nova-regra" class="botao secundario" type="button">Nova regra</button>
+          </div>
+          <label class="cadastro-filtro">
+            <span>Pesquisar</span>
+            <input id="filtro-regras" type="search" placeholder="Nome, operacao, item ou saida" />
+          </label>
+          <div id="lista-regras" class="lista-cadastro"></div>
+        </section>
+      </section>
+
+      <section id="aba-resultado" class="painel-aba">
+        <section class="painel">
+          <div class="resultado-secoes">
+            <article class="painel-resultado">
+              <div class="titulo-resultado">
+                <div class="titulo-resultado-topo">
+                  <h3>Materiais</h3>
+                  <div id="linha-resultado-material" class="linha-formulario">
+                    <input id="busca-resultado-material" list="opcoes-resultado-material" placeholder="Digite codigo ou descricao do material" />
+                    <datalist id="opcoes-resultado-material"></datalist>
+                    <input id="quantidade-resultado-material" type="number" min="0" step="0.01" value="1" />
+                    <button id="confirmar-resultado-material" class="botao secundario" type="button">+</button>
+                  </div>
+                </div>
+                <div class="abas-resultado" aria-label="Filtros de materiais">
+                  <button class="aba-resultado ativa" data-resultado-secao="material" data-resultado-operacao="I" type="button">I - Instalacao</button>
+                  <button class="aba-resultado" data-resultado-secao="material" data-resultado-operacao="D" type="button">D - Desativacao</button>
+                </div>
+              </div>
+              <div id="resultado-material" class="resultado-lista"></div>
+            </article>
+            <article class="painel-resultado">
+              <div class="titulo-resultado">
+                <div class="titulo-resultado-topo">
+                  <h3>Mao de obra</h3>
+                  <div id="linha-resultado-mao-obra" class="linha-formulario">
+                    <input id="busca-resultado-mao-obra" list="opcoes-resultado-mao-obra" placeholder="Digite codigo ou descricao da mao de obra" />
+                    <datalist id="opcoes-resultado-mao-obra"></datalist>
+                    <input id="quantidade-resultado-mao-obra" type="number" min="0" step="0.01" value="1" />
+                    <button id="confirmar-resultado-mao-obra" class="botao secundario" type="button">+</button>
+                  </div>
+                </div>
+              </div>
+              <div id="resultado-mao-obra" class="resultado-lista"></div>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="modal-material" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-material">
+      <div class="modal-conteudo">
+        <div class="modal-topo">
+          <div>
+            <p class="rotulo">Catalogo</p>
+            <h2 id="titulo-modal-material">Novo material</h2>
+          </div>
+          <button class="botao secundario botao-fechar-modal" data-fechar-modal="material" type="button">Fechar</button>
+        </div>
+        <form id="form-material" class="formulario">
+          <input name="id" type="hidden" />
+          <label>Codigo<input name="codigo" /></label>
+          <label>Descricao<input name="descricao" required /></label>
+          <label>Unidade<input name="unidade" required value="un" /></label>
+          <label>Categoria
+            <select name="categoria">
+              <option value="geral">Geral</option>
+              <option value="poste">Poste</option>
+              <option value="cabo">Cabo</option>
+            </select>
+          </label>
+          <div class="acoes-formulario">
+            <button class="botao secundario" data-fechar-modal="material" type="button">Cancelar</button>
+            <button class="botao primario" type="submit">Salvar material</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-estrutura" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-estrutura">
+      <div class="modal-conteudo">
+        <div class="modal-topo">
+          <div>
+            <p class="rotulo">Templates</p>
+            <h2 id="titulo-modal-estrutura">Nova estrutura</h2>
+          </div>
+          <button class="botao secundario botao-fechar-modal" data-fechar-modal="estrutura" type="button">Fechar</button>
+        </div>
+        <form id="form-estrutura" class="formulario">
+          <input name="idOriginal" type="hidden" />
+          <label>ID da estrutura<input name="id" required placeholder="CE3" /></label>
+          <label>Descricao<input name="descricao" required /></label>
+          <div class="linha-formulario linha-formulario-estrutura">
+            <label>Material
+              <input name="materialBusca" list="materiais-estrutura" autocomplete="off" placeholder="Digite codigo ou descricao" />
+              <input name="materialId" type="hidden" />
+              <datalist id="materiais-estrutura"></datalist>
+            </label>
+            <label>Quantidade<input name="quantidade" type="number" min="0" step="0.01" value="1" /></label>
+            <button id="incluir-item-estrutura" class="botao secundario" type="button">Incluir item</button>
+          </div>
+          <p id="material-estrutura-status" class="texto-apoio">Nenhum material selecionado.</p>
+          <div id="itens-estrutura" class="itens-temporarios"></div>
+          <div class="acoes-formulario">
+            <button class="botao secundario" data-fechar-modal="estrutura" type="button">Cancelar</button>
+            <button class="botao primario" type="submit">Salvar estrutura</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-mao-obra" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-mao-obra">
+      <div class="modal-conteudo">
+        <div class="modal-topo">
+          <div>
+            <p class="rotulo">Catalogo</p>
+            <h2 id="titulo-modal-mao-obra">Nova mao de obra</h2>
+          </div>
+          <button class="botao secundario botao-fechar-modal" data-fechar-modal="maoObra" type="button">Fechar</button>
+        </div>
+        <form id="form-mao-obra" class="formulario">
+          <input name="id" type="hidden" />
+          <label>Codigo<input name="codigo" required /></label>
+          <label>Descricao<input name="descricao" required /></label>
+          <label>Unidade<input name="unidade" required value="un" /></label>
+          <div class="acoes-formulario">
+            <button class="botao secundario" data-fechar-modal="maoObra" type="button">Cancelar</button>
+            <button class="botao primario" type="submit">Salvar mao de obra</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-regra" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-regra">
+      <div class="modal-conteudo">
+        <div class="modal-topo">
+          <div>
+            <p class="rotulo">Motor dinamico</p>
+            <h2 id="titulo-modal-regra">Nova regra</h2>
+          </div>
+          <button class="botao secundario botao-fechar-modal" data-fechar-modal="regra" type="button">Fechar</button>
+        </div>
+        <form id="form-regra" class="formulario regra-formulario">
+          <input name="id" type="hidden" />
+          <select name="materialId" class="oculto"></select>
+          <section class="bloco-regra bloco-regra-principal">
+            <label>Nome da regra<input name="nome" required /></label>
+            <label>Tipo de regra
+              <select name="categoriaRegra">
+                <option value="poste">Poste</option>
+                <option value="geral">Geral</option>
+                <option value="cabo">Cabo</option>
+                <option value="estrutura">Estrutura</option>
+              </select>
+            </label>
+          </section>
+          <section id="campo-material-regra" class="bloco-regra campo-busca-regra">
+            <div class="cabecalho-inline-regra">
+              <h3>Materiais</h3>
+              <div class="campo-busca-regra-acoes">
+                <input id="busca-material-regra" list="opcoes-material-regra" placeholder="Digite codigo ou descricao do item" />
+                <button id="adicionar-material-regra" class="botao secundario" type="button">+</button>
+              </div>
+            </div>
+            <p class="texto-apoio">Selecione varios itens da categoria escolhida.</p>
+            <datalist id="opcoes-material-regra"></datalist>
+            <div id="itens-materiais-regra" class="itens-temporarios"></div>
+          </section>
+          <fieldset class="bloco-regra grupo-operacoes">
+            <legend>Operacoes</legend>
+            <label><input type="checkbox" name="operacoes" value="I" checked /> I - Instalacao</label>
+            <label><input type="checkbox" name="operacoes" value="D" /> D - Desativacao</label>
+            <label><input type="checkbox" name="operacoes" value="R" /> R - Reinstalacao</label>
+          </fieldset>
+          <section class="bloco-regra">
+            <div class="cabecalho-inline-regra">
+              <h3>Mao de obra por operacao</h3>
+              <div class="campo-busca-regra-acoes">
+                <input id="busca-mao-obra-regra" list="opcoes-mao-obra-regra" placeholder="Digite codigo ou descricao da mao de obra" />
+                <button id="adicionar-mao-obra-regra" class="botao secundario" type="button">+</button>
+              </div>
+            </div>
+            <p class="texto-apoio">Marque a operacao para incluir mao de obra. Com mais de uma operacao marcada, a lista aparece consolidada por cor.</p>
+            <p id="status-operacao-regra" class="texto-apoio"></p>
+            <datalist id="opcoes-mao-obra-regra"></datalist>
+            <div id="saidas-regra" class="itens-temporarios"></div>
+          </section>
+          <div class="acoes-formulario">
+            <button class="botao secundario" data-fechar-modal="regra" type="button">Cancelar</button>
+            <button class="botao primario" type="submit">Salvar regra</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal-seletor-item" class="modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo-modal-seletor-item">
+      <div class="modal-conteudo modal-conteudo-seletor">
+        <div class="modal-topo">
+          <div>
+            <p id="rotulo-modal-seletor-item" class="rotulo">Selecao</p>
+            <h2 id="titulo-modal-seletor-item">Selecionar item</h2>
+          </div>
+          <button class="botao secundario botao-fechar-modal" data-fechar-modal="seletorItem" type="button">Fechar</button>
+        </div>
+        <form id="form-seletor-item" class="formulario formulario-seletor-item">
+          <label>Buscar
+            <input name="busca" list="opcoes-seletor-item" autocomplete="off" placeholder="Digite codigo ou descricao" />
+          </label>
+          <datalist id="opcoes-seletor-item"></datalist>
+          <p id="status-seletor-item" class="texto-apoio">Nenhum item selecionado.</p>
+          <div class="linha-formulario linha-formulario-seletor">
+            <label id="campo-codigo-seletor-item" class="oculto">Codigo
+              <input name="codigo" placeholder="MO-001" />
+            </label>
+            <label id="campo-descricao-seletor-item" class="oculto">Descricao
+              <input name="descricao" placeholder="Descricao da mao de obra" />
+            </label>
+            <label id="campo-quantidade-seletor-item">Quantidade
+              <input name="quantidade" type="number" min="0" step="0.01" value="1" />
+            </label>
+          </div>
+          <div class="acoes-formulario">
+            <button class="botao secundario" data-fechar-modal="seletorItem" type="button">Cancelar</button>
+            <button id="confirmar-seletor-item" class="botao primario" type="submit">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/aplicacao.js"></script>
+  </body>
+</html>
