@@ -18,6 +18,10 @@ window.APP_CONFIG = {
 };
 ```
 
+A URL tambem pode ser copiada no botao **Connect** do projeto. Ela tem o
+formato `https://xxxxxxxxxxxxxxxxxxxx.supabase.co`. A configuracao so ativa o
+Supabase quando tanto a URL quanto a chave estiverem preenchidas.
+
 No primeiro acesso, se a tabela estiver vazia, o app envia automaticamente o
 conteudo de `base-medicao.json`. Depois disso, alteracoes em materiais, mao de
 obra, estruturas e regras sao gravadas pela API REST do Supabase.

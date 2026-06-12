@@ -14,6 +14,13 @@ class RepositorioSupabase {
     return Boolean(this.url && this.chaveAnonima);
   }
 
+  validarConfiguracao() {
+    const temUrl = Boolean(this.url);
+    const temChave = Boolean(this.chaveAnonima);
+    if (temUrl === temChave) return;
+    throw new Error("Configuracao incompleta do Supabase: informe supabaseUrl e supabaseAnonKey em scripts/config.js.");
+  }
+
   basePersistente(base) {
     return {
       versao: base?.versao || "",
@@ -36,6 +43,7 @@ class RepositorioSupabase {
   }
 
   async carregar() {
+    this.validarConfiguracao();
     if (!this.estaConfigurado()) return this.carregarBaseLocal();
 
     const resposta = await fetch(`${this.url}/rest/v1/bases_medicao?id=eq.${encodeURIComponent(this.idBase)}&select=dados`, {
