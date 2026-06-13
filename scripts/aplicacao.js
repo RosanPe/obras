@@ -2228,14 +2228,31 @@ class AplicacaoMedicao {
     linhas.sort((a, b) => a.descricao.localeCompare(b.descricao, "pt-BR"));
   }
 
-  salvarMaoObraCatalogo(item) {
+  salvarMaoObraCatalogo(item, sincronizarRegras = true) {
     const descricao = String(item.descricao || "").trim();
     const codigo = String(item.codigo || "").trim() || this.criarCodigoMaoObra(descricao);
     const unidade = String(item.unidade || "un").trim() || "un";
     const id = item.id || this.criarId(`${codigo}_${descricao}`);
     const normalizado = { id, codigo, descricao, unidade };
     this.salvarPorId(this.base.maoObra, normalizado);
+    if (sincronizarRegras) this.sincronizarMaoObraNasRegras(normalizado);
     return normalizado;
+  }
+
+  sincronizarMaoObraNasRegras(maoObra) {
+    this.base.regrasMaoObra = this.base.regrasMaoObra.map((regra) => ({
+      ...regra,
+      saidas: (regra.saidas || []).map((saida) => (
+        saida.maoObraId === maoObra.id
+          ? {
+            ...saida,
+            codigo: maoObra.codigo,
+            descricao: maoObra.descricao,
+            unidade: maoObra.unidade || saida.unidade || "un"
+          }
+          : saida
+      ))
+    }));
   }
 
   criarCodigoMaoObra(descricao) {
@@ -2348,12 +2365,13 @@ class AplicacaoMedicao {
         categorias: regra.categorias || []
       },
       saidas: (regra.saidas || []).map((saida) => {
-        const maoObra = this.salvarMaoObraCatalogo({
-          id: saida.maoObraId || "",
-          codigo: saida.codigo,
-          descricao: saida.descricao,
-          unidade: "un"
-        });
+        const maoObra = this.base.maoObra.find((item) => item.id === saida.maoObraId)
+          || this.salvarMaoObraCatalogo({
+            id: saida.maoObraId || "",
+            codigo: saida.codigo,
+            descricao: saida.descricao,
+            unidade: "un"
+          }, false);
         return {
           ...saida,
           maoObraId: maoObra.id,
