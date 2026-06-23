@@ -454,6 +454,7 @@ class AplicacaoMedicao {
       paineisCadastro: document.querySelectorAll(".painel-cadastro"),
       listaPontos: document.querySelector("#lista-pontos"),
       adicionarPonto: document.querySelector("#adicionar-ponto"),
+      baixarPontosExcel: document.querySelector("#baixar-pontos-excel"),
       zerarMedicao: document.querySelector("#zerar-medicao"),
       gerarMedicao: document.querySelector("#gerar-medicao"),
       totalPontos: document.querySelector("#total-pontos"),
@@ -532,6 +533,7 @@ class AplicacaoMedicao {
     this.elementos.abas.forEach((aba) => aba.addEventListener("click", () => this.abrirAba(aba.dataset.aba)));
     this.elementos.abasCadastro.forEach((aba) => aba.addEventListener("click", () => this.abrirAbaCadastro(aba.dataset.cadastro)));
     this.elementos.adicionarPonto.addEventListener("click", () => this.adicionarPonto());
+    this.elementos.baixarPontosExcel.addEventListener("click", () => this.baixarExcelPontos());
     this.elementos.zerarMedicao.addEventListener("click", () => this.zerarMedicao());
     this.elementos.gerarMedicao.addEventListener("click", () => this.gerarMedicao());
     this.elementos.alternarTema.addEventListener("click", () => this.alternarTema());
@@ -702,8 +704,8 @@ class AplicacaoMedicao {
         <td data-coluna="Estrutura 2">${this.inputBuscaPonto("estrutura2Id", this.base.estruturas, ponto.estrutura2Id, indice, "opcoes-estruturas-ponto")}</td>
         <td data-coluna="Estrutura 3">${this.inputBuscaPonto("estrutura3Id", this.base.estruturas, ponto.estrutura3Id, indice, "opcoes-estruturas-ponto")}</td>
         <td data-coluna="Poste">${this.inputBuscaPonto("posteId", this.materiaisPorCategoria("poste"), ponto.posteId, indice, "opcoes-postes-ponto")}</td>
-        <td data-coluna="Cabo BT">${this.inputBuscaPonto("caboBTId", this.materiaisPorCategoria("cabo"), ponto.caboBTId, indice, "opcoes-cabos-bt-ponto")}</td>
         <td data-coluna="Cabo MT">${this.inputBuscaPonto("caboMTId", this.materiaisPorCategoria("cabo"), ponto.caboMTId, indice, "opcoes-cabos-mt-ponto")}</td>
+        <td data-coluna="Cabo BT">${this.inputBuscaPonto("caboBTId", this.materiaisPorCategoria("cabo"), ponto.caboBTId, indice, "opcoes-cabos-bt-ponto")}</td>
         <td data-coluna="Qtd. cabo"><input data-campo="quantidadeCabo" data-indice="${indice}" type="number" min="0" step="0.01" value="${ponto.quantidadeCabo || ""}"></td>
         <td data-coluna="Acao"><button class="botao perigo" data-remover-ponto="${indice}" type="button">Remover</button></td>
       `;
@@ -1616,6 +1618,76 @@ class AplicacaoMedicao {
     this.baixarArquivo("resultado-medicao.xls", conteudo, "application/vnd.ms-excel;charset=utf-8");
   }
 
+  baixarExcelPontos() {
+    if (!this.base.pontos.length) {
+      this.mostrarAviso("Adicione ao menos um ponto para exportar.");
+      return;
+    }
+
+    const linhas = this.base.pontos.map((ponto) => {
+      const estrutura1 = this.estruturaPorId(ponto.estruturaId);
+      const estrutura2 = this.estruturaPorId(ponto.estrutura2Id);
+      const estrutura3 = this.estruturaPorId(ponto.estrutura3Id);
+      const poste = this.materialPorId(ponto.posteId);
+      const caboMT = this.materialPorId(ponto.caboMTId);
+      const caboBT = this.materialPorId(ponto.caboBTId);
+
+      return `
+        <tr>
+          <td>${this.escaparHtml(ponto.numero)}</td>
+          <td>${this.escaparHtml(this.rotuloOperacao(ponto.operacao))}</td>
+          <td>${this.escaparHtml(estrutura1?.descricao || "")}</td>
+          <td>${this.escaparHtml(estrutura2?.descricao || "")}</td>
+          <td>${this.escaparHtml(estrutura3?.descricao || "")}</td>
+          <td>${this.escaparHtml(poste?.codigo || "")}</td>
+          <td>${this.escaparHtml(poste?.descricao || "")}</td>
+          <td>${this.escaparHtml(caboMT?.codigo || "")}</td>
+          <td>${this.escaparHtml(caboMT?.descricao || "")}</td>
+          <td>${this.escaparHtml(caboBT?.codigo || "")}</td>
+          <td>${this.escaparHtml(caboBT?.descricao || "")}</td>
+          <td>${Number(ponto.quantidadeCabo || 0)}</td>
+        </tr>
+      `;
+    }).join("");
+
+    const conteudo = `
+      <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+      <head>
+        <meta charset="UTF-8" />
+        <!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Pontos</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+      </head>
+      <body>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Ponto</th>
+              <th>Operacao</th>
+              <th>Estrutura</th>
+              <th>Estrutura 2</th>
+              <th>Estrutura 3</th>
+              <th>Codigo Poste</th>
+              <th>Poste</th>
+              <th>Codigo Cabo MT</th>
+              <th>Cabo MT</th>
+              <th>Codigo Cabo BT</th>
+              <th>Cabo BT</th>
+              <th>Qtd. cabo</th>
+            </tr>
+          </thead>
+          <tbody>${linhas}</tbody>
+        </table>
+      </body>
+      </html>
+    `;
+
+    this.baixarArquivo("pontos-medicao.xls", conteudo, "application/vnd.ms-excel;charset=utf-8");
+  }
+
+  rotuloOperacao(operacao) {
+    const nomes = { I: "I - Instalacao", D: "D - Desativacao", R: "R - Reinstalacao" };
+    return nomes[operacao] || operacao || "";
+  }
+
   chaveLinhaResultado(item) {
     return `${item.codigo || ""}||${item.descricao || ""}||${item.unidade || "un"}`;
   }
@@ -1748,6 +1820,10 @@ class AplicacaoMedicao {
 
   materialPorId(id) {
     return this.base.materiais.find((item) => item.id === id);
+  }
+
+  estruturaPorId(id) {
+    return this.base.estruturas.find((item) => item.id === id);
   }
 
   salvarPorId(lista, item) {

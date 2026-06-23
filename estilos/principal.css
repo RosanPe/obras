@@ -261,7 +261,7 @@ body[data-tema="escuro"] .aba-resultado {
   align-items: center;
 }
 
-.acoes-aba-medicao #adicionar-ponto {
+.botao-adicionar-ponto-tabela {
   width: 30px;
   min-width: 30px;
   height: 30px;
@@ -269,6 +269,10 @@ body[data-tema="escuro"] .aba-resultado {
   padding: 0;
   border-radius: 4px;
   font-weight: 800;
+}
+
+.tabela-medicao th:last-child {
+  text-align: center;
 }
 
 .botao-zerar-medicao {
