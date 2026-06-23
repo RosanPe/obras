@@ -1639,11 +1639,8 @@ class AplicacaoMedicao {
           <td>${this.escaparHtml(estrutura1?.descricao || "")}</td>
           <td>${this.escaparHtml(estrutura2?.descricao || "")}</td>
           <td>${this.escaparHtml(estrutura3?.descricao || "")}</td>
-          <td>${this.escaparHtml(poste?.codigo || "")}</td>
           <td>${this.escaparHtml(poste?.descricao || "")}</td>
-          <td>${this.escaparHtml(caboMT?.codigo || "")}</td>
           <td>${this.escaparHtml(caboMT?.descricao || "")}</td>
-          <td>${this.escaparHtml(caboBT?.codigo || "")}</td>
           <td>${this.escaparHtml(caboBT?.descricao || "")}</td>
           <td>${Number(ponto.quantidadeCabo || 0)}</td>
         </tr>
@@ -1665,11 +1662,8 @@ class AplicacaoMedicao {
               <th>Estrutura</th>
               <th>Estrutura 2</th>
               <th>Estrutura 3</th>
-              <th>Codigo Poste</th>
               <th>Poste</th>
-              <th>Codigo Cabo MT</th>
               <th>Cabo MT</th>
-              <th>Codigo Cabo BT</th>
               <th>Cabo BT</th>
               <th>Qtd. cabo</th>
             </tr>
